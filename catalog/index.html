@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People.ai LLM Skills Catalog</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --pai-primary-blue: #006885;
+    --pai-dark-blue: #00204E;
+    --pai-blue: #0A41AA;
+    --pai-med-blue: #8CB8ED;
+    --pai-light-blue: #CDE6FF;
+    --pai-teal: #00D9D3;
+    --pai-light-teal: #7FECE9;
+    --pai-dark-gray: #54667D;
+    --pai-med-gray: #A9B2BE;
+    --pai-light-gray: #D4D9DE;
+    --pai-off-black: #0A1225;
+    --pai-white: #FFFFFF;
+    --pai-yellow: #E8C031;
+    --pai-orange: #EB8D35;
+    --pai-red: #F8544D;
+    --radius: 8px;
+    --shadow: 0 2px 8px rgba(0,32,78,0.08);
+    --shadow-hover: 0 4px 16px rgba(0,32,78,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--pai-off-black);
+    background: #F5F7FA;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--pai-dark-blue) 0%, var(--pai-primary-blue) 100%);
+    color: white;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .header-logo {
+    font-size: 18px;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+  .header-logo span { color: var(--pai-teal); }
+  .header-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .header-subtitle {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--pai-teal);
+    color: var(--pai-dark-blue);
+  }
+  .btn-primary:hover { background: var(--pai-light-teal); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+  .btn-outline {
+    background: transparent;
+    color: var(--pai-primary-blue);
+    border: 1px solid var(--pai-light-gray);
+  }
+  .btn-outline:hover { border-color: var(--pai-primary-blue); background: var(--pai-light-blue); }
+  .btn-copy {
+    background: var(--pai-primary-blue);
+    color: white;
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+  .btn-copy:hover { background: var(--pai-dark-blue); }
+  .btn-copy.copied { background: #0a8a5e; }
+
+  /* Container */
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 32px; }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+  .filter-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pai-dark-gray);
+    margin-right: 4px;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--pai-light-gray);
+    background: white;
+    color: var(--pai-dark-gray);
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--pai-primary-blue); color: var(--pai-primary-blue); }
+  .filter-btn.active {
+    background: var(--pai-primary-blue);
+    color: white;
+    border-color: var(--pai-primary-blue);
+  }
+  .filter-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--pai-light-gray);
+    margin: 0 8px;
+  }
+
+  /* Card Grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--pai-light-gray);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    border-left: 4px solid transparent;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .card.status-ready { border-left-color: var(--pai-teal); }
+  .card.status-draft { border-left-color: var(--pai-orange); }
+
+  .card-number {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pai-med-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .card-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 4px 0 8px;
+    color: var(--pai-dark-blue);
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--pai-dark-gray);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-audience {
+    background: var(--pai-light-blue);
+    color: var(--pai-blue);
+  }
+  .badge-platform {
+    background: #E8F7F7;
+    color: #007A77;
+  }
+  .badge-status-ready {
+    background: #E6F9F0;
+    color: #0a8a5e;
+  }
+  .badge-status-draft {
+    background: #FFF3E0;
+    color: #B06800;
+  }
+  .badge-status-coming-soon {
+    background: var(--pai-light-gray);
+    color: var(--pai-dark-gray);
+  }
+
+  /* Skill Detail View */
+  .detail-view { display: none; }
+  .detail-view.active { display: block; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--pai-primary-blue);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  .detail-header {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--pai-light-gray);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .detail-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--pai-dark-blue);
+    margin-bottom: 8px;
+  }
+  .detail-desc {
+    font-size: 15px;
+    color: var(--pai-dark-gray);
+    margin-bottom: 16px;
+  }
+  .detail-meta-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--pai-dark-gray);
+  }
+  .detail-meta-item strong { color: var(--pai-off-black); }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--pai-light-gray);
+    margin-bottom: 20px;
+  }
+  .tab {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    color: var(--pai-dark-gray);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab:hover { color: var(--pai-primary-blue); }
+  .tab.active {
+    color: var(--pai-primary-blue);
+    border-bottom-color: var(--pai-primary-blue);
+  }
+  .tab.disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .tab .tab-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    background: var(--pai-light-gray);
+    color: var(--pai-dark-gray);
+  }
+
+  .tab-content {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--pai-light-gray);
+    padding: 24px;
+  }
+
+  .instructions-block {
+    background: #F8F9FB;
+    border: 1px solid var(--pai-light-gray);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    max-height: 500px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .instructions-block h1 { font-size: 18px; margin: 16px 0 8px; }
+  .instructions-block h2 { font-size: 16px; margin: 14px 0 6px; }
+  .instructions-block h3 { font-size: 14px; margin: 12px 0 4px; }
+  .instructions-block ul, .instructions-block ol { padding-left: 20px; margin: 8px 0; }
+  .instructions-block code {
+    background: #E8EDF2;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .instructions-block pre {
+    background: var(--pai-dark-blue);
+    color: #E8EDF2;
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+  .instructions-block pre code { background: none; color: inherit; }
+  .instructions-block table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .instructions-block th, .instructions-block td {
+    border: 1px solid var(--pai-light-gray);
+    padding: 6px 10px;
+    text-align: left;
+  }
+  .instructions-block th { background: #F0F2F5; font-weight: 600; }
+
+  /* Setup Steps */
+  .setup-steps { list-style: none; counter-reset: step; }
+  .setup-steps li {
+    counter-increment: step;
+    padding: 12px 0 12px 48px;
+    position: relative;
+    border-bottom: 1px solid var(--pai-light-gray);
+    font-size: 14px;
+  }
+  .setup-steps li:last-child { border-bottom: none; }
+  .setup-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--pai-light-blue);
+    color: var(--pai-primary-blue);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Onboarding Wizard */
+  .wizard-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,32,78,0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .wizard-overlay.active { display: flex; }
+  .wizard {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 640px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 32px;
+    position: relative;
+  }
+  .wizard-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--pai-dark-gray);
+  }
+  .wizard-step { display: none; }
+  .wizard-step.active { display: block; }
+  .wizard-step-indicator {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .wizard-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pai-light-gray);
+  }
+  .wizard-dot.active { background: var(--pai-primary-blue); }
+  .wizard-dot.done { background: var(--pai-teal); }
+  .wizard-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--pai-dark-blue);
+    margin-bottom: 8px;
+  }
+  .wizard-text {
+    font-size: 14px;
+    color: var(--pai-dark-gray);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+
+  /* Coming Soon placeholder */
+  .coming-soon {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--pai-med-gray);
+  }
+  .coming-soon-icon { font-size: 40px; margin-bottom: 12px; }
+  .coming-soon-text { font-size: 15px; font-weight: 600; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--pai-dark-blue);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 200;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 24px;
+    padding: 16px 0;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--pai-dark-gray);
+  }
+  .stats-bar strong { color: var(--pai-dark-blue); }
+
+  /* Print */
+  @media print {
+    .header { background: white !important; color: black !important; }
+    .btn, .filters, .wizard-overlay, .toast { display: none !important; }
+    .card { break-inside: avoid; border: 1px solid #ccc; }
+    body { background: white; }
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--pai-med-gray);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div>
+      <div class="header-logo">people<span>.</span>ai</div>
+    </div>
+    <div>
+      <div class="header-title">LLM Skills Catalog</div>
+      <div class="header-subtitle">Ready-to-deploy AI skills powered by People.ai MCP</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <a class="btn btn-secondary" href="#/about">About</a>
+    <button class="btn btn-primary" onclick="openWizard()">Get Started</button>
+  </div>
+</div>
+
+<!-- Catalog View -->
+<div id="catalog-view" class="container">
+  <div class="stats-bar" id="stats-bar"></div>
+  <div class="filters" id="filters"></div>
+  <div class="card-grid" id="card-grid"></div>
+</div>
+
+<!-- Detail View -->
+<div id="detail-view" class="container detail-view">
+  <a class="back-link" onclick="navigate('#/')">&#8592; Back to Catalog</a>
+  <div id="detail-content"></div>
+</div>
+
+<!-- About View -->
+<div id="about-view" class="container detail-view">
+  <a class="back-link" onclick="navigate('#/')">&#8592; Back to Catalog</a>
+  <div class="detail-header">
+    <div class="detail-title">About the LLM Skills Catalog</div>
+    <div class="detail-desc">
+      This catalog contains ready-to-deploy AI skills that leverage the People.ai MCP (Model Context Protocol) integration.
+      Each skill is a pre-built template that transforms raw CRM and communication data into actionable intelligence.
+    </div>
+    <div style="margin-top:16px;font-size:14px;line-height:1.8;">
+      <strong>How it works:</strong><br>
+      1. Choose a skill from the catalog<br>
+      2. Pick your platform (Claude.ai, Claude Code, ChatGPT, or Gemini)<br>
+      3. Copy the instructions and follow the setup steps<br>
+      4. Start using the skill with any account name<br><br>
+      <strong>Prerequisites:</strong><br>
+      &bull; A Claude Pro/Team, ChatGPT Plus, or supported LLM account<br>
+      &bull; People.ai MCP integration connected (<a href="" id="mcp-setup-link" target="_blank">Setup Guide</a>)<br><br>
+      <strong>Maintained by:</strong> AI Innovation Team<br>
+      <strong>Slack:</strong> #claude-users
+    </div>
+  </div>
+</div>
+
+<!-- Onboarding Wizard -->
+<div class="wizard-overlay" id="wizard-overlay">
+  <div class="wizard">
+    <button class="wizard-close" onclick="closeWizard()">&times;</button>
+    <div class="wizard-step-indicator" id="wizard-dots"></div>
+
+    <div class="wizard-step" id="wizard-step-0">
+      <div class="wizard-title">Connect People.ai MCP</div>
+      <div class="wizard-text">
+        Before using any skill, you need to connect the People.ai MCP integration to your LLM platform.
+        This gives the AI access to your account data, communication intelligence, and scorecards.
+      </div>
+      <div style="background:#F8F9FB;border-radius:8px;padding:16px;margin-bottom:16px;font-size:13px;">
+        <strong>For Claude.ai:</strong> Settings &rarr; Integrations &rarr; Enable "People.ai MCP"<br><br>
+        <strong>For ChatGPT:</strong> Configure Actions in your Custom GPT pointing to People.ai API endpoints<br><br>
+        <a href="" id="wizard-mcp-link" target="_blank" style="color:var(--pai-primary-blue);">Full setup guide &rarr;</a>
+      </div>
+      <div class="wizard-actions">
+        <div></div>
+        <button class="btn btn-primary" onclick="wizardNext()">I've Connected MCP &rarr;</button>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="wizard-step-1">
+      <div class="wizard-title">Choose Your Platform</div>
+      <div class="wizard-text">Which LLM platform will you use?</div>
+      <div id="wizard-platform-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;"></div>
+      <div class="wizard-actions">
+        <button class="btn btn-outline" onclick="wizardPrev()">&larr; Back</button>
+        <button class="btn btn-primary" onclick="wizardNext()">Next &rarr;</button>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="wizard-step-2">
+      <div class="wizard-title">Choose Your First Skill</div>
+      <div class="wizard-text">Pick a skill to start with. We recommend the Account Plan Agent.</div>
+      <div id="wizard-skill-grid" style="display:grid;gap:8px;margin-bottom:16px;"></div>
+      <div class="wizard-actions">
+        <button class="btn btn-outline" onclick="wizardPrev()">&larr; Back</button>
+        <button class="btn btn-primary" onclick="wizardNext()">Next &rarr;</button>
+      </div>
+    </div>
+
+    <div class="wizard-step" id="wizard-step-3">
+      <div class="wizard-title">Copy & Deploy</div>
+      <div class="wizard-text" id="wizard-deploy-text"></div>
+      <div id="wizard-deploy-instructions" class="instructions-block" style="max-height:250px;"></div>
+      <button class="btn btn-copy" id="wizard-copy-btn" onclick="wizardCopy()" style="width:100%;justify-content:center;margin-top:12px;">
+        Copy Instructions to Clipboard
+      </button>
+      <div class="wizard-actions" style="margin-top:16px;">
+        <button class="btn btn-outline" onclick="wizardPrev()">&larr; Back</button>
+        <button class="btn btn-primary" onclick="closeWizard();if(wizardState.skill){navigate('#/skill/'+wizardState.skill.id);}">
+          View Full Skill Details &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+let catalogData = null;
+let currentFilter = 'all';
+let currentPlatformFilter = 'all';
+const wizardState = { step: 0, platform: null, skill: null };
+
+// ── Data Loading ──
+async function loadSkills() {
+  try {
+    const res = await fetch('skills.json');
+    catalogData = await res.json();
+    if (catalogData.catalog.mcpSetupUrl) {
+      const links = document.querySelectorAll('#mcp-setup-link, #wizard-mcp-link');
+      links.forEach(l => l.href = catalogData.catalog.mcpSetupUrl);
+    }
+  } catch (e) {
+    console.error('Failed to load skills.json:', e);
+    document.getElementById('card-grid').innerHTML =
+      '<div class="empty-state">Failed to load skills data. Ensure skills.json is in the same directory.</div>';
+  }
+}
+
+// ── Routing ──
+function navigate(hash) { location.hash = hash; }
+
+function handleRoute() {
+  const hash = location.hash || '#/';
+  const views = ['catalog-view', 'detail-view', 'about-view'];
+  views.forEach(v => {
+    document.getElementById(v).style.display = 'none';
+    document.getElementById(v).classList.remove('active');
+  });
+
+  if (hash.startsWith('#/skill/')) {
+    const id = hash.replace('#/skill/', '');
+    document.getElementById('detail-view').style.display = 'block';
+    document.getElementById('detail-view').classList.add('active');
+    renderDetail(id);
+  } else if (hash === '#/about') {
+    document.getElementById('about-view').style.display = 'block';
+    document.getElementById('about-view').classList.add('active');
+  } else {
+    document.getElementById('catalog-view').style.display = 'block';
+    document.getElementById('catalog-view').classList.add('active');
+    renderCatalog();
+  }
+}
+
+// ── Catalog Rendering ──
+function renderCatalog() {
+  if (!catalogData) return;
+  renderStats();
+  renderFilters();
+  renderCards();
+}
+
+function renderStats() {
+  const skills = catalogData.skills;
+  const ready = skills.filter(s => s.status === 'ready').length;
+  const platforms = catalogData.catalog.platforms.filter(p => p.status === 'supported').length;
+  document.getElementById('stats-bar').innerHTML =
+    `<span><strong>${skills.length}</strong> skills</span>
+     <span><strong>${ready}</strong> ready to deploy</span>
+     <span><strong>${platforms}</strong> platforms supported</span>
+     <span>Updated: ${catalogData.catalog.lastUpdated}</span>`;
+}
+
+function renderFilters() {
+  const cats = catalogData.categories;
+  const platforms = catalogData.catalog.platforms.filter(p => p.status === 'supported');
+
+  let html = '<span class="filter-label">Category:</span>';
+  html += `<button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All</button>`;
+  cats.forEach(c => {
+    html += `<button class="filter-btn ${currentFilter === c.id ? 'active' : ''}" onclick="setFilter('${c.id}')">${c.name}</button>`;
+  });
+
+  html += '<div class="filter-divider"></div>';
+  html += '<span class="filter-label">Platform:</span>';
+  html += `<button class="filter-btn ${currentPlatformFilter === 'all' ? 'active' : ''}" onclick="setPlatformFilter('all')">All</button>`;
+  platforms.forEach(p => {
+    html += `<button class="filter-btn ${currentPlatformFilter === p.id ? 'active' : ''}" onclick="setPlatformFilter('${p.id}')">${p.name}</button>`;
+  });
+
+  document.getElementById('filters').innerHTML = html;
+}
+
+function setFilter(f) { currentFilter = f; renderCatalog(); }
+function setPlatformFilter(f) { currentPlatformFilter = f; renderCatalog(); }
+
+function renderCards() {
+  let skills = catalogData.skills;
+
+  if (currentFilter !== 'all') {
+    skills = skills.filter(s => s.category === currentFilter);
+  }
+  if (currentPlatformFilter !== 'all') {
+    skills = skills.filter(s => s.platforms[currentPlatformFilter] !== null);
+  }
+
+  if (skills.length === 0) {
+    document.getElementById('card-grid').innerHTML =
+      '<div class="empty-state">No skills match the selected filters.</div>';
+    return;
+  }
+
+  document.getElementById('card-grid').innerHTML = skills.map(s => {
+    const cat = catalogData.categories.find(c => c.id === s.category);
+    const platformCount = Object.values(s.platforms).filter(v => v !== null).length;
+    return `
+      <div class="card status-${s.status}" onclick="navigate('#/skill/${s.id}')">
+        <div class="card-number">Skill ${s.number} &middot; ${cat ? cat.name : ''}</div>
+        <div class="card-name">${s.name}</div>
+        <div class="card-desc">${s.description}</div>
+        <div class="card-meta">
+          ${s.audience.map(a => `<span class="badge badge-audience">${a}</span>`).join('')}
+          <span class="badge badge-platform">${platformCount} platform${platformCount !== 1 ? 's' : ''}</span>
+          <span class="badge badge-status-${s.status}">${s.status === 'ready' ? 'Ready' : 'Draft'}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── Detail Rendering ──
+function renderDetail(skillId) {
+  const skill = catalogData.skills.find(s => s.id === skillId);
+  if (!skill) {
+    document.getElementById('detail-content').innerHTML =
+      '<div class="empty-state">Skill not found.</div>';
+    return;
+  }
+
+  const cat = catalogData.categories.find(c => c.id === skill.category);
+  const allPlatforms = catalogData.catalog.platforms;
+
+  // Determine first available platform tab
+  const firstAvailable = allPlatforms.find(p => skill.platforms[p.id] !== null);
+  const defaultTab = firstAvailable ? firstAvailable.id : 'setup';
+
+  let html = `
+    <div class="detail-header">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+        <span class="badge badge-status-${skill.status}" style="font-size:12px;">
+          ${skill.status === 'ready' ? 'Ready to Deploy' : 'Draft'}
+        </span>
+        <span style="font-size:12px;color:var(--pai-med-gray);">Skill ${skill.number}</span>
+      </div>
+      <div class="detail-title">${skill.name}</div>
+      <div class="detail-desc">${skill.description}</div>
+      <div class="detail-meta-row">
+        <div><strong>Audience:</strong> ${skill.audience.join(', ')}</div>
+        <div><strong>Input:</strong> ${skill.input}</div>
+        <div><strong>Category:</strong> ${cat ? cat.name : ''}</div>
+        <div><strong>MCP:</strong> ${skill.mcpConnectors.join(', ')}</div>
+      </div>
+      ${skill.mcpTools.length ? `<div style="margin-top:8px;font-size:12px;color:var(--pai-dark-gray);">
+        <strong>Tools:</strong> ${skill.mcpTools.join(', ')}
+      </div>` : ''}
+      ${skill.projectKnowledgeFiles.length ? `<div style="margin-top:8px;font-size:12px;color:var(--pai-dark-gray);">
+        <strong>Knowledge Files:</strong> ${skill.projectKnowledgeFiles.join(', ')}
+      </div>` : ''}
+    </div>
+
+    <div class="tabs" id="detail-tabs">
+      ${allPlatforms.map(p => {
+        const available = skill.platforms[p.id] !== null;
+        const isComingSoon = p.status === 'coming-soon';
+        return `<div class="tab ${!available && !isComingSoon ? 'disabled' : ''} ${p.id === defaultTab ? 'active' : ''}"
+                     data-tab="${p.id}"
+                     ${available ? `onclick="switchTab('${p.id}')"` : ''}>
+          ${p.name}
+          ${isComingSoon ? '<span class="tab-badge">Soon</span>' : ''}
+          ${!available && !isComingSoon ? '<span class="tab-badge">N/A</span>' : ''}
+        </div>`;
+      }).join('')}
+      <div class="tab" data-tab="setup" onclick="switchTab('setup')">Setup</div>
+    </div>
+
+    <div id="tab-panels">
+      ${allPlatforms.map(p => {
+        const data = skill.platforms[p.id];
+        if (p.status === 'coming-soon') {
+          return `<div class="tab-content" data-panel="${p.id}" style="display:${p.id === defaultTab ? 'block' : 'none'}">
+            <div class="coming-soon">
+              <div class="coming-soon-icon">&#128640;</div>
+              <div class="coming-soon-text">${p.name} support coming soon</div>
+              <div style="margin-top:8px;font-size:13px;">We'll add ${p.name} instructions when MCP support is available.</div>
+            </div>
+          </div>`;
+        }
+        if (!data) {
+          return `<div class="tab-content" data-panel="${p.id}" style="display:none">
+            <div class="coming-soon">
+              <div class="coming-soon-text">Instructions not yet created for ${p.name}</div>
+              <div style="margin-top:8px;font-size:13px;">This skill is still in draft for this platform.</div>
+            </div>
+          </div>`;
+        }
+        return `<div class="tab-content" data-panel="${p.id}" style="display:${p.id === defaultTab ? 'block' : 'none'}">
+          <div class="instructions-block">${renderMarkdown(data.instructions)}</div>
+          <button class="btn btn-copy" onclick="copyInstructions('${skill.id}', '${p.id}')">
+            Copy ${p.name} Instructions to Clipboard
+          </button>
+        </div>`;
+      }).join('')}
+
+      <div class="tab-content" data-panel="setup" style="display:none">
+        <h3 style="margin-bottom:16px;color:var(--pai-dark-blue);">Setup by Platform</h3>
+        ${allPlatforms.filter(p => skill.platforms[p.id]).map(p => `
+          <div style="margin-bottom:20px;">
+            <h4 style="margin-bottom:8px;color:var(--pai-primary-blue);">${p.name}</h4>
+            <ol class="setup-steps">
+              ${skill.platforms[p.id].setupSteps.map(step => `<li>${step}</li>`).join('')}
+            </ol>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+
+  document.getElementById('detail-content').innerHTML = html;
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('#detail-tabs .tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tabId);
+  });
+  document.querySelectorAll('#tab-panels .tab-content').forEach(p => {
+    p.style.display = p.dataset.panel === tabId ? 'block' : 'none';
+  });
+}
+
+// ── Clipboard ──
+async function copyInstructions(skillId, platformId) {
+  const skill = catalogData.skills.find(s => s.id === skillId);
+  if (!skill || !skill.platforms[platformId]) return;
+  await copyToClipboard(skill.platforms[platformId].instructions);
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Copied to clipboard!');
+  } catch (e) {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Copied to clipboard!');
+  }
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ── Markdown ──
+function renderMarkdown(text) {
+  if (typeof marked !== 'undefined') {
+    return marked.parse(text);
+  }
+  // Basic fallback
+  return text.replace(/\n/g, '<br>');
+}
+
+// ── Onboarding Wizard ──
+function openWizard() {
+  wizardState.step = 0;
+  wizardState.platform = null;
+  wizardState.skill = null;
+  document.getElementById('wizard-overlay').classList.add('active');
+  renderWizardStep();
+  renderWizardPlatforms();
+  renderWizardSkills();
+}
+
+function closeWizard() {
+  document.getElementById('wizard-overlay').classList.remove('active');
+}
+
+function wizardNext() {
+  if (wizardState.step < 3) {
+    wizardState.step++;
+    renderWizardStep();
+    if (wizardState.step === 3) renderWizardDeploy();
+  }
+}
+
+function wizardPrev() {
+  if (wizardState.step > 0) {
+    wizardState.step--;
+    renderWizardStep();
+  }
+}
+
+function renderWizardStep() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById(`wizard-step-${i}`).classList.toggle('active', i === wizardState.step);
+  }
+  // Dots
+  let dots = '';
+  for (let i = 0; i < 4; i++) {
+    const cls = i === wizardState.step ? 'active' : (i < wizardState.step ? 'done' : '');
+    dots += `<div class="wizard-dot ${cls}"></div>`;
+  }
+  document.getElementById('wizard-dots').innerHTML = dots;
+}
+
+function renderWizardPlatforms() {
+  if (!catalogData) return;
+  const platforms = catalogData.catalog.platforms.filter(p => p.status === 'supported');
+  document.getElementById('wizard-platform-grid').innerHTML = platforms.map(p => `
+    <div style="border:2px solid ${wizardState.platform === p.id ? 'var(--pai-primary-blue)' : 'var(--pai-light-gray)'};
+                border-radius:8px;padding:14px;cursor:pointer;transition:all 0.2s;
+                background:${wizardState.platform === p.id ? 'var(--pai-light-blue)' : 'white'}"
+         onclick="wizardState.platform='${p.id}';renderWizardPlatforms();">
+      <div style="font-weight:600;font-size:14px;">${p.name}</div>
+    </div>
+  `).join('');
+}
+
+function renderWizardSkills() {
+  if (!catalogData) return;
+  const readySkills = catalogData.skills.filter(s => s.status === 'ready');
+  const allSkills = catalogData.skills;
+  const skills = readySkills.length ? readySkills : allSkills.slice(0, 4);
+
+  document.getElementById('wizard-skill-grid').innerHTML = skills.map(s => `
+    <div style="border:2px solid ${wizardState.skill?.id === s.id ? 'var(--pai-primary-blue)' : 'var(--pai-light-gray)'};
+                border-radius:8px;padding:14px;cursor:pointer;transition:all 0.2s;
+                background:${wizardState.skill?.id === s.id ? 'var(--pai-light-blue)' : 'white'}"
+         onclick="wizardState.skill=catalogData.skills.find(x=>x.id==='${s.id}');renderWizardSkills();">
+      <div style="font-weight:600;font-size:14px;">${s.name}</div>
+      <div style="font-size:12px;color:var(--pai-dark-gray);margin-top:4px;">${s.description.substring(0, 80)}...</div>
+    </div>
+  `).join('');
+}
+
+function renderWizardDeploy() {
+  const platform = catalogData.catalog.platforms.find(p => p.id === wizardState.platform);
+  const skill = wizardState.skill;
+
+  if (!platform || !skill) {
+    document.getElementById('wizard-deploy-text').textContent =
+      'Please go back and select a platform and skill.';
+    return;
+  }
+
+  const data = skill.platforms[platform.id];
+  if (!data) {
+    document.getElementById('wizard-deploy-text').textContent =
+      `${skill.name} doesn't have ${platform.name} instructions yet. Try a different platform.`;
+    document.getElementById('wizard-deploy-instructions').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('wizard-deploy-text').textContent =
+    `Copy the instructions below and paste them into your ${platform.name} setup:`;
+  document.getElementById('wizard-deploy-instructions').innerHTML = renderMarkdown(data.instructions);
+}
+
+function wizardCopy() {
+  const skill = wizardState.skill;
+  const platform = wizardState.platform;
+  if (!skill || !platform || !skill.platforms[platform]) return;
+  copyToClipboard(skill.platforms[platform].instructions);
+  const btn = document.getElementById('wizard-copy-btn');
+  btn.classList.add('copied');
+  btn.textContent = 'Copied!';
+  setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy Instructions to Clipboard'; }, 2000);
+}
+
+// ── Init ──
+window.addEventListener('hashchange', handleRoute);
+window.addEventListener('load', async () => {
+  await loadSkills();
+  handleRoute();
+});
+</script>
+</body>
+</html>

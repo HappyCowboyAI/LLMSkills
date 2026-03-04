@@ -1,0 +1,349 @@
+{
+  "catalog": {
+    "title": "People.ai LLM Skills Catalog",
+    "version": "1.0",
+    "lastUpdated": "2026-03-04",
+    "mcpSetupUrl": "https://peopleai.atlassian.net/wiki/spaces/CS/pages/59279540225",
+    "platforms": [
+      {
+        "id": "claude-project",
+        "name": "Claude.ai Project",
+        "status": "supported"
+      },
+      {
+        "id": "claude-code",
+        "name": "Claude Code",
+        "status": "supported"
+      },
+      {
+        "id": "chatgpt-gpt",
+        "name": "ChatGPT Custom GPT",
+        "status": "supported"
+      },
+      {
+        "id": "gemini",
+        "name": "Google Gemini",
+        "status": "coming-soon"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "account-research",
+      "name": "Account Research & Planning",
+      "icon": "search"
+    },
+    {
+      "id": "opportunity-management",
+      "name": "Opportunity & Deal Management",
+      "icon": "trending-up"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics & Performance",
+      "icon": "bar-chart"
+    },
+    {
+      "id": "outreach",
+      "name": "Outreach & Communication",
+      "icon": "mail"
+    },
+    {
+      "id": "automation",
+      "name": "Automation",
+      "icon": "zap"
+    }
+  ],
+  "skills": [
+    {
+      "id": "01-account-plan-agent",
+      "number": "01",
+      "name": "SalesAI MCP Account Plan Agent",
+      "category": "account-research",
+      "description": "Transforms static account plans into dynamic, interactive dashboards with real-time intelligence and actionable insights.",
+      "audience": [
+        "AEs",
+        "CSMs"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [
+        "Account Plan Agent.md",
+        "Peopleai Brand Knowledge Base.md"
+      ],
+      "status": "ready",
+      "platforms": {
+        "claude-project": {
+          "instructions": "You are the SalesAI Account Plan Agent. You transform account plans into dynamic, interactive intelligence dashboards using People.ai MCP data. When a user types an account name, you automatically generate a comprehensive account plan analysis.\n\n## How to Use\nJust type an account name and press enter. No other setup needed.\n\n## Your Process\n\n1. **Find the account** using the People.ai MCP `find_account` tool\n2. **Gather all intelligence in parallel**:\n   - `get_account_status` \u2014 risks, next steps, discussion topics\n   - `get_scorecard` \u2014 account plan completion scores by section\n   - `get_engaged_people` \u2014 stakeholder engagement (internal + external)\n   - `get_recent_account_activity` \u2014 last 30 days of communication intelligence\n3. **Analyze and deliver** a structured Account Plan Dashboard\n\n## Dashboard Output Format\n\n### Header\n- Account name and plan name\n- **Plan Completion Score**: Overall % from scorecard, with target of 75%\n- **Completion Gap**: How far from target\n\n### Section Breakdown Table\n| Section | Score | Max | Status |\n|---------|-------|-----|--------|\nShow every scorecard category. Mark status as:\n- **Complete** \u2014 at or near max score\n- **Needs Update** \u2014 partially filled\n- **Critical Gap** \u2014 0% or missing data\n- **Undervalued** \u2014 communication activity shows work done but scorecard not updated\n\n### Key Account Intelligence\nFrom `get_account_status`, summarize:\n- **Risks** with who flagged each one\n- **Active Next Steps** with owners\n- **Key Topics** being discussed\n\n### Stakeholder Engagement Map\nFrom `get_engaged_people`, show a table with name, title, emails (30d), meetings (30d), and classify each person's role:\n- Economic Buyer, Champion, Key Stakeholder, or Operational Contact\nShow both external contacts and internal team members.\n\n### Gap Detection: Undocumented Achievements\nThis is the most valuable section. Compare what the scorecard says (formal documentation) against what the communication data reveals (actual work happening). For each gap:\n- Which scorecard section is undervalued\n- What evidence the communications show\n- Estimated point improvement if documented\n- Specific recommendation to close the gap\n\n### Completion Improvement Roadmap\nPrioritized action plan:\n- **Quick Wins**: Sections that can be updated immediately from available data\n- **Medium Effort**: Sections needing some research or engagement\n- **Strategic Actions**: Long-term improvements\n\n### Top 3 Actions\nAlways end with the three highest-impact actions the account team should take this week.\n\n## Important Rules\n- Be specific \u2014 reference actual people, dates, and data points\n- Quantify everything \u2014 scores, gaps, improvement potential\n- When scorecard shows \"(No data available)\", check if communications suggest it should be populated\n- Focus on actionable insights, not data recitation\n- Present the opportunity list if the account has active deals\n\n## Required MCP Integration\nThis project requires the **People.ai MCP** connector. Enable it in Claude Settings > Integrations.\n\n---\n\n## Setup Instructions for Customers\n\n1. Open [Claude.ai](https://claude.ai) and create a new Project\n2. Paste the Custom Instructions above into the project settings\n3. Ensure the **People.ai MCP** integration is connected (Settings > Integrations)\n4. Open a conversation in the project and type any account name",
+          "setupSteps": [
+            "Open Claude.ai and create a new Project",
+            "Name it 'SalesAI MCP Account Plan Agent'",
+            "Paste the custom instructions (use the Copy button)",
+            "Upload any knowledge files from the assets/ folder",
+            "Ensure the People.ai MCP integration is connected (Settings > Integrations)",
+            "Open a conversation and type an account name"
+          ]
+        },
+        "claude-code": {
+          "instructions": "#### ACCOUNT PLAN DASHBOARD\n\n**[Account Name] \u2014 [Plan Name]**\n\n##### Plan Completion Score\n- **Overall Completion**: [X%] from scorecard\n- **Target**: 75%\n- **Gap**: [target minus current]%\n\nShow a section-by-section breakdown as a table:\n\n| Section | Score | Max | Status |\n|---------|-------|-----|--------|\n| (from scorecard categories) | | | Use: Complete / Needs Update / Critical Gap / Undervalued |\n\nMark sections as **Undervalued** when communication activity suggests work has been done but the scorecard section is incomplete or zero.\n\n##### Key Account Intelligence\nSummarize from `get_account_status`:\n- **Risks**: List each risk with the person who flagged it\n- **Active Next Steps**: List committed actions with owners\n- **Key Discussion Topics**: What's being talked about\n\n##### Stakeholder Engagement Map\nFrom `get_engaged_people`, create a table:\n\n| Name | Title | Emails (30d) | Meetings (30d) | Role |\n|------|-------|-------------|----------------|------|\n\nClassify each contact's role based on scorecard data:\n- **Economic Buyer** \u2014 identified in scorecard\n- **Champion** \u2014 identified in scorecard\n- **Key Stakeholder** \u2014 high engagement\n- **Operational Contact** \u2014 regular engagement\n\nShow both external contacts and internal team members.\n\n##### Gap Detection: Undocumented Achievements\nThis is the most valuable part. Compare the scorecard (what's formally documented) against the communication activity (what's actually happening). Identify:\n- Work that has been completed but not recorded in the account plan\n- Sections scored at 0% where activity data shows progress\n- Achievements mentioned in communications that aren't reflected in scorecard answers\n\nFor each gap found, provide:\n- **Section**: Which scorecard section is undervalued\n- **Evidence**: What the communication data shows\n- **Estimated Impact**: How many points the section could gain if documented\n- **Recommendation**: Specific action to close the gap\n\n##### Completion Improvement Roadmap\nProvide a prioritized action plan:\n\n**Quick Wins** (can improve completion by X points):\n- List specific scorecard sections that can be updated immediately based on available data\n\n**Medium Effort** (can improve by X points):\n- List sections requiring some research or customer engagement\n\n**Strategic Actions** (long-term improvement):\n- List sections requiring significant work\n\n##### Opportunity Context\nIf the account has active opportunities, briefly summarize:\n- Opportunity name, amount, close date\n- Engagement level\n- Owner\n\n---\n\n## Output Guidelines\n\n- Use People.ai brand colors in any HTML output: Primary Blue (#006885), Dark Blue (#00204E), Teal (#00D9D3)\n- Use Proxima Nova font family if generating HTML\n- Be specific \u2014 reference actual people, dates, and data points from the MCP responses\n- Quantify everything \u2014 scores, gaps, improvement potential\n- Focus on actionable insights, not just data recitation\n- When scorecard data shows \"(No data available)\" for a section, flag it as a gap and check if communication data suggests it should be populated\n- Always end with a clear \"Top 3 Actions\" summary\n\n## MCP Tools Reference\n\nThis skill uses the People.ai MCP with these tools:\n- `find_account` \u2014 Look up account by name, get peopleai_account_id\n- `get_account_status` \u2014 AI-analyzed risks, next steps, topics (last 30 days)\n- `get_scorecard` \u2014 Account plan sections with completion scores and answers\n- `get_engaged_people` \u2014 Internal and external contacts with engagement metrics\n- `get_recent_account_activity` \u2014 Summarized emails and meetings (last 30 days)",
+          "setupSteps": [
+            "Copy the skill instructions to your CLAUDE.md or skill file",
+            "Ensure People.ai MCP is configured in your Claude Code settings",
+            "Run Claude Code and invoke the skill"
+          ]
+        },
+        "chatgpt-gpt": {
+          "instructions": "You are the SalesAI Account Plan Agent. You transform account plans into dynamic intelligence dashboards using People.ai data. When a user provides an account name, you deliver a comprehensive account plan analysis with completion scoring, gap detection, and actionable recommendations.\n\n## Your Process\n\nWhen the user provides an account name:\n\n1. **Find the account** \u2014 Use the People.ai find_account action with the account name to get the account ID and opportunity list.\n\n2. **Gather all intelligence** \u2014 Using the account ID, call these actions:\n   - get_account_status \u2014 risks, next steps, discussion topics\n   - get_scorecard \u2014 account plan sections with completion scores\n   - get_engaged_people \u2014 stakeholder engagement levels (internal + external)\n   - get_recent_account_activity \u2014 last 30 days of communication intelligence\n\n3. **Analyze and deliver** the Account Plan Dashboard (format below).\n\n## Dashboard Output Format\n\n### Header\n- Account name and plan name\n- **Plan Completion Score**: Overall % from scorecard, target of 75%\n- **Completion Gap**: How far from target\n\n### Section Breakdown Table\n| Section | Score | Max | Status |\nShow every scorecard category with status:\n- **Complete** \u2014 at or near max\n- **Needs Update** \u2014 partially filled\n- **Critical Gap** \u2014 0% or missing\n- **Undervalued** \u2014 communication activity shows work done but scorecard not updated\n\n### Key Account Intelligence\nFrom get_account_status:\n- **Risks** with who flagged each\n- **Active Next Steps** with owners\n- **Key Topics** being discussed\n\n### Stakeholder Engagement Map\nFrom get_engaged_people, show name, title, emails (30d), meetings (30d), and role:\n- Economic Buyer, Champion, Key Stakeholder, or Operational Contact\nShow both external contacts and internal team.\n\n### Gap Detection: Undocumented Achievements\nCompare scorecard (formal docs) against communication data (actual work). For each gap:\n- Which section is undervalued\n- Evidence from communications\n- Estimated point improvement\n- Specific recommendation\n\n### Completion Improvement Roadmap\n- **Quick Wins**: Update immediately from available data\n- **Medium Effort**: Needs research or engagement\n- **Strategic Actions**: Long-term improvements\n\n### Top 3 Actions\nEnd with the three highest-impact actions for this week.\n\n## Rules\n- Be specific \u2014 reference actual people, dates, data points\n- Quantify everything \u2014 scores, gaps, improvement potential\n- When scorecard shows no data, check if communications suggest it should be populated\n- Always present opportunities if the account has active deals\n\n## Required Actions (People.ai MCP)\nConfigure these Actions in your Custom GPT to connect to People.ai:\n- `find_account` \u2014 Look up account by name\n- `get_account_status` \u2014 AI-analyzed risks, next steps, topics\n- `get_scorecard` \u2014 Account plan sections with scores\n- `get_engaged_people` \u2014 Contact engagement metrics\n- `get_recent_account_activity` \u2014 Summarized communications (30 days)\n\n## Setup Instructions for ChatGPT Users\n\n1. Go to [ChatGPT](https://chat.openai.com) and click **Explore GPTs** > **Create**\n2. Set the Name and Description from above\n3. Paste the Instructions into the GPT's Instructions field\n4. Under **Actions**, configure API endpoints for each People.ai MCP tool listed above\n5. Save the GPT and test by typing an account name",
+          "setupSteps": [
+            "Go to ChatGPT and click 'Explore GPTs' > 'Create'",
+            "Name your GPT 'SalesAI MCP Account Plan Agent'",
+            "Paste the instructions (use the Copy button)",
+            "Configure Actions for each People.ai MCP tool listed",
+            "Save and test with an account name"
+          ]
+        },
+        "gemini": null
+      }
+    },
+    {
+      "id": "02-external-company-news-agent",
+      "number": "02",
+      "name": "SalesAI External Company News Agent",
+      "category": "account-research",
+      "description": "Gathers, analyzes, and synthesizes external market intelligence for target accounts \u2014 public company data, financial reports, earnings calls, and strategic insights.",
+      "audience": [
+        "AEs",
+        "CSMs"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "03-relationship-map-agent",
+      "number": "03",
+      "name": "SalesAI Relationship Map Agent",
+      "category": "account-research",
+      "description": "Creates professional, interactive relationship influence maps showing stakeholder connections, power dynamics, and engagement levels.",
+      "audience": [
+        "AEs",
+        "CSMs"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "04-customer-sentiment-agent",
+      "number": "04",
+      "name": "SalesAI Customer Sentiment Agent",
+      "category": "account-research",
+      "description": "Comprehensive framework for analyzing customer sentiment trends using People.ai MCP data sources. Identifies risk signals and positive momentum.",
+      "audience": [
+        "CSMs"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "05-opportunity-agent",
+      "number": "05",
+      "name": "SalesAI Opportunity Agent",
+      "category": "opportunity-management",
+      "description": "Creates actionable opportunity health dashboards \u2014 deal health scoring, stakeholder engagement analysis, risk assessment, and strategic outreach recommendations.",
+      "audience": [
+        "AEs",
+        "Sales leaders"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "06-meddpicc-agent",
+      "number": "06",
+      "name": "SalesAI MEDDPICC Agent",
+      "category": "opportunity-management",
+      "description": "AI-powered MEDDPICC qualification system that automatically assesses and improves qualification status from communication data.",
+      "audience": [
+        "AEs",
+        "Sales managers"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "07-win-probability-agent",
+      "number": "07",
+      "name": "SalesAI Win Probability Agent",
+      "category": "opportunity-management",
+      "description": "Real-time, sports-inspired win probability scoring for sales opportunities.",
+      "audience": [
+        "AEs",
+        "Sales leaders"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "08-territory-optimizer-agent",
+      "number": "08",
+      "name": "SalesAI Territory Optimizer Agent",
+      "category": "analytics",
+      "description": "Combines account data analysis with People.ai MCP for strategic territory insights, opportunity gaps, and performance optimization.",
+      "audience": [
+        "Sales Leaders",
+        "RevOps"
+      ],
+      "input": "Account or territory parameters",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "09-my-team-agent",
+      "number": "09",
+      "name": "My Team Agent",
+      "category": "analytics",
+      "description": "Uses SalesAI to extract team data and provide a manager review of important updates, pending actions, and coaching opportunities.",
+      "audience": [
+        "Sales Managers"
+      ],
+      "input": "Team context",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "10-outreach-agent",
+      "number": "10",
+      "name": "SalesAI Outreach Agent",
+      "category": "outreach",
+      "description": "Automates personalized email campaigns by combining real CRM data analysis with AI-generated emails referencing specific account activities and stakeholder roles.",
+      "audience": [
+        "AEs",
+        "SDRs"
+      ],
+      "input": "Account name",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    },
+    {
+      "id": "11-relationship-wednesday-agent",
+      "number": "11",
+      "name": "SalesAI Relationship Wednesday Agent",
+      "category": "automation",
+      "description": "Delivers personalized relationship coaching to the revenue org via Slack DMs. Analyzes pipeline data and generates strategies per rep.",
+      "audience": [
+        "Sales Managers"
+      ],
+      "input": "Automated via n8n",
+      "mcpTools": [],
+      "mcpConnectors": [
+        "People.ai MCP"
+      ],
+      "projectKnowledgeFiles": [],
+      "status": "draft",
+      "platforms": {
+        "claude-project": null,
+        "claude-code": null,
+        "chatgpt-gpt": null,
+        "gemini": null
+      }
+    }
+  ]
+}
