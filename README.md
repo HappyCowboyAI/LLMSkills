@@ -19,29 +19,14 @@ Shareable Claude skills powered by the People.ai MCP. These skills help customer
 | 06 | MEDDPICC Agent | AI-powered MEDDPICC qualification and coaching |
 | 07 | Win Probability Agent | Real-time win probability scoring for deals |
 
-### Analytics & Performance
-| # | Skill | Description |
-|---|-------|-------------|
-| 08 | Territory Optimizer Agent | Territory insights and opportunity gap analysis |
-| 09 | My Team Agent | Manager review of team updates and coaching opportunities |
-
-### Outreach & Communication
-| # | Skill | Description |
-|---|-------|-------------|
-| 10 | Outreach Agent | Personalized email campaigns from CRM data |
-
-### Automation
-| # | Skill | Description |
-|---|-------|-------------|
-| 11 | Relationship Wednesday Agent | Weekly relationship coaching via Slack DMs |
-
 ## Skill Format
 
 Each skill folder contains:
-- `SOURCE.md` — Original Claude.ai project instructions (drop your content here)
-- `skill.md` — Claude Code skill version (generated)
-- `claude-project.md` — Claude.ai project template (generated)
-- `assets/` — Images, JSON, or other supporting files
+- `SOURCE.md` — Metadata and MCP tool references
+- `skill.md` — Claude Code skill version
+- `claude-project.md` — Claude.ai project template
+- `chatgpt-gpt.md` — ChatGPT Custom GPT template
+- `assets/` — Knowledge files and supporting documents
 
 ## Prerequisites
 

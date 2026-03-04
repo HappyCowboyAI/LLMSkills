@@ -1,7 +1,7 @@
 # Win Probability Agent
 
 ## Description
-Real-time, sports-inspired win probability scoring for sales opportunities.
+Real-time, time-sensitive win probability scoring for sales opportunities. Factors in timeline pressure — same qualification gaps have different impact based on time available.
 
 ## Audience
 AEs, Sales leaders
@@ -10,14 +10,11 @@ AEs, Sales leaders
 Account name
 
 ## MCP Tools Used
-<!-- List the specific People.ai MCP tools this skill calls -->
-- 
-
-## Custom Instructions
-<!-- Paste the full custom instructions / system prompt from your Claude.ai project below -->
-
+- find_account
+- get_opportunity_status
+- get_recent_opportunity_activity
+- ask_sales_ai_about_opportunity
 
 ## Project Knowledge Files
-<!-- List any files uploaded to the Claude.ai project (docs, images, JSON, etc.) -->
-<!-- Place copies of those files in the assets/ folder -->
+- winprob.md (scoring methodology, time-sensitive business logic, and validation results)
 
