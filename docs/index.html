@@ -99,6 +99,15 @@
   }
   .btn-copy:hover { background: var(--pai-dark-blue); }
   .btn-copy.copied { background: #0a8a5e; }
+  .btn-download {
+    background: transparent;
+    color: var(--pai-primary-blue);
+    border: 1px solid var(--pai-primary-blue);
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+  .btn-download:hover { background: var(--pai-light-blue); }
+  .btn-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
   /* Container */
   .container { max-width: 1200px; margin: 0 auto; padding: 24px 32px; }
@@ -595,9 +604,14 @@
       <div class="wizard-title">Copy & Deploy</div>
       <div class="wizard-text" id="wizard-deploy-text"></div>
       <div id="wizard-deploy-instructions" class="instructions-block" style="max-height:250px;"></div>
-      <button class="btn btn-copy" id="wizard-copy-btn" onclick="wizardCopy()" style="width:100%;justify-content:center;margin-top:12px;">
-        Copy Instructions to Clipboard
-      </button>
+      <div class="btn-actions" style="margin-top:12px;">
+        <button class="btn btn-copy" id="wizard-copy-btn" onclick="wizardCopy()" style="flex:1;justify-content:center;">
+          Copy Instructions to Clipboard
+        </button>
+        <button class="btn btn-download" onclick="wizardDownload()" style="flex:1;justify-content:center;">
+          Download as File
+        </button>
+      </div>
       <div class="wizard-actions" style="margin-top:16px;">
         <button class="btn btn-outline" onclick="wizardPrev()">&larr; Back</button>
         <button class="btn btn-primary" onclick="closeWizard();if(wizardState.skill){navigate('#/skill/'+wizardState.skill.id);}">
@@ -811,9 +825,14 @@ function renderDetail(skillId) {
         }
         return `<div class="tab-content" data-panel="${p.id}" style="display:${p.id === defaultTab ? 'block' : 'none'}">
           <div class="instructions-block">${renderMarkdown(data.instructions)}</div>
-          <button class="btn btn-copy" onclick="copyInstructions('${skill.id}', '${p.id}')">
-            Copy ${p.name} Instructions to Clipboard
-          </button>
+          <div class="btn-actions">
+            <button class="btn btn-copy" onclick="copyInstructions('${skill.id}', '${p.id}')">
+              Copy Instructions to Clipboard
+            </button>
+            <button class="btn btn-download" onclick="downloadInstructions('${skill.id}', '${p.id}')">
+              Download as File
+            </button>
+          </div>
         </div>`;
       }).join('')}
 
@@ -863,6 +882,45 @@ async function copyToClipboard(text) {
     document.body.removeChild(ta);
     showToast('Copied to clipboard!');
   }
+}
+
+// ── Download ──
+const PLATFORM_FILES = {
+  'claude-project': 'claude-project.md',
+  'claude-code': 'skill.md',
+  'chatgpt-gpt': 'chatgpt-gpt.md'
+};
+
+function downloadInstructions(skillId, platformId) {
+  const skill = catalogData.skills.find(s => s.id === skillId);
+  if (!skill || !skill.platforms[platformId]) return;
+  const text = skill.platforms[platformId].instructions;
+  const filename = PLATFORM_FILES[platformId] || `${platformId}-instructions.md`;
+  const skillName = skill.name.toLowerCase().replace(/\s+/g, '-');
+  triggerDownload(text, `${skillName}-${filename}`);
+}
+
+function wizardDownload() {
+  const skill = wizardState.skill;
+  const platform = wizardState.platform;
+  if (!skill || !platform || !skill.platforms[platform]) return;
+  const text = skill.platforms[platform].instructions;
+  const filename = PLATFORM_FILES[platform] || `${platform}-instructions.md`;
+  const skillName = skill.name.toLowerCase().replace(/\s+/g, '-');
+  triggerDownload(text, `${skillName}-${filename}`);
+}
+
+function triggerDownload(text, filename) {
+  const blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('File downloaded!');
 }
 
 function showToast(msg) {
