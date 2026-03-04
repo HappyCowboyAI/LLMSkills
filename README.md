@@ -31,4 +31,4 @@ Each skill folder contains:
 ## Prerequisites
 
 - Claude Pro/Team account
-- People.ai MCP integration connected ([Setup guide](https://peopleai.atlassian.net/wiki/spaces/CS/pages/59279540225))
+- People.ai MCP integration connected ([MCP setup articles](https://help.people.ai/en/?q=mcp))

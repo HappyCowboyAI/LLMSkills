@@ -200,7 +200,7 @@ def build_catalog():
             "title": "People.ai LLM Skills Catalog",
             "version": "1.0",
             "lastUpdated": "2026-03-04",
-            "mcpSetupUrl": "https://peopleai.atlassian.net/wiki/spaces/CS/pages/59279540225",
+            "mcpSetupUrl": "https://help.people.ai/en/?q=mcp",
             "platforms": [
                 {k: v for k, v in p.items() if k != "file"} for p in PLATFORMS
             ],
