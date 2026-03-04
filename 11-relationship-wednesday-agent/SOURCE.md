@@ -1,4 +1,4 @@
-# SalesAI Relationship Wednesday Agent
+# Relationship Wednesday Agent
 
 ## Description
 Delivers personalized relationship coaching to the revenue org via Slack DMs. Analyzes pipeline data and generates strategies per rep.

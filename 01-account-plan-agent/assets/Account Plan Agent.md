@@ -1,4 +1,4 @@
-# SalesAI MCP Account Plan Agent
+# Account Plan Agent
 
 **Version:** 1.1  
 **Last Updated:** August 28, 2025  
@@ -6,7 +6,7 @@
 
 ## 🎯 Project Overview
 
-The **SalesAI MCP Account Plan Agent** is an AI-powered account planning solution that transforms static Salesforce account plans into dynamic, interactive dashboards with real-time intelligence and actionable insights. Version 1.1 focuses on **Account Plan Completion** as the primary metric while leveraging SalesAI intelligence to identify gaps between formal documentation and actual progress.
+The **Account Plan Agent** is an AI-powered account planning solution that transforms static Salesforce account plans into dynamic, interactive dashboards with real-time intelligence and actionable insights. Version 1.1 focuses on **Account Plan Completion** as the primary metric while leveraging SalesAI intelligence to identify gaps between formal documentation and actual progress.
 
 ### Problem Statement
 Traditional account planning suffers from:
@@ -288,7 +288,7 @@ Traditional Account Planning Problems:
 - Executive frustration with incomplete plans
 - Missed renewal opportunities due to poor documentation
 
-SalesAI MCP Agent v1.1 Benefits:
+MCP Agent v1.1 Benefits:
 - Plan completion rate improvement: 45.5% → 75%+ target
 - Undocumented work identification: 7+ achievements found
 - Gap quantification: 29.5% documentation deficit identified
@@ -393,11 +393,11 @@ ROI = (Completion improvement × plan quality × renewal success rate) +
 
 ## 📝 Version History
 
-- **v1.0** (August 2025): Initial SalesAI MCP Account Plan Agent
+- **v1.0** (August 2025): Initial Account Plan Agent
 - **v1.1** (August 28, 2025): Account Plan Completion Focus, Gap Detection, Compact UI
 
 ---
 
 **Ready to transform your account planning from documentation burden to completion success?**
 
-*The SalesAI MCP Account Plan Agent v1.1 turns every account plan into an intelligent completion engine, identifying gaps between reality and documentation while providing clear paths to improvement.*
+*The Account Plan Agent v1.1 turns every account plan into an intelligent completion engine, identifying gaps between reality and documentation while providing clear paths to improvement.*

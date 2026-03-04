@@ -1,4 +1,4 @@
-# SalesAI External Company News Agent
+# External Company News Agent
 
 ## Description
 Gathers, analyzes, and synthesizes external market intelligence for target accounts — public company data, financial reports, earnings calls, and strategic insights.

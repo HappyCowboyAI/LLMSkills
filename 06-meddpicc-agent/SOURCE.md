@@ -1,4 +1,4 @@
-# SalesAI MEDDPICC Agent
+# MEDDPICC Agent
 
 ## Description
 AI-powered MEDDPICC qualification system that automatically assesses and improves qualification status from communication data.

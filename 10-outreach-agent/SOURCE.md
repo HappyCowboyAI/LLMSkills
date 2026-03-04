@@ -1,4 +1,4 @@
-# SalesAI Outreach Agent
+# Outreach Agent
 
 ## Description
 Automates personalized email campaigns by combining real CRM data analysis with AI-generated emails referencing specific account activities and stakeholder roles.

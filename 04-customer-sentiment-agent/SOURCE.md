@@ -1,4 +1,4 @@
-# SalesAI Customer Sentiment Agent
+# Customer Sentiment Agent
 
 ## Description
 Comprehensive framework for analyzing customer sentiment trends using People.ai MCP data sources. Identifies risk signals and positive momentum.

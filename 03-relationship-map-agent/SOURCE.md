@@ -1,4 +1,4 @@
-# SalesAI Relationship Map Agent
+# Relationship Map Agent
 
 ## Description
 Creates professional, interactive relationship influence maps showing stakeholder connections, power dynamics, and engagement levels.

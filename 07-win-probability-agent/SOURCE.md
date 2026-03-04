@@ -1,4 +1,4 @@
-# SalesAI Win Probability Agent
+# Win Probability Agent
 
 ## Description
 Real-time, sports-inspired win probability scoring for sales opportunities.

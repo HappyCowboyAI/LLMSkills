@@ -1,4 +1,4 @@
-# SalesAI Territory Optimizer Agent
+# Territory Optimizer Agent
 
 ## Description
 Combines account data analysis with People.ai MCP for strategic territory insights, opportunity gaps, and performance optimization.

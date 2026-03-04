@@ -1,7 +1,7 @@
 # My Team Agent
 
 ## Description
-Uses SalesAI to extract team data and provide a manager review of important updates, pending actions, and coaching opportunities.
+Uses People.ai to extract team data and provide a manager review of important updates, pending actions, and coaching opportunities.
 
 ## Audience
 Sales Managers

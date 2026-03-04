@@ -1,4 +1,4 @@
-# SalesAI MCP Account Plan Agent
+# Account Plan Agent
 
 ## Description
 Transforms static account plans into dynamic, interactive dashboards with real-time intelligence and actionable insights.

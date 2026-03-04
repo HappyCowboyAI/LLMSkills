@@ -1,4 +1,4 @@
-# SalesAI Opportunity Agent
+# Opportunity Agent
 
 ## Description
 Creates actionable opportunity health dashboards — deal health scoring, stakeholder engagement analysis, risk assessment, and strategic outreach recommendations.
