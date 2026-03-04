@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ACCOUNT_NAME}} Relationship Influence Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .midmarket-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 22px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 19px;
+        }
+
+        .section {
+            margin-bottom: 19px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 11px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 2px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            border-radius: 1px;
+        }
+
+        /* Mid-Market Stakeholder Grid */
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
+        }
+
+        .stakeholder-category {
+            background: white;
+            border-radius: 9px;
+            padding: 13px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+
+        .stakeholder-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-decision-maker {
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.05));
+        }
+
+        .category-champion {
+            border-color: #27ae60;
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05));
+        }
+
+        .category-influencer {
+            border-color: #3498db;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+        }
+
+        .category-risk {
+            border-color: #f39c12;
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(243, 156, 18, 0.05));
+        }
+
+        .category-header {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 11px;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-icon {
+            font-size: 1.15rem;
+            margin-right: 7px;
+        }
+
+        .stakeholder {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 7px;
+            padding: 9px;
+            margin-bottom: 7px;
+            border-left: 3px solid;
+            transition: all 0.3s ease;
+        }
+
+        .stakeholder:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateX(3px);
+            box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+        }
+
+        .stakeholder-name {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 3px;
+            font-size: 0.82rem;
+        }
+
+        .stakeholder-title {
+            font-size: 0.72rem;
+            color: #7f8c8d;
+            margin-bottom: 3px;
+            font-weight: 500;
+        }
+
+        .stakeholder-influence {
+            font-size: 0.67rem;
+            line-height: 1.3;
+            color: #5d6d7e;
+        }
+
+        /* Mid-Market Org Chart */
+        .org-chart-container {
+            background: white;
+            padding: 14px;
+            border-radius: 9px;
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .org-level {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 9px 0;
+            gap: 17px;
+        }
+
+        .org-node {
+            background: white;
+            border-radius: 7px;
+            padding: 7px;
+            box-shadow: 0 4px 11px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            min-width: 75px;
+            text-align: center;
+            position: relative;
+        }
+
+        .org-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .org-node-decision {
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.05));
+        }
+
+        .org-node-champion {
+            border-color: #27ae60;
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05));
+        }
+
+        .org-node-influencer {
+            border-color: #3498db;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+        }
+
+        .org-node-risk {
+            border-color: #f39c12;
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(243, 156, 18, 0.05));
+        }
+
+        .org-node-gap {
+            border-color: #9b59b6;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(155, 89, 182, 0.05));
+            border-style: dashed;
+        }
+
+        .org-avatar {
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+        }
+
+        .org-name {
+            font-weight: 700;
+            font-size: 0.63rem;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .org-title {
+            font-size: 0.53rem;
+            color: #7f8c8d;
+            margin-bottom: 3px;
+            line-height: 1.1;
+        }
+
+        .org-influence {
+            font-size: 0.43rem;
+            font-weight: 600;
+            padding: 2px 4px;
+            border-radius: 4px;
+            display: inline-block;
+            color: white;
+        }
+
+        .org-node-decision .org-influence {
+            background: #e74c3c;
+        }
+
+        .org-node-champion .org-influence {
+            background: #27ae60;
+        }
+
+        .org-node-influencer .org-influence {
+            background: #3498db;
+        }
+
+        .org-node-risk .org-influence {
+            background: #f39c12;
+        }
+
+        .org-node-gap .org-influence {
+            background: #9b59b6;
+        }
+
+        /* Connection lines */
+        .vertical-line {
+            width: 2px;
+            height: 10px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            margin: 0 auto;
+        }
+
+        .vertical-line-split {
+            width: 70px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 7px auto;
+            position: relative;
+        }
+
+        .vertical-line-split::before,
+        .vertical-line-split::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 7px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            top: -7px;
+        }
+
+        .vertical-line-split::before {
+            left: 25%;
+        }
+
+        .vertical-line-split::after {
+            right: 25%;
+        }
+
+        .org-connection-horizontal {
+            width: 45px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            align-self: center;
+        }
+
+        .org-connection-horizontal-small {
+            width: 25px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            align-self: center;
+        }
+
+        /* Mid-Market specific sections */
+        .org-parallel-section {
+            background: linear-gradient(135deg, #ff7675, #fd79a8);
+            padding: 13px;
+            border-radius: 9px;
+            margin: 13px 0;
+            color: white;
+        }
+
+        .parallel-header {
+            text-align: center;
+            margin-bottom: 11px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .parallel-nodes {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .org-arrow {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .collab-line {
+            width: 28px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Power structure */
+        .power-structure {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 9px;
+        }
+
+        .power-structure h3 {
+            font-size: 1.05rem;
+            margin-bottom: 13px;
+            text-align: center;
+        }
+
+        .power-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .power-level {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 11px;
+            border-radius: 7px;
+            border-left: 4px solid #4ECDC4;
+        }
+
+        .power-level-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+
+        .power-level div:last-child {
+            font-size: 0.73rem;
+            line-height: 1.3;
+        }
+
+        /* Risk alerts */
+        .risk-alerts {
+            background: linear-gradient(135deg, #ff7675, #fd79a8);
+            color: white;
+            padding: 16px;
+            border-radius: 9px;
+        }
+
+        .risk-alerts h3 {
+            font-size: 1.05rem;
+            margin-bottom: 13px;
+            text-align: center;
+        }
+
+        .risk-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 11px;
+            border-radius: 7px;
+            margin-bottom: 9px;
+            border-left: 4px solid #fdcb6e;
+        }
+
+        .risk-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+
+        .risk-item div:last-child {
+            font-size: 0.73rem;
+            line-height: 1.3;
+        }
+
+        /* Strategic recommendations */
+        .strategic-recommendations {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            padding: 16px;
+            border-radius: 9px;
+        }
+
+        .strategic-recommendations h3 {
+            font-size: 1.05rem;
+            margin-bottom: 13px;
+            text-align: center;
+        }
+
+        .recommendation-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 11px;
+            border-radius: 7px;
+            margin-bottom: 9px;
+            border-left: 4px solid #55efc4;
+        }
+
+        .recommendation-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+        }
+
+        .recommendation-item div:last-child {
+            font-size: 0.73rem;
+            line-height: 1.3;
+        }
+
+        /* Opportunities */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 13px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border-radius: 9px;
+            padding: 13px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .opportunity-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 7px;
+        }
+
+        .opportunity-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin-bottom: 9px;
+        }
+
+        .detail-item {
+            font-size: 0.77rem;
+        }
+
+        .detail-label {
+            color: #7f8c8d;
+            margin-bottom: 2px;
+            font-size: 0.72rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .engagement-bar {
+            width: 100%;
+            height: 5px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 7px;
+        }
+
+        .engagement-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            transition: width 0.4s ease;
+        }
+
+        @media (max-width: 1200px) {
+            .midmarket-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 18px;
+                gap: 18px;
+            }
+            .stakeholder-grid {
+                grid-template-columns: 1fr;
+                gap: 11px;
+            }
+            .midmarket-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header h1 {
+                font-size: 1.45rem;
+            }
+            .header p {
+                font-size: 0.82rem;
+            }
+            .opportunity-details {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 {{ACCOUNT_NAME}} Relationship Influence Map</h1>
+            <p>Strategic Account Intelligence | Owner: {{ACCOUNT_OWNER}} | ${{REVENUE}}+ Revenue | Account Health: {{HEALTH_STATUS}}</p>
+            
+            <div class="midmarket-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">{{KEY_STAKEHOLDERS}}</div>
+                    <div class="metric-label">Key Stakeholders</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">{{CHAMPION_STRENGTH}}</div>
+                    <div class="metric-label">Champion Strength</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">{{GROWTH_OPPORTUNITIES}}</div>
+                    <div class="metric-label">Growth Opportunities</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">{{DEAL_VELOCITY}}</div>
+                    <div class="metric-label">Deal Velocity</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Mid-Market Stakeholder Dynamics -->
+                <div class="section">
+                    <h2 class="section-title">Core Stakeholder Network</h2>
+                    <div class="stakeholder-grid">
+                        <!-- Decision Makers -->
+                        <div class="stakeholder-category category-decision-maker">
+                            <div class="category-header">
+                                <span class="category-icon">👑</span>
+                                <span>Decision Makers</span>
+                            </div>
+                            <!-- Populate with verified decision makers -->
+                            <div class="stakeholder" style="border-left-color: #e74c3c;">
+                                <div class="stakeholder-name">{{DECISION_MAKER_NAME_1}}</div>
+                                <div class="stakeholder-title">{{DECISION_MAKER_TITLE_1}}</div>
+                                <div class="stakeholder-influence">{{DECISION_MAKER_INFLUENCE_1}}</div>
+                            </div>
+                            <div class="stakeholder" style="border-left-color: #e74c3c;">
+                                <div class="stakeholder-name">{{DECISION_MAKER_NAME_2}}</div>
+                                <div class="stakeholder-title">{{DECISION_MAKER_TITLE_2}}</div>
+                                <div class="stakeholder-influence">{{DECISION_MAKER_INFLUENCE_2}}</div>
+                            </div>
+                        </div>
+
+                        <!-- Champions -->
+                        <div class="stakeholder-category category-champion">
+                            <div class="category-header">
+                                <span class="category-icon">🚀</span>
+                                <span>Champions</span>
+                            </div>
+                            <!-- Populate with verified champions -->
+                            <div class="stakeholder" style="border-left-color: #27ae60;">
+                                <div class="stakeholder-name">{{CHAMPION_NAME_1}}</div>
+                                <div class="stakeholder-title">{{CHAMPION_TITLE_1}}</div>
+                                <div class="stakeholder-influence">{{CHAMPION_INFLUENCE_1}}</div>
+                            </div>
+                            <div class="stakeholder" style="border-left-color: #27ae60;">
+                                <div class="stakeholder-name">{{CHAMPION_NAME_2}}</div>
+                                <div class="stakeholder-title">{{CHAMPION_TITLE_2}}</div>
+                                <div class="stakeholder-influence">{{CHAMPION_INFLUENCE_2}}</div>
+                            </div>
+                        </div>
+
+                        <!-- Key Influencers -->
+                        <div class="stakeholder-category category-influencer">
+                            <div class="category-header">
+                                <span class="category-icon">🎯</span>
+                                <span>Key Influencers</span>
+                            </div>
+                            <!-- Populate with operational influencers -->
+                            <div class="stakeholder" style="border-left-color: #3498db;">
+                                <div class="stakeholder-name">{{INFLUENCER_NAME_1}}</div>
+                                <div class="stakeholder-title">{{INFLUENCER_TITLE_1}}</div>
+                                <div class="stakeholder-influence">{{INFLUENCER_INFLUENCE_1}}</div>
+                            </div>
+                            <div class="stakeholder" style="border-left-color: #3498db;">
+                                <div class="stakeholder-name">{{INFLUENCER_NAME_2}}</div>
+                                <div class="stakeholder-title">{{INFLUENCER_TITLE_2}}</div>
+                                <div class="stakeholder-influence">{{INFLUENCER_INFLUENCE_2}}</div>
+                            </div>
+                        </div>
+
+                        <!-- Risk Factors -->
+                        <div class="stakeholder-category category-risk">
+                            <div class="category-header">
+                                <span class="category-icon">⚠️</span>
+                                <span>Risk Factors</span>
+                            </div>
+                            <!-- Populate with identified risks -->
+                            <div class="stakeholder" style="border-left-color: #f39c12;">
+                                <div class="stakeholder-name">{{RISK_NAME_1}}</div>
+                                <div class="stakeholder-title">{{RISK_TITLE_1}}</div>
+                                <div class="stakeholder-influence">{{RISK_INFLUENCE_1}}</div>
+                            </div>
+                            <div class="stakeholder" style="border-left-color: #f39c12;">
+                                <div class="stakeholder-name">{{RISK_NAME_2}}</div>
+                                <div class="stakeholder-title">{{RISK_TITLE_2}}</div>
+                                <div class="stakeholder-influence">{{RISK_INFLUENCE_2}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growth Opportunities -->
+                <div class="section">
+                    <h2 class="section-title">Growth Opportunities</h2>
+                    <div class="opportunities-grid">
+                        <!-- Populate with verified opportunities -->
+                        <div class="opportunity-card">
+                            <div class="opportunity-name">{{OPPORTUNITY_NAME_1}}</div>
+                            <div class="opportunity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">Amount</div>
+                                    <div class="detail-value">{{OPPORTUNITY_AMOUNT_1}}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Close Date</div>
+                                    <div class="detail-value">{{OPPORTUNITY_CLOSE_1}}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Type</div>
+                                    <div class="detail-value">{{OPPORTUNITY_TYPE_1}}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Engagement</div>
+                                    <div class="detail-value">{{OPPORTUNITY_ENGAGEMENT_1}}%</div>
+                                </div>
+                            </div>
+                            <div class="engagement-bar">
+                                <div class="engagement-fill" style="width: {{OPPORTUNITY_ENGAGEMENT_1}}%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="opportunity-card">
+                            <div class="opportunity-name">{{OPPORTUNITY_NAME_2}}</div>
+                            <div class="opportunity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">Amount</div>
+                                    <div class="detail-value">{{OPPORTUNITY_AMOUNT_2}}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Close Date</div>
+                                    <div class="detail-value">{{OPPORTUNITY_CLOSE_2}}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Type</div>
+                                    <div class="detail-value">{{OPPORTUNITY_TYPE_2}}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Engagement</div>
+                                    <div class="detail-value">{{OPPORTUNITY_ENGAGEMENT_2}}%</div>
+                                </div>
+                            </div>
+                            <div class="engagement-bar">
+                                <div class="engagement-fill" style="width: {{OPPORTUNITY_ENGAGEMENT_2}}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Mid-Market Decision Structure -->
+                <div class="section">
+                    <h2 class="section-title">Decision-Making Framework</h2>
+                    <div class="org-chart-container">
+                        <!-- Level 1: Executive -->
+                        <div class="org-level org-level-1">
+                            <div class="org-node org-node-decision">
+                                <div class="org-avatar">👑</div>
+                                <div class="org-info">
+                                    <div class="org-name">{{EXECUTIVE_ORG_NAME_1}}</div>
+                                    <div class="org-title">{{EXECUTIVE_ORG_TITLE_1}}</div>
+                                    <div class="org-influence">Executive</div>
+                                </div>
+                            </div>
+                            
+                            <div class="org-connection-horizontal"></div>
+                            
+                            <div class="org-node org-node-gap">
+                                <div class="org-avatar">?</div>
+                                <div class="org-info">
+                                    <div class="org-name">Missing Exec</div>
+                                    <div class="org-title">{{GAP_TITLE_1}}</div>
+                                    <div class="org-influence">Opportunity</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vertical-line"></div>
+
+                        <!-- Level 2: Champions -->
+                        <div class="org-level org-level-2">
+                            <div class="org-node org-node-champion">
+                                <div class="org-avatar">🚀</div>
+                                <div class="org-info">
+                                    <div class="org-name">{{CHAMPION_ORG_NAME_1}}</div>
+                                    <div class="org-title">{{CHAMPION_ORG_TITLE_1}}</div>
+                                    <div class="org-influence">Champion</div>
+                                </div>
+                            </div>
+                            
+                            <div class="org-connection-horizontal"></div>
+                            
+                            <div class="org-node org-node-champion">
+                                <div class="org-avatar">⭐</div>
+                                <div class="org-info">
+                                    <div class="org-name">{{CHAMPION_ORG_NAME_2}}</div>
+                                    <div class="org-title">{{CHAMPION_ORG_TITLE_2}}</div>
+                                    <div class="org-influence">Champion</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="vertical-line-split"></div>
+
+                        <!-- Level 3: Operational -->
+                        <div class="org-level org-level-3">
+                            <div class="org-node org-node-influencer">
+                                <div class="org-avatar">🎯</div>
+                                <div class="org-info">
+                                    <div class="org-name">{{INFLUENCER_ORG_NAME_1}}</div>
+                                    <div class="org-title">{{INFLUENCER_ORG_TITLE_1}}</div>
+                                    <div class="org-influence">Influencer</div>
+                                </div>
+                            </div>
+
+                            <div class="org-connection-horizontal-small"></div>
+
+                            <div class="org-node org-node-influencer">
+                                <div class="org-avatar">📊</div>
+                                <div class="org-info">
+                                    <div class="org-name">{{INFLUENCER_ORG_NAME_2}}</div>
+                                    <div class="org-title">{{INFLUENCER_ORG_TITLE_2}}</div>
+                                    <div class="org-influence">Influencer</div>
+                                </div>
+                            </div>
+
+                            <div class="org-connection-horizontal-small"></div>
+
+                            <div class="org-node org-node-risk">
+                                <div class="org-avatar">⚠️</div>
+                                <div class="org-info">
+                                    <div class="org-name">{{RISK_ORG_NAME_1}}</div>
+                                    <div class="org-title">{{RISK_ORG_TITLE_1}}</div>
+                                    <div class="org-influence">Risk</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Parallel Structure: Support Functions -->
+                        <div class="org-parallel-section">
+                            <div class="parallel-header">
+                                <h4>🛠️ Support & Implementation</h4>
+                            </div>
+                            <div class="parallel-nodes">
+                                <div class="org-node org-node-influencer">
+                                    <div class="org-avatar">🔧</div>
+                                    <div class="org-info">
+                                        <div class="org-name">{{SUPPORT_NAME_1}}</div>
+                                        <div class="org-title">{{SUPPORT_TITLE_1}}</div>
+                                        <div class="org-influence">Support</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="org-arrow">→</div>
+                                
+                                <div class="org-node org-node-influencer">
+                                    <div class="org-avatar">📈</div>
+                                    <div class="org-info">
+                                        <div class="org-name">{{SUPPORT_NAME_2}}</div>
+                                        <div class="org-title">{{SUPPORT_TITLE_2}}</div>
+                                        <div class="org-influence">User</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power Structure Analysis -->
+                <div class="section">
+                    <div class="power-structure">
+                        <h3>🗝️ Decision Flow & Influence</h3>
+                        <div class="power-levels">
+                            <div class="power-level">
+                                <div class="power-level-title">Budget Authority</div>
+                                <div>{{BUDGET_AUTHORITY_DESCRIPTION}}</div>
+                            </div>
+                            <div class="power-level">
+                                <div class="power-level-title">Champion Network</div>
+                                <div>{{CHAMPION_NETWORK_DESCRIPTION}}</div>
+                            </div>
+                            <div class="power-level">
+                                <div class="power-level-title">Implementation Team</div>
+                                <div>{{IMPLEMENTATION_DESCRIPTION}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div class="section">
+                    <div class="risk-alerts">
+                        <h3>🚨 Key Risk Factors</h3>
+                        <div class="risk-item">
+                            <div class="risk-title">{{RISK_TITLE_1}}</div>
+                            <div>{{RISK_DESCRIPTION_1}}</div>
+                        </div>
+                        <div class="risk-item">
+                            <div class="risk-title">{{RISK_TITLE_2}}</div>
+                            <div>{{RISK_DESCRIPTION_2}}</div>
+                        </div>
+                        <div class="risk-item">
+                            <div class="risk-title">{{RISK_TITLE_3}}</div>
+                            <div>{{RISK_DESCRIPTION_3}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Action Plan -->
+                <div class="section">
+                    <div class="strategic-recommendations">
+                        <h3>🎯 Growth Strategy</h3>
+                        <div class="recommendation-item">
+                            <div class="recommendation-title">{{STRATEGY_TITLE_1}}</div>
+                            <div>{{STRATEGY_DESCRIPTION_1}}</div>
+                        </div>
+                        <div class="recommendation-item">
+                            <div class="recommendation-title">{{STRATEGY_TITLE_2}}</div>
+                            <div>{{STRATEGY_DESCRIPTION_2}}</div>
+                        </div>
+                        <div class="recommendation-item">
+                            <div class="recommendation-title">{{STRATEGY_TITLE_3}}</div>
+                            <div>{{STRATEGY_DESCRIPTION_3}}</div>
+                        </div>
+                        <div class="recommendation-item">
+                            <div class="recommendation-title">{{STRATEGY_TITLE_4}}</div>
+                            <div>{{STRATEGY_DESCRIPTION_4}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            animateEngagementBars();
+            addHoverEffects();
+        });
+
+        function animateEngagementBars() {
+            const bars = document.querySelectorAll('.engagement-fill');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 400);
+            });
+        }
+
+        function addHoverEffects() {
+            const categories = document.querySelectorAll('.stakeholder-category');
+            categories.forEach(category => {
+                category.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                category.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            const orgNodes = document.querySelectorAll('.org-node');
+            orgNodes.forEach(node => {
+                node.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.03)';
+                });
+                node.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        }
+
+        console.log('🎯 Mid-Market Relationship Map Template Loaded');
+        console.log('📊 Optimized for VP/Director level decision makers');
+    </script>
+</body>
+</html>
