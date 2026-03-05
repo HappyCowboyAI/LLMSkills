@@ -26,6 +26,7 @@ Shareable Claude skills powered by the People.ai MCP. These skills help customer
 |---|-------|-------------|
 | 08 | Meeting Prep Agent | One-page meeting briefing with talking points and risks |
 | 09 | QBR Generator Agent | Draft Quarterly Business Review content from engagement data |
+| 15 | Executive Briefing Agent | Internal exec summary — Red/Yellow/Green health, revenue at risk, leadership action needed |
 
 ### Action & Growth
 | # | Skill | Description |
@@ -33,6 +34,18 @@ Shareable Claude skills powered by the People.ai MCP. These skills help customer
 | 11 | Next Best Action Agent | Top 3 actions to take right now with specific contacts and messaging |
 | 12 | Whitespace Mapper Agent | Expansion opportunities by department — engagement without revenue |
 | 13 | Pipeline Review Agent | Portfolio-level pipeline health, coaching priorities, and forecast risks |
+| 16 | Renewal Risk Agent | Predicts renewal likelihood with 6-dimension risk scoring and save plans |
+
+### Transitions & Learning
+| # | Skill | Description |
+|---|-------|-------------|
+| 17 | Handoff Agent | Account handoff docs — stakeholder personalities, commitments, landmines |
+| 18 | Deal Debrief Agent | Post-close win/loss analysis with lessons learned |
+
+### Engagement Analytics
+| # | Skill | Description |
+|---|-------|-------------|
+| 19 | Engagement Scorecard Agent | Data-driven engagement metrics — who's active, who's going dark, trends |
 
 ## Skill Format
 
