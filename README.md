@@ -19,12 +19,20 @@ Shareable Claude skills powered by the People.ai MCP. These skills help customer
 | 06 | MEDDPICC Agent | AI-powered MEDDPICC qualification and coaching |
 | 07 | Win Probability Agent | Real-time win probability scoring for deals |
 | 10 | Multi-Threading Coach Agent | Identifies single-threaded risk and recommends people to engage |
+| 14 | Competitive Battle Card Agent | Live battle cards tailored to deal context and customer concerns |
 
 ### Meeting & Review Prep
 | # | Skill | Description |
 |---|-------|-------------|
 | 08 | Meeting Prep Agent | One-page meeting briefing with talking points and risks |
 | 09 | QBR Generator Agent | Draft Quarterly Business Review content from engagement data |
+
+### Action & Growth
+| # | Skill | Description |
+|---|-------|-------------|
+| 11 | Next Best Action Agent | Top 3 actions to take right now with specific contacts and messaging |
+| 12 | Whitespace Mapper Agent | Expansion opportunities by department — engagement without revenue |
+| 13 | Pipeline Review Agent | Portfolio-level pipeline health, coaching priorities, and forecast risks |
 
 ## Skill Format
 
