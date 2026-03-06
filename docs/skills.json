@@ -72,7 +72,8 @@
       ],
       "projectKnowledgeFiles": [
         "Account Plan Agent.md",
-        "Peopleai Brand Knowledge Base.md"
+        "Peopleai Brand Knowledge Base.md",
+        "walkthrough-data.json"
       ],
       "status": "ready",
       "platforms": {
@@ -158,7 +159,7 @@
           "Completion Improvement Roadmap",
           "Opportunity Context"
         ],
-        "hasCustomData": false
+        "hasCustomData": true
       }
     },
     {

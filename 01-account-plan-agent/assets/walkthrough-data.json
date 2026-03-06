@@ -1,0 +1,47 @@
+{
+  "input": "Globex Industries",
+  "tools": {
+    "find_account": {
+      "response": {
+        "name": "Globex Industries",
+        "peopleai_account_id": "acc_99871",
+        "domain": "globexindustries.com",
+        "opportunities": [
+          { "name": "Globex Platform Modernization", "amount": "$720,000", "stage": "Proposal", "close_date": "2026-05-01" },
+          { "name": "Globex Analytics Add-On", "amount": "$95,000", "stage": "Closed Won", "close_date": "2026-01-15" }
+        ]
+      }
+    },
+    "get_scorecard": {
+      "response": {
+        "overall_completion": "58%",
+        "target": "75%",
+        "gap": "17%",
+        "sections": [
+          { "name": "Business Overview", "score": 9, "max": 10, "status": "Complete" },
+          { "name": "Key Stakeholders", "score": 5, "max": 10, "status": "Needs Update" },
+          { "name": "Competitive Landscape", "score": 2, "max": 10, "status": "Critical Gap" },
+          { "name": "Technology Stack", "score": 0, "max": 10, "status": "Undervalued" },
+          { "name": "Success Metrics", "score": 7, "max": 10, "status": "Needs Update" },
+          { "name": "Growth Strategy", "score": 6, "max": 10, "status": "Needs Update" }
+        ]
+      }
+    },
+    "get_engaged_people": {
+      "response": {
+        "external": [
+          { "name": "Rachel Kim", "title": "CTO", "emails_30d": 4, "meetings_30d": 2, "role": "Economic Buyer" },
+          { "name": "James Okafor", "title": "VP Platform Engineering", "emails_30d": 22, "meetings_30d": 6, "role": "Champion" },
+          { "name": "Priya Sharma", "title": "Director of Data", "emails_30d": 15, "meetings_30d": 3, "role": "Key Stakeholder" },
+          { "name": "Carlos Mendez", "title": "Senior Architect", "emails_30d": 18, "meetings_30d": 4, "role": "Key Stakeholder" },
+          { "name": "Amy Liu", "title": "Procurement Lead", "emails_30d": 6, "meetings_30d": 1, "role": "Operational Contact" }
+        ],
+        "internal": [
+          { "name": "Ben Alvarez", "title": "Enterprise AE", "emails_30d": 38, "meetings_30d": 9 },
+          { "name": "Keiko Tanaka", "title": "Solutions Engineer", "emails_30d": 14, "meetings_30d": 5 },
+          { "name": "Ryan O'Brien", "title": "CSM", "emails_30d": 12, "meetings_30d": 3 }
+        ]
+      }
+    }
+  }
+}
