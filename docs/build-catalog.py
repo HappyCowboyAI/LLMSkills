@@ -54,6 +54,10 @@ def extract_walkthrough(skill_dir: Path) -> dict | None:
 
     text = skill_md.read_text()
 
+    # Trim text to just the workflow section (stop at ## MCP Tools Reference, ## Rules, ## Output Guidelines, etc.)
+    workflow_end = re.search(r"\n## (?:MCP Tools|Rules|Output Guidelines|Report Format|Important)", text)
+    workflow_text = text[:workflow_end.start()] if workflow_end else text
+
     # Extract input type from SOURCE.md
     source_meta = parse_source_md(skill_dir / "SOURCE.md")
     input_label = source_meta.get("input", "Account name")
@@ -69,27 +73,34 @@ def extract_walkthrough(skill_dir: Path) -> dict | None:
 
     # Extract workflow steps from ### Step N headings
     step_pattern = r"### Step (\d+):?\s*(.+?)(?=\n)"
-    step_matches = re.finditer(step_pattern, text)
+    step_matches = re.finditer(step_pattern, workflow_text)
 
     steps = []
+    seen_tools = set()
     for match in step_matches:
         step_num = int(match.group(1))
         step_title = match.group(2).strip()
 
         # Get the content between this step heading and the next ### heading
         start = match.end()
-        next_heading = re.search(r"\n### ", text[start:])
-        end = start + next_heading.start() if next_heading else len(text)
-        step_content = text[start:end]
+        next_heading = re.search(r"\n### ", workflow_text[start:])
+        end = start + next_heading.start() if next_heading else len(workflow_text)
+        step_content = workflow_text[start:end]
 
         # Check if this step mentions parallel execution
         parallel = bool(re.search(r"parallel|simultaneous", step_content, re.IGNORECASE))
 
         # Extract backticked tool names (People.ai MCP tool pattern)
         tool_names = re.findall(r"`((?:find_|get_|ask_|account_|top_)\w+)`", step_content)
+        # Deduplicate within this step (same tool mentioned multiple times)
+        unique_tools = list(dict.fromkeys(tool_names))
 
-        if tool_names:
-            for tool_name in tool_names:
+        if unique_tools:
+            for tool_name in unique_tools:
+                # Skip if we already saw this tool in a previous step
+                if tool_name in seen_tools:
+                    continue
+                seen_tools.add(tool_name)
                 desc_match = re.search(
                     rf"`{re.escape(tool_name)}`\s*[—\-]+\s*(.+?)(?:\n|$)",
                     step_content,
@@ -109,11 +120,16 @@ def extract_walkthrough(skill_dir: Path) -> dict | None:
                 "stepNum": step_num,
             })
 
-    output_pattern = r"(?:####|#####)\s+(.+?)(?:\n)"
-    output_sections = re.findall(output_pattern, text)
+    # Extract output section headings from the output template area
+    # Look for ### / #### / ##### headings after the last Step heading
+    last_step = list(re.finditer(r"### Step \d+", workflow_text))
+    output_area = text[last_step[-1].end():] if last_step else ""
+    output_pattern = r"(?:###|####|#####)\s+(.+?)(?:\n)"
+    output_sections = re.findall(output_pattern, output_area)
     output_sections = [
         s.strip() for s in output_sections
         if not re.match(r"step\s+\d+", s, re.IGNORECASE)
+        and s.strip().lower() not in ("header", "rules", "important rules")
     ]
 
     has_custom_data = (skill_dir / "assets" / "walkthrough-data.json").exists()

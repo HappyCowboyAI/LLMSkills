@@ -147,55 +147,6 @@
             "description": "last 30 days of communication intelligence",
             "parallel": true,
             "stepNum": 2
-          },
-          {
-            "type": "tool",
-            "name": "get_account_status",
-            "description": "AI-analyzed risks, next steps, topics (last 30 days)",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
-            "name": "get_engaged_people",
-            "description": "Internal and external contacts with engagement metrics",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
-            "name": "find_account",
-            "description": "Look up account by name, get peopleai_account_id",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
-            "name": "get_account_status",
-            "description": "AI-analyzed risks, next steps, topics (last 30 days)",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
-            "name": "get_scorecard",
-            "description": "Account plan sections with completion scores and answers",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
-            "name": "get_engaged_people",
-            "description": "Internal and external contacts with engagement metrics",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
-            "name": "get_recent_account_activity",
-            "description": "Summarized emails and meetings (last 30 days)",
-            "parallel": false,
-            "stepNum": 3
           }
         ],
         "outputSections": [
@@ -303,20 +254,6 @@
           },
           {
             "type": "tool",
-            "name": "account_company_news",
-            "description": "external news, public filings, and market events",
-            "parallel": true,
-            "stepNum": 2
-          },
-          {
-            "type": "tool",
-            "name": "account_company_news",
-            "description": "Web Research (for private companies or to supplement)",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
-            "type": "tool",
             "name": "ask_sales_ai_about_account",
             "description": "Strategic AI Analysis",
             "parallel": false,
@@ -328,7 +265,15 @@
             "stepNum": 5
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Executive Summary",
+          "Company Overview",
+          "Financial Intelligence",
+          "Strategic Intelligence",
+          "Sales Intelligence",
+          "People.ai Relationship Context",
+          "Sources & Confidence"
+        ],
         "hasCustomData": false
       }
     },
@@ -456,59 +401,8 @@
             "stepNum": 4
           },
           {
-            "type": "tool",
-            "name": "get_engaged_people",
-            "description": "Classify Stakeholders",
-            "parallel": false,
-            "stepNum": 5
-          },
-          {
-            "type": "tool",
-            "name": "find_account",
-            "description": "Look up account by name",
-            "parallel": false,
-            "stepNum": 6
-          },
-          {
-            "type": "tool",
-            "name": "get_account_status",
-            "description": "AI-analyzed risks, next steps, topics",
-            "parallel": false,
-            "stepNum": 6
-          },
-          {
-            "type": "tool",
-            "name": "get_engaged_people",
-            "description": "Stakeholder engagement metrics (internal + external)",
-            "parallel": false,
-            "stepNum": 6
-          },
-          {
-            "type": "tool",
-            "name": "get_recent_account_activity",
-            "description": "Communication summaries (30 days)",
-            "parallel": false,
-            "stepNum": 6
-          },
-          {
-            "type": "tool",
-            "name": "ask_sales_ai_about_account",
-            "description": "AI-powered strategic analysis",
-            "parallel": false,
-            "stepNum": 6
-          },
-          {
-            "type": "tool",
-            "name": "get_opportunity_status",
-            "description": "Deal-specific insights",
-            "parallel": false,
-            "stepNum": 6
-          },
-          {
-            "type": "tool",
-            "name": "ask_sales_ai_about_opportunity",
-            "description": "AI-powered deal analysis",
-            "parallel": false,
+            "type": "analysis",
+            "title": "Generate the Relationship Map",
             "stepNum": 6
           }
         ],
@@ -629,7 +523,13 @@
             "stepNum": 5
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Executive Summary",
+          "Sentiment Components Analysis",
+          "Key Relationship Dynamics",
+          "Recommendations",
+          "Conclusion"
+        ],
         "hasCustomData": false
       }
     },
@@ -752,38 +652,8 @@
             "stepNum": 6
           },
           {
-            "type": "tool",
-            "name": "find_account",
-            "description": "Look up account by name, get opportunities",
-            "parallel": false,
-            "stepNum": 7
-          },
-          {
-            "type": "tool",
-            "name": "get_opportunity_status",
-            "description": "Deal-specific risks and next steps",
-            "parallel": false,
-            "stepNum": 7
-          },
-          {
-            "type": "tool",
-            "name": "get_recent_opportunity_activity",
-            "description": "Communication history",
-            "parallel": false,
-            "stepNum": 7
-          },
-          {
-            "type": "tool",
-            "name": "ask_sales_ai_about_opportunity",
-            "description": "AI-powered deal analysis",
-            "parallel": false,
-            "stepNum": 7
-          },
-          {
-            "type": "tool",
-            "name": "get_account_status",
-            "description": "Account-level context",
-            "parallel": false,
+            "type": "analysis",
+            "title": "Deliver the Dashboard",
             "stepNum": 7
           }
         ],
@@ -915,7 +785,12 @@
             "stepNum": 7
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "MEDDPICC Scorecard",
+          "AI Coaching Panel",
+          "Action Plan",
+          "Messaging Templates"
+        ],
         "hasCustomData": false
       }
     },
@@ -1040,7 +915,13 @@
             "stepNum": 8
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Executive Summary",
+          "Time Horizon Analysis (2x2 Grid)",
+          "Risk Factor Breakdown",
+          "Action Plan by Timeline",
+          "Post-Close Slip Analysis (if applicable)"
+        ],
         "hasCustomData": false
       }
     },
@@ -1146,7 +1027,16 @@
             "stepNum": 3
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Meeting Briefing: [Account Name]",
+          "What You Need to Know (30-second summary)",
+          "Recent Activity Highlights",
+          "Who You're Meeting With",
+          "Open Issues & Risks",
+          "Recommended Talking Points",
+          "Things to Avoid",
+          "Suggested Next Steps to Propose"
+        ],
         "hasCustomData": false
       }
     },
@@ -1267,7 +1157,18 @@
             "stepNum": 4
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Quarterly Business Review: [Account Name]",
+          "1. Executive Summary",
+          "2. Partnership Value Delivered",
+          "3. Engagement Overview",
+          "4. Opportunity & Revenue Summary",
+          "5. Risk Assessment",
+          "6. Market Context (if available)",
+          "7. Recommendations for Next Quarter",
+          "8. Discussion Topics for the QBR Meeting",
+          "9. Success Metrics for Next Quarter"
+        ],
         "hasCustomData": false
       }
     },
@@ -1389,19 +1290,19 @@
             "stepNum": 4
           },
           {
-            "type": "tool",
-            "name": "get_engaged_people",
-            "description": "Identify Multi-Threading Targets",
-            "parallel": false,
-            "stepNum": 5
-          },
-          {
             "type": "analysis",
             "title": "Deliver the Multi-Threading Report",
             "stepNum": 6
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Multi-Threading Analysis: [Account Name]",
+          "Account-Level Threading Summary",
+          "Opportunity Threading Breakdown",
+          "Critical Gaps",
+          "Multi-Threading Action Plan",
+          "Recommended Outreach"
+        ],
         "hasCustomData": false
       }
     },
@@ -1512,7 +1413,13 @@
             "stepNum": 5
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Next Best Actions: [Account Name]",
+          "Action 1: [Verb + Specific Outcome]",
+          "Action 2: [Verb + Specific Outcome]",
+          "Action 3: [Verb + Specific Outcome]",
+          "Why These 3?"
+        ],
         "hasCustomData": false
       }
     },
@@ -1614,13 +1521,6 @@
             "stepNum": 2
           },
           {
-            "type": "tool",
-            "name": "get_engaged_people",
-            "description": "Map the Engagement Landscape",
-            "parallel": false,
-            "stepNum": 3
-          },
-          {
             "type": "analysis",
             "title": "Identify Whitespace",
             "stepNum": 4
@@ -1631,7 +1531,15 @@
             "stepNum": 5
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Whitespace Map: [Account Name]",
+          "Engagement Coverage Matrix",
+          "Hot Whitespace (Act Now)",
+          "Warm Whitespace (Develop)",
+          "Strategic Whitespace (Explore)",
+          "Expansion Revenue Estimate",
+          "Recommended Expansion Playbook"
+        ],
         "hasCustomData": false
       }
     },
@@ -1740,7 +1648,15 @@
             "stepNum": 5
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Pipeline Review Summary",
+          "Pipeline Health at a Glance",
+          "Forecast Risk Assessment",
+          "Top Coaching Priorities",
+          "Deal-by-Deal Summary",
+          "Accounts Needing Discussion",
+          "Quick Wins"
+        ],
         "hasCustomData": false
       }
     },
@@ -1859,7 +1775,17 @@
             "stepNum": 5
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Competitive Battle Card: [Account Name] vs. [Competitor]",
+          "Competitive Situation Summary",
+          "What the Customer Actually Cares About",
+          "Where We Win",
+          "Where They Win (Be Honest)",
+          "Stakeholder-Specific Positioning",
+          "Objection Handling",
+          "Recommended Competitive Actions",
+          "Talk Track"
+        ],
         "hasCustomData": false
       }
     },
@@ -1974,7 +1900,16 @@
             "stepNum": 4
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Executive Brief: [Account Name]",
+          "Bottom Line",
+          "Revenue Summary",
+          "Account Health (Red / Yellow / Green)",
+          "What's Working",
+          "What's Not Working",
+          "Leadership Action Needed?",
+          "30-Day Outlook"
+        ],
         "hasCustomData": false
       }
     },
@@ -2106,7 +2041,15 @@
             "stepNum": 6
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Renewal Risk Report: [Account Name]",
+          "Renewal Verdict",
+          "Risk Dimension Breakdown",
+          "Early Warning Signals",
+          "Protective Factors",
+          "Save Plan (if Yellow/Orange/Red)",
+          "Stakeholders to Activate"
+        ],
         "hasCustomData": false
       }
     },
@@ -2229,7 +2172,20 @@
             "stepNum": 4
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Account Handoff: [Account Name]",
+          "The 2-Minute Version",
+          "Account Overview",
+          "Key Stakeholders (Who Matters)",
+          "Active Opportunities",
+          "Open Commitments & Promises",
+          "Unresolved Issues",
+          "Political Dynamics",
+          "What's Working Well",
+          "Landmines to Avoid",
+          "Recommended First 30 Days",
+          "Institutional Knowledge"
+        ],
         "hasCustomData": false
       }
     },
@@ -2349,7 +2305,18 @@
             "stepNum": 4
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Deal Debrief: [Opportunity Name]",
+          "Outcome Summary",
+          "Timeline & Key Moments",
+          "Stakeholder Analysis",
+          "What Worked Well",
+          "What Could Have Been Done Differently",
+          "Competitive Dynamics (if applicable)",
+          "Process Analysis",
+          "Lessons Learned",
+          "Applicability"
+        ],
         "hasCustomData": false
       }
     },
@@ -2461,7 +2428,16 @@
             "stepNum": 4
           }
         ],
-        "outputSections": [],
+        "outputSections": [
+          "Engagement Scorecard: [Account Name]",
+          "Headline Metrics",
+          "Engagement by Level",
+          "Most Active Stakeholders",
+          "Going Dark (Watch List)",
+          "Newly Active",
+          "Activity Timeline",
+          "Key Engagement Themes"
+        ],
         "hasCustomData": false
       }
     }
