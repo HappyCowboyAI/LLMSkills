@@ -46,6 +46,89 @@ def get_category(number: int) -> str:
     return "other"
 
 
+def extract_walkthrough(skill_dir: Path) -> dict | None:
+    """Extract walkthrough structure from skill.md."""
+    skill_md = skill_dir / "skill.md"
+    if not skill_md.exists():
+        return None
+
+    text = skill_md.read_text()
+
+    # Extract input type from SOURCE.md
+    source_meta = parse_source_md(skill_dir / "SOURCE.md")
+    input_label = source_meta.get("input", "Account name")
+
+    # Map input labels to example values
+    input_examples = {
+        "account name": "Acme Corp",
+        "opportunity name": "Acme Enterprise Renewal",
+        "account name and opportunity": "Acme Corp",
+        "account name, then opportunity selection": "Acme Corp",
+    }
+    example_input = input_examples.get(input_label.lower(), "Acme Corp")
+
+    # Extract workflow steps from ### Step N headings
+    step_pattern = r"### Step (\d+):?\s*(.+?)(?=\n)"
+    step_matches = re.finditer(step_pattern, text)
+
+    steps = []
+    for match in step_matches:
+        step_num = int(match.group(1))
+        step_title = match.group(2).strip()
+
+        # Get the content between this step heading and the next ### heading
+        start = match.end()
+        next_heading = re.search(r"\n### ", text[start:])
+        end = start + next_heading.start() if next_heading else len(text)
+        step_content = text[start:end]
+
+        # Check if this step mentions parallel execution
+        parallel = bool(re.search(r"parallel|simultaneous", step_content, re.IGNORECASE))
+
+        # Extract backticked tool names (People.ai MCP tool pattern)
+        tool_names = re.findall(r"`((?:find_|get_|ask_|account_|top_)\w+)`", step_content)
+
+        if tool_names:
+            for tool_name in tool_names:
+                desc_match = re.search(
+                    rf"`{re.escape(tool_name)}`\s*[—\-]+\s*(.+?)(?:\n|$)",
+                    step_content,
+                )
+                desc = desc_match.group(1).strip() if desc_match else step_title
+                steps.append({
+                    "type": "tool",
+                    "name": tool_name,
+                    "description": desc,
+                    "parallel": parallel,
+                    "stepNum": step_num,
+                })
+        else:
+            steps.append({
+                "type": "analysis",
+                "title": step_title,
+                "stepNum": step_num,
+            })
+
+    output_pattern = r"(?:####|#####)\s+(.+?)(?:\n)"
+    output_sections = re.findall(output_pattern, text)
+    output_sections = [
+        s.strip() for s in output_sections
+        if not re.match(r"step\s+\d+", s, re.IGNORECASE)
+    ]
+
+    has_custom_data = (skill_dir / "assets" / "walkthrough-data.json").exists()
+
+    if not steps:
+        return None
+
+    return {
+        "input": {"label": input_label, "example": example_input},
+        "steps": steps,
+        "outputSections": output_sections,
+        "hasCustomData": has_custom_data,
+    }
+
+
 def parse_source_md(path: Path) -> dict:
     """Parse SOURCE.md to extract metadata."""
     if not path.exists():
@@ -173,6 +256,8 @@ def build_catalog():
             else:
                 platforms[platform["id"]] = None
 
+        walkthrough = extract_walkthrough(skill_dir)
+
         # Determine skill status
         if has_any_platform:
             status = "ready"
@@ -192,6 +277,7 @@ def build_catalog():
             "projectKnowledgeFiles": list_assets(skill_dir),
             "status": status,
             "platforms": platforms,
+            "walkthrough": walkthrough,
         }
         skills.append(skill)
 

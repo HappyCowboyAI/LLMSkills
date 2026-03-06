@@ -106,6 +106,108 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, and discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_scorecard",
+            "description": "account plan sections with completion scores",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "stakeholder engagement levels (internal and external)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication intelligence",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "AI-analyzed risks, next steps, topics (last 30 days)",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "Internal and external contacts with engagement metrics",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Look up account by name, get peopleai_account_id",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "AI-analyzed risks, next steps, topics (last 30 days)",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_scorecard",
+            "description": "Account plan sections with completion scores and answers",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "Internal and external contacts with engagement metrics",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "Summarized emails and meetings (last 30 days)",
+            "parallel": false,
+            "stepNum": 3
+          }
+        ],
+        "outputSections": [
+          "ACCOUNT PLAN DASHBOARD",
+          "Plan Completion Score",
+          "Key Account Intelligence",
+          "Stakeholder Engagement Map",
+          "Gap Detection: Undocumented Achievements",
+          "Completion Improvement Roadmap",
+          "Opportunity Context"
+        ],
+        "hasCustomData": false
       }
     },
     {
@@ -164,6 +266,70 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication intelligence",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "account_company_news",
+            "description": "external news, public filings, and market events",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "account_company_news",
+            "description": "external news, public filings, and market events",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "account_company_news",
+            "description": "Web Research (for private companies or to supplement)",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Strategic AI Analysis",
+            "parallel": false,
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Market Intelligence Report",
+            "stepNum": 5
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -228,6 +394,126 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication intelligence",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks and next steps",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Opportunity-Specific Analysis",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Select Template",
+            "stepNum": 4
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "Classify Stakeholders",
+            "parallel": false,
+            "stepNum": 5
+          },
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Look up account by name",
+            "parallel": false,
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "AI-analyzed risks, next steps, topics",
+            "parallel": false,
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "Stakeholder engagement metrics (internal + external)",
+            "parallel": false,
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "Communication summaries (30 days)",
+            "parallel": false,
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "AI-powered strategic analysis",
+            "parallel": false,
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "Deal-specific insights",
+            "parallel": false,
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "AI-powered deal analysis",
+            "parallel": false,
+            "stepNum": 6
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -285,6 +571,66 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, trending topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "account_company_news",
+            "description": "public filings and market events (public companies only)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Calculate Sentiment Score",
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Classify Sentiment",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Report",
+            "stepNum": 5
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -343,6 +689,106 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account & Present Opportunities",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks, next steps",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_opportunity_activity",
+            "description": "communication history",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Gather Opportunity Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "account-level context",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Calculate Health Score (0-100)",
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Classify Stakeholders",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Generate 14-Day Action Plan",
+            "stepNum": 5
+          },
+          {
+            "type": "analysis",
+            "title": "Generate Outreach Templates",
+            "stepNum": 6
+          },
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Look up account by name, get opportunities",
+            "parallel": false,
+            "stepNum": 7
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "Deal-specific risks and next steps",
+            "parallel": false,
+            "stepNum": 7
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_opportunity_activity",
+            "description": "Communication history",
+            "parallel": false,
+            "stepNum": 7
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "AI-powered deal analysis",
+            "parallel": false,
+            "stepNum": 7
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "Account-level context",
+            "parallel": false,
+            "stepNum": 7
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -401,6 +847,76 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account & Present Opportunities",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "strategic overview with risks and next steps",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_opportunity_activity",
+            "description": "communication history analysis",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Gather MEDDPICC Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "account-level context",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Score Each MEDDPICC Element",
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Generate AI Coaching Insights",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Create Prioritized Action Plan",
+            "stepNum": 5
+          },
+          {
+            "type": "analysis",
+            "title": "Generate MEDDPICC-Specific Messaging",
+            "stepNum": 6
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the MEDDPICC Dashboard",
+            "stepNum": 7
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -458,6 +974,74 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account & Present Opportunities",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "risk assessment with stakeholder analysis",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_opportunity_activity",
+            "description": "communication intelligence and engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Gather Opportunity Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Calculate Win Probability",
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Generate Time Horizon Analysis",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Risk Factor Assessment",
+            "stepNum": 5
+          },
+          {
+            "type": "analysis",
+            "title": "Generate Action-Oriented Insights",
+            "stepNum": 6
+          },
+          {
+            "type": "analysis",
+            "title": "Post-Close Date Analysis (if applicable)",
+            "stepNum": 7
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Win Probability Dashboard",
+            "stepNum": 8
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -514,6 +1098,56 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, trending discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Briefing",
+            "stepNum": 3
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -571,6 +1205,70 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "account_company_news",
+            "description": "public filings, market events (if public company)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific status, risks, next steps",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the QBR Document",
+            "stepNum": 4
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -629,6 +1327,82 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics (critical for this skill)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Engagement Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific context",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Opportunity-Level Threading Analysis",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Analyze Threading Risk",
+            "stepNum": 4
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "Identify Multi-Threading Targets",
+            "parallel": false,
+            "stepNum": 5
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Multi-Threading Report",
+            "stepNum": 6
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -685,6 +1459,61 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name (or \"my accounts\" for portfolio scan)",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks and next steps",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Prioritize Actions",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Actions",
+            "stepNum": 5
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -742,6 +1571,68 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics (critical for this skill)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "Map the Engagement Landscape",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Identify Whitespace",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Whitespace Map",
+            "stepNum": 5
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -798,6 +1689,59 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "List of account names (or a single account for deep-dive)",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find All Accounts",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks and next steps",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Gather Intelligence",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Categorize Opportunities",
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Identify Coaching Priorities",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Pipeline Review",
+            "stepNum": 5
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -855,6 +1799,68 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name (+ optional competitor name)",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_opportunity_activity",
+            "description": "communication history",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Opportunity-Level Competitive Analysis",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Build the Battle Card",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Battle Card",
+            "stepNum": 5
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -913,6 +1919,63 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks and next steps",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Executive Brief",
+            "stepNum": 4
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -971,6 +2034,80 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "account_company_news",
+            "description": "market events, org changes (public companies)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific risks and timeline",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Calculate Renewal Risk Score",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Generate Save Plan (if Yellow or above)",
+            "stepNum": 5
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Renewal Risk Report",
+            "stepNum": 6
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -1030,6 +2167,70 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks, next steps, discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "deal-specific context",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Opportunity Deep Dive",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Handoff Document",
+            "stepNum": 4
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -1088,6 +2289,68 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name (selects a closed opportunity)",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "analysis",
+            "title": "Present Closed Opportunities",
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_opportunity_status",
+            "description": "final status and context",
+            "parallel": true,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_opportunity_activity",
+            "description": "communication history through the deal",
+            "parallel": true,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_opportunity",
+            "description": "Gather Intelligence (parallel)",
+            "parallel": true,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "broader account context",
+            "parallel": true,
+            "stepNum": 3
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "who was involved and their engagement levels",
+            "parallel": true,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Deal Debrief",
+            "stepNum": 4
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     },
     {
@@ -1145,6 +2408,61 @@
           ]
         },
         "gemini": null
+      },
+      "walkthrough": {
+        "input": {
+          "label": "Account name",
+          "example": "Acme Corp"
+        },
+        "steps": [
+          {
+            "type": "tool",
+            "name": "find_account",
+            "description": "Find the Account",
+            "parallel": false,
+            "stepNum": 1
+          },
+          {
+            "type": "tool",
+            "name": "get_engaged_people",
+            "description": "all stakeholders with engagement metrics (primary data source)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_recent_account_activity",
+            "description": "last 30 days of communication summaries",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "get_account_status",
+            "description": "risks and discussion topics",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "tool",
+            "name": "ask_sales_ai_about_account",
+            "description": "Gather Engagement Data (parallel)",
+            "parallel": true,
+            "stepNum": 2
+          },
+          {
+            "type": "analysis",
+            "title": "Compile the Scorecard",
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Deliver the Engagement Scorecard",
+            "stepNum": 4
+          }
+        ],
+        "outputSections": [],
+        "hasCustomData": false
       }
     }
   ]
