@@ -701,6 +701,556 @@
     letter-spacing: 0.5px;
     margin-bottom: 4px;
   }
+
+  /* ── Setup Walkthrough CSS ── */
+  .setup-wt {
+    background: var(--pai-white);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--pai-border);
+  }
+  .setup-wt-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .setup-wt-tab {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--pai-light-blue);
+    color: var(--pai-dark-blue);
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .setup-wt-tab:hover { background: #dbeafe; }
+  .setup-wt-tab.active {
+    background: var(--pai-primary-blue);
+    color: white;
+    border-color: var(--pai-primary-blue);
+  }
+
+  .setup-mockup {
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    overflow: hidden;
+    min-height: 340px;
+    margin-bottom: 16px;
+    border: 1px solid #e0e0e0;
+  }
+  .mock-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #e8e8e8;
+    border-bottom: 1px solid #d0d0d0;
+  }
+  .mock-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .mock-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .mock-dots span:nth-child(1) { background: #ff5f57; }
+  .mock-dots span:nth-child(2) { background: #ffbd2e; }
+  .mock-dots span:nth-child(3) { background: #28c840; }
+  .mock-url-bar {
+    flex: 1;
+    background: white;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #666;
+    font-family: monospace;
+  }
+
+  /* Claude.ai mockup */
+  .mock-claude {
+    background: #F5F0EA;
+  }
+  .mock-claude-body {
+    display: flex;
+    min-height: 300px;
+  }
+  .mock-claude-sidebar {
+    width: 200px;
+    background: #EDE7DD;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .mock-claude-sidebar-item {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #5a4a3a;
+    cursor: default;
+    margin-bottom: 4px;
+    transition: background 0.2s;
+  }
+  .mock-claude-sidebar-item:hover { background: rgba(0,0,0,0.05); }
+  .mock-claude-sidebar-item.active { background: rgba(0,0,0,0.08); font-weight: 600; }
+  .mock-claude-main {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mock-claude-dialog {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .mock-claude-dialog.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mock-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #5a4a3a;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .mock-text-field {
+    width: 100%;
+    padding: 8px 10px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fafafa;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 8px;
+  }
+  .mock-text-field.highlighted {
+    border-color: #c9956b;
+    box-shadow: 0 0 0 3px rgba(201,149,107,0.25);
+    animation: setupPulse 1.5s ease-in-out infinite;
+  }
+  .mock-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 8px 10px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: monospace;
+    background: #fafafa;
+    color: #333;
+    resize: none;
+    white-space: pre-wrap;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 8px;
+  }
+  .mock-textarea.highlighted {
+    border-color: #c9956b;
+    box-shadow: 0 0 0 3px rgba(201,149,107,0.25);
+    animation: setupPulse 1.5s ease-in-out infinite;
+  }
+
+  .mock-file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: #EDE7DD;
+    border-radius: 12px;
+    font-size: 11px;
+    color: #5a4a3a;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .mock-file-chip.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .mock-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+  .mock-toggle {
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background: #ccc;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .mock-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .mock-toggle.on {
+    background: #c9956b;
+  }
+  .mock-toggle.on::after {
+    transform: translateX(18px);
+  }
+
+  .mock-claude-chat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: auto;
+  }
+  .mock-claude-chat-input {
+    flex: 1;
+    border: none;
+    font-size: 13px;
+    color: #333;
+    background: transparent;
+    outline: none;
+  }
+  .mock-claude-chat-send {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #c9956b;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .mock-claude-chat-send.visible {
+    opacity: 1;
+  }
+
+  /* Claude Code terminal mockup */
+  .mock-terminal {
+    background: #1E1E2E;
+  }
+  .mock-terminal .mock-browser-bar {
+    background: #313244;
+    border-bottom-color: #45475a;
+  }
+  .mock-terminal .mock-url-bar {
+    background: #1E1E2E;
+    color: #a6adc8;
+  }
+  .mock-terminal-body {
+    padding: 16px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    min-height: 280px;
+    color: #cdd6f4;
+  }
+  .mock-terminal-line {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.3s, transform 0.3s;
+    margin-bottom: 2px;
+  }
+  .mock-terminal-line.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .mock-terminal-prompt {
+    color: #a6e3a1;
+    font-weight: 600;
+  }
+  .mock-terminal-cmd {
+    color: #89b4fa;
+  }
+  .mock-terminal-comment {
+    color: #6c7086;
+    font-style: italic;
+  }
+  .mock-terminal-success {
+    color: #a6e3a1;
+  }
+  .mock-terminal-file-content {
+    color: #f9e2af;
+    padding-left: 16px;
+    border-left: 2px solid #45475a;
+    margin: 4px 0;
+  }
+
+  /* ChatGPT mockup */
+  .mock-chatgpt {
+    background: #ffffff;
+  }
+  .mock-chatgpt-body {
+    display: flex;
+    min-height: 300px;
+  }
+  .mock-chatgpt-sidebar {
+    width: 200px;
+    background: #202123;
+    padding: 12px;
+    flex-shrink: 0;
+  }
+  .mock-chatgpt-sidebar-item {
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #ececf1;
+    cursor: default;
+    margin-bottom: 4px;
+    transition: background 0.2s;
+  }
+  .mock-chatgpt-sidebar-item:hover { background: rgba(255,255,255,0.08); }
+  .mock-chatgpt-sidebar-item.active { background: rgba(255,255,255,0.12); font-weight: 600; }
+  .mock-chatgpt-main {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mock-chatgpt-form {
+    background: #f7f7f8;
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .mock-chatgpt-form.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mock-gpt-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #353740;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .mock-gpt-text-field {
+    width: 100%;
+    padding: 8px 10px;
+    border: 2px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 13px;
+    background: white;
+    color: #353740;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 8px;
+  }
+  .mock-gpt-text-field.highlighted {
+    border-color: #10A37F;
+    box-shadow: 0 0 0 3px rgba(16,163,127,0.2);
+    animation: setupPulseGreen 1.5s ease-in-out infinite;
+  }
+  .mock-gpt-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 8px 10px;
+    border: 2px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: monospace;
+    background: white;
+    color: #353740;
+    resize: none;
+    white-space: pre-wrap;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 8px;
+  }
+  .mock-gpt-textarea.highlighted {
+    border-color: #10A37F;
+    box-shadow: 0 0 0 3px rgba(16,163,127,0.2);
+    animation: setupPulseGreen 1.5s ease-in-out infinite;
+  }
+
+  .mock-gpt-action-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #353740;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.3s, transform 0.3s;
+    margin-bottom: 6px;
+  }
+  .mock-gpt-action-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .mock-gpt-action-status {
+    font-size: 11px;
+    font-weight: 600;
+    color: #10A37F;
+  }
+
+  .mock-chatgpt-chat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #f7f7f8;
+    border-radius: 20px;
+    border: 1px solid #e5e5e5;
+    margin-top: auto;
+  }
+  .mock-chatgpt-chat-input {
+    flex: 1;
+    border: none;
+    font-size: 13px;
+    color: #353740;
+    background: transparent;
+    outline: none;
+  }
+  .mock-chatgpt-chat-send {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #10A37F;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .mock-chatgpt-chat-send.visible {
+    opacity: 1;
+  }
+
+  /* Setup walkthrough controls */
+  .setup-wt-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .setup-wt-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--pai-border);
+    background: white;
+    color: var(--pai-dark-blue);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .setup-wt-btn:hover { background: var(--pai-light-blue); }
+  .setup-wt-btn.primary {
+    width: 44px;
+    height: 44px;
+    background: var(--pai-primary-blue);
+    color: white;
+    border: none;
+    font-size: 16px;
+  }
+  .setup-wt-btn.primary:hover { background: #2563eb; }
+
+  .setup-wt-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .setup-wt-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: all 0.3s;
+  }
+  .setup-wt-dot.active {
+    background: var(--pai-primary-blue);
+    transform: scale(1.3);
+  }
+  .setup-wt-dot.done {
+    background: var(--pai-teal);
+  }
+
+  .setup-wt-step-desc {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pai-dark-blue);
+    margin-top: 12px;
+    min-height: 20px;
+  }
+  .setup-wt-step-detail {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    min-height: 16px;
+    margin-bottom: 8px;
+  }
+
+  @keyframes setupPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(201,149,107,0.25); }
+    50% { box-shadow: 0 0 0 6px rgba(201,149,107,0.15); }
+  }
+  @keyframes setupPulseGreen {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(16,163,127,0.2); }
+    50% { box-shadow: 0 0 0 6px rgba(16,163,127,0.1); }
+  }
+
+  .setup-wt-copy-btn {
+    display: block;
+    margin: 8px auto;
+    padding: 6px 16px;
+    background: var(--pai-primary-blue);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .setup-wt-copy-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .setup-wt-copy-btn:hover { background: #2563eb; }
+
 </style>
 </head>
 <body>
@@ -1666,6 +2216,193 @@ class SkillWalkthrough {
   }
 
   wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+}
+
+// ── Setup Walkthrough Component ──
+class SetupWalkthrough {
+  constructor(skill, container) {
+    this.skill = skill;
+    this.container = container;
+    this.currentStep = -1;
+    this.totalSteps = 0;
+    this.playing = false;
+    this.timer = null;
+    this.platformId = null;
+    this.mockupEl = null;
+  }
+
+  init() {
+    const allPlatforms = catalogData.catalog.platforms;
+    this.availablePlatforms = allPlatforms.filter(p =>
+      p.status === 'supported' && this.skill.platforms[p.id] !== null
+    );
+    if (this.availablePlatforms.length === 0) return;
+    this.render();
+    this.selectPlatform(this.availablePlatforms[0].id);
+  }
+
+  render() {
+    this.container.innerHTML = `
+      <h3 style="margin-bottom:16px;color:var(--pai-dark-blue);">Setup Walkthrough</h3>
+      <div class="setup-wt">
+        <div class="setup-wt-tabs">
+          ${this.availablePlatforms.map(p => `
+            <div class="setup-wt-tab" data-platform="${p.id}">${p.name}</div>
+          `).join('')}
+        </div>
+        <div class="setup-mockup-area"></div>
+        <div class="setup-wt-step-desc"></div>
+        <div class="setup-wt-step-detail"></div>
+        <button class="setup-wt-copy-btn">Copy Instructions</button>
+        <div class="setup-wt-controls">
+          <button class="setup-wt-btn" data-action="prev">&#9664;</button>
+          <button class="setup-wt-btn primary" data-action="play">&#9654;</button>
+          <div class="setup-wt-dots"></div>
+          <button class="setup-wt-btn" data-action="next">&#9654;</button>
+        </div>
+      </div>`;
+
+    this.container.querySelectorAll('.setup-wt-tab').forEach(tab => {
+      tab.onclick = () => this.selectPlatform(tab.dataset.platform);
+    });
+    this.container.querySelector('[data-action="prev"]').onclick = () => this.stepBack();
+    this.container.querySelector('[data-action="play"]').onclick = () => this.togglePlay();
+    this.container.querySelector('[data-action="next"]').onclick = () => this.stepForward();
+    this.container.querySelector('.setup-wt-copy-btn').onclick = () => {
+      const data = this.skill.platforms[this.platformId];
+      if (data) copyToClipboard(data.instructions);
+    };
+
+    this.mockupArea = this.container.querySelector('.setup-mockup-area');
+    this.descEl = this.container.querySelector('.setup-wt-step-desc');
+    this.detailEl = this.container.querySelector('.setup-wt-step-detail');
+    this.dotsEl = this.container.querySelector('.setup-wt-dots');
+    this.copyBtn = this.container.querySelector('.setup-wt-copy-btn');
+  }
+
+  selectPlatform(platformId) {
+    this.stop();
+    this.platformId = platformId;
+    this.currentStep = -1;
+    this.container.querySelectorAll('.setup-wt-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.platform === platformId);
+    });
+    this.buildMockup();
+    this.renderDots();
+    this.updateDesc();
+    this.copyBtn.classList.remove('visible');
+  }
+
+  buildMockup() {
+    this.mockupArea.innerHTML = '';
+    if (this.platformId === 'claude-project') {
+      this.buildClaudeMockup();
+    } else if (this.platformId === 'claude-code') {
+      this.buildTerminalMockup();
+    } else if (this.platformId === 'chatgpt-gpt') {
+      this.buildChatgptMockup();
+    }
+  }
+
+  // Platform-specific stubs (replaced in Tasks 3-5)
+  buildClaudeMockup() { this.steps = []; this.totalSteps = 0; }
+  buildTerminalMockup() { this.steps = []; this.totalSteps = 0; }
+  buildChatgptMockup() { this.steps = []; this.totalSteps = 0; }
+
+  renderDots() {
+    let html = '';
+    for (let i = 0; i < this.totalSteps; i++) {
+      const cls = i === this.currentStep ? 'active' : (i < this.currentStep ? 'done' : '');
+      html += `<div class="setup-wt-dot ${cls}"></div>`;
+    }
+    this.dotsEl.innerHTML = html;
+  }
+
+  updateDesc() {
+    if (this.currentStep < 0 || this.currentStep >= this.steps.length) {
+      this.descEl.textContent = 'Click play or step forward to begin';
+      this.detailEl.textContent = '';
+      return;
+    }
+    const step = this.steps[this.currentStep];
+    this.descEl.textContent = step.title;
+    this.detailEl.textContent = step.detail || '';
+  }
+
+  async stepForward() {
+    if (this.currentStep >= this.totalSteps - 1) {
+      this.stop();
+      return;
+    }
+    this.currentStep++;
+    this.renderDots();
+    this.updateDesc();
+    const step = this.steps[this.currentStep];
+    if (step && step.animate) await step.animate();
+    if (step && step.showCopy) this.copyBtn.classList.add('visible');
+    else this.copyBtn.classList.remove('visible');
+  }
+
+  stepBack() {
+    if (this.currentStep <= 0) return;
+    this.stop();
+    const target = this.currentStep - 1;
+    this.currentStep = -1;
+    this.buildMockup();
+    this.copyBtn.classList.remove('visible');
+    const fastForward = async () => {
+      for (let i = 0; i <= target; i++) {
+        this.currentStep = i;
+        this.renderDots();
+        this.updateDesc();
+        const step = this.steps[i];
+        if (step && step.animate) await step.animate();
+        if (step && step.showCopy) this.copyBtn.classList.add('visible');
+        else this.copyBtn.classList.remove('visible');
+      }
+    };
+    fastForward();
+  }
+
+  togglePlay() {
+    if (this.playing) {
+      this.stop();
+    } else {
+      this.playing = true;
+      this.container.querySelector('[data-action="play"]').innerHTML = '&#9646;&#9646;';
+      this.autoStep();
+    }
+  }
+
+  async autoStep() {
+    if (!this.playing) return;
+    await this.stepForward();
+    if (this.currentStep >= this.totalSteps - 1) { this.stop(); return; }
+    this.timer = setTimeout(() => this.autoStep(), 2000);
+  }
+
+  stop() {
+    this.playing = false;
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = null;
+    const btn = this.container.querySelector('[data-action="play"]');
+    if (btn) btn.innerHTML = '&#9654;';
+  }
+
+  async wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  async typeText(el, text, speed = 30) {
+    el.textContent = '';
+    for (let i = 0; i < text.length; i++) {
+      el.textContent = text.substring(0, i + 1);
+      await this.wait(speed);
+    }
+  }
+
+  truncateInstructions(text, lines = 6) {
+    const arr = text.split('\n').slice(0, lines);
+    return arr.join('\n') + '\n...';
+  }
 }
 
 // ── Init ──
