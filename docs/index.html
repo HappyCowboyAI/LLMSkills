@@ -1594,15 +1594,7 @@ function renderDetail(skillId) {
       }).join('')}
 
       <div class="tab-content" data-panel="setup" style="display:none">
-        <h3 style="margin-bottom:16px;color:var(--pai-dark-blue);">Setup by Platform</h3>
-        ${allPlatforms.filter(p => skill.platforms[p.id]).map(p => `
-          <div style="margin-bottom:20px;">
-            <h4 style="margin-bottom:8px;color:var(--pai-primary-blue);">${p.name}</h4>
-            <ol class="setup-steps">
-              ${skill.platforms[p.id].setupSteps.map(step => `<li>${step}</li>`).join('')}
-            </ol>
-          </div>
-        `).join('')}
+        <div id="setup-walkthrough-container"></div>
       </div>
     </div>
 
@@ -1615,6 +1607,13 @@ function renderDetail(skillId) {
     const wtContainer = document.getElementById('walkthrough-container');
     const wt = new SkillWalkthrough(skill, wtContainer);
     wt.init();
+  }
+
+  // Initialize setup walkthrough
+  const setupContainer = document.getElementById('setup-walkthrough-container');
+  if (setupContainer) {
+    const setupWt = new SetupWalkthrough(skill, setupContainer);
+    setupWt.init();
   }
 }
 
