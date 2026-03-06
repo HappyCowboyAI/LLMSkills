@@ -987,9 +987,13 @@ function renderDetail(skillId) {
       ${skill.projectKnowledgeFiles.length ? `<div style="margin-top:8px;font-size:12px;color:var(--pai-dark-gray);">
         <strong>Knowledge Files:</strong> ${skill.projectKnowledgeFiles.join(', ')}
       </div>` : ''}
+      ${skill.walkthrough ? `<div style="margin-top:12px;">
+        <a href="#walkthrough" onclick="document.getElementById('walkthrough-container').scrollIntoView({behavior:'smooth'});return false;"
+           style="color:var(--pai-primary-blue);font-size:13px;font-weight:600;text-decoration:none;">
+          &#9654; See it in action &darr;
+        </a>
+      </div>` : ''}
     </div>
-
-    ${skill.walkthrough ? `<div id="walkthrough-container"></div>` : ''}
 
     <div class="tabs" id="detail-tabs">
       ${allPlatforms.map(p => {
@@ -1050,7 +1054,9 @@ function renderDetail(skillId) {
           </div>
         `).join('')}
       </div>
-    </div>`;
+    </div>
+
+    ${skill.walkthrough ? `<div id="walkthrough-container" style="margin-top:24px;"></div>` : ''}`;
 
   document.getElementById('detail-content').innerHTML = html;
 
