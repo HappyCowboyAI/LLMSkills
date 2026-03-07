@@ -2549,14 +2549,13 @@ class SetupWalkthrough {
         title: 'Start Using the Skill',
         detail: 'Type an account name to begin',
         animate: async () => {
-          dialog.classList.remove('visible');
+          dialog.style.display = 'none';
           chatSection.style.display = 'flex';
           resultsArea.style.display = 'flex';
           await this.wait(300);
           const example = skill.walkthrough?.input?.example || 'Acme Corp';
           await this.typeText(chatInput, example);
           chatSend.classList.add('visible');
-          // Add user message bubble
           const userBubble = document.createElement('div');
           userBubble.className = 'mock-chat-bubble user';
           userBubble.textContent = example;
@@ -2765,7 +2764,7 @@ class SetupWalkthrough {
         title: 'Save & Test',
         detail: 'Try the GPT with an account name',
         animate: async () => {
-          form.classList.remove('visible');
+          form.style.display = 'none';
           chatSection.style.display = 'flex';
           resultsArea.style.display = 'flex';
           await this.wait(300);
