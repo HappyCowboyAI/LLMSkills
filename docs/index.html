@@ -737,9 +737,11 @@
     border-radius: 10px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.12);
     overflow: hidden;
-    min-height: 240px;
+    height: 360px;
     margin-bottom: 16px;
     border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
   }
   .mock-browser-bar {
     display: flex;
@@ -777,8 +779,8 @@
   }
   .mock-claude-body {
     display: flex;
-    min-height: 200px;
-    transition: min-height 0.3s;
+    flex: 1;
+    overflow: hidden;
   }
   .mock-claude-sidebar {
     width: 200px;
@@ -799,11 +801,11 @@
   .mock-claude-sidebar-item.active { background: rgba(0,0,0,0.08); font-weight: 600; }
   .mock-claude-main {
     flex: 1;
-    padding: 20px;
+    padding: 12px;
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   .mock-claude-dialog {
     background: white;
@@ -963,11 +965,12 @@
     color: #a6adc8;
   }
   .mock-terminal-body {
-    padding: 16px;
+    padding: 12px;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 12px;
     line-height: 1.6;
-    min-height: 280px;
+    flex: 1;
+    overflow-y: auto;
     color: #cdd6f4;
   }
   .mock-terminal-line {
@@ -1007,8 +1010,8 @@
   }
   .mock-chatgpt-body {
     display: flex;
-    min-height: 200px;
-    transition: min-height 0.3s;
+    flex: 1;
+    overflow: hidden;
   }
   .mock-chatgpt-sidebar {
     width: 200px;
@@ -1029,11 +1032,11 @@
   .mock-chatgpt-sidebar-item.active { background: rgba(255,255,255,0.12); font-weight: 600; }
   .mock-chatgpt-main {
     flex: 1;
-    padding: 20px;
+    padding: 12px;
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   .mock-chatgpt-form {
     background: #f7f7f8;
@@ -1257,11 +1260,13 @@
 
   /* ── Platform-native chat results ── */
   .mock-results-area {
+    flex: 1;
     overflow-y: auto;
     padding: 8px 0;
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-height: 0;
   }
   .mock-chat-bubble {
     max-width: 90%;
