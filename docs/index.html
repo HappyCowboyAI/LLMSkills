@@ -918,6 +918,26 @@
     transform: translateX(18px);
   }
 
+  .mock-mcp-item {
+    padding: 10px 12px;
+    border: 1px solid #e8e0d4;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+  .mock-mcp-item.visible { opacity: 1; }
+  .mock-mcp-item.highlighted {
+    border-color: #C67B30;
+    background: rgba(198,123,48,0.06);
+    animation: setupPulse 1.5s ease-in-out infinite;
+  }
+
+  .mock-mcp-settings {
+    padding: 4px;
+  }
+
   .mock-claude-chat {
     display: flex;
     align-items: center;
@@ -1638,7 +1658,7 @@ function renderDetail(skillId) {
 
   // Determine first available platform tab
   const firstAvailable = allPlatforms.find(p => skill.platforms[p.id] !== null);
-  const defaultTab = firstAvailable ? firstAvailable.id : 'setup';
+  const defaultTab = 'setup';
 
   let html = `
     <div class="detail-header">
@@ -1665,10 +1685,11 @@ function renderDetail(skillId) {
     </div>
 
     <div class="tabs" id="detail-tabs">
+      <div class="tab active" data-tab="setup" onclick="switchTab('setup')">Setup</div>
       ${allPlatforms.map(p => {
         const available = skill.platforms[p.id] !== null;
         const isComingSoon = p.status === 'coming-soon';
-        return `<div class="tab ${!available && !isComingSoon ? 'disabled' : ''} ${p.id === defaultTab ? 'active' : ''}"
+        return `<div class="tab ${!available && !isComingSoon ? 'disabled' : ''}"
                      data-tab="${p.id}"
                      ${available ? `onclick="switchTab('${p.id}')"` : ''}>
           ${p.name}
@@ -1676,14 +1697,16 @@ function renderDetail(skillId) {
           ${!available && !isComingSoon ? '<span class="tab-badge">N/A</span>' : ''}
         </div>`;
       }).join('')}
-      <div class="tab" data-tab="setup" onclick="switchTab('setup')">Setup</div>
     </div>
 
     <div id="tab-panels">
+      <div class="tab-content" data-panel="setup" style="display:block">
+        <div id="setup-walkthrough-container"></div>
+      </div>
       ${allPlatforms.map(p => {
         const data = skill.platforms[p.id];
         if (p.status === 'coming-soon') {
-          return `<div class="tab-content" data-panel="${p.id}" style="display:${p.id === defaultTab ? 'block' : 'none'}">
+          return `<div class="tab-content" data-panel="${p.id}" style="display:none">
             <div class="coming-soon">
               <div class="coming-soon-icon">&#128640;</div>
               <div class="coming-soon-text">${p.name} support coming soon</div>
@@ -1699,7 +1722,7 @@ function renderDetail(skillId) {
             </div>
           </div>`;
         }
-        return `<div class="tab-content" data-panel="${p.id}" style="display:${p.id === defaultTab ? 'block' : 'none'}">
+        return `<div class="tab-content" data-panel="${p.id}" style="display:none">
           <div class="instructions-block">${renderMarkdown(data.instructions)}</div>
           <div class="btn-actions">
             <button class="btn btn-copy" onclick="copyInstructions('${skill.id}', '${p.id}')">
@@ -1711,10 +1734,6 @@ function renderDetail(skillId) {
           </div>
         </div>`;
       }).join('')}
-
-      <div class="tab-content" data-panel="setup" style="display:none">
-        <div id="setup-walkthrough-container"></div>
-      </div>
     </div>`;
 
   document.getElementById('detail-content').innerHTML = html;
@@ -2357,7 +2376,7 @@ class SetupWalkthrough {
     );
     if (this.availablePlatforms.length === 0) return;
     this.render();
-    this.selectPlatform(this.availablePlatforms[0].id);
+    this.selectPlatform('mcp-setup');
   }
 
   render() {
@@ -2365,6 +2384,7 @@ class SetupWalkthrough {
       <h3 style="margin-bottom:16px;color:var(--pai-dark-blue);">Setup Walkthrough</h3>
       <div class="setup-wt">
         <div class="setup-wt-tabs">
+          <div class="setup-wt-tab" data-platform="mcp-setup">MCP Setup</div>
           ${this.availablePlatforms.map(p => `
             <div class="setup-wt-tab" data-platform="${p.id}">${p.name}</div>
           `).join('')}
@@ -2414,17 +2434,147 @@ class SetupWalkthrough {
 
   buildMockup() {
     this.mockupArea.innerHTML = '';
-    if (this.platformId === 'claude-project') {
+    if (this.platformId === 'mcp-setup') {
+      this.buildMcpSetupMockup();
+    } else if (this.platformId === 'claude-project') {
       this.buildClaudeMockup();
     } else if (this.platformId === 'claude-code') {
       this.buildTerminalMockup();
     } else if (this.platformId === 'chatgpt-gpt') {
       this.buildChatgptMockup();
     }
-    this.appendToolCallSteps();
+    if (this.platformId !== 'mcp-setup') this.appendToolCallSteps();
   }
 
   // Platform-specific mockup builders
+  buildMcpSetupMockup() {
+    this.mockupArea.innerHTML = `
+      <div class="setup-mockup mock-claude">
+        <div class="mock-browser-bar">
+          <div class="mock-dots"><span></span><span></span><span></span></div>
+          <div class="mock-url-bar">claude.ai/settings</div>
+        </div>
+        <div class="mock-claude-body">
+          <div class="mock-claude-sidebar">
+            <div style="font-weight:700;font-size:11px;color:#8B7E6E;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Settings</div>
+            <div class="mock-claude-sidebar-item" data-item="profile">Profile</div>
+            <div class="mock-claude-sidebar-item" data-item="integrations">Integrations</div>
+            <div class="mock-claude-sidebar-item" data-item="billing">Billing</div>
+          </div>
+          <div class="mock-claude-main">
+            <div class="mock-mcp-settings" data-section="settings">
+              <div style="font-weight:700;font-size:15px;margin-bottom:12px;">Integrations</div>
+              <div style="font-size:12px;color:#8B7E6E;margin-bottom:16px;">Connect external tools and data sources via MCP</div>
+              <div data-section="mcp-list"></div>
+              <div data-section="mcp-detail" style="display:none;">
+                <div style="font-weight:600;font-size:13px;margin-bottom:8px;">People.ai MCP Server</div>
+                <div style="font-size:11px;color:#8B7E6E;margin-bottom:12px;">Access CRM intelligence, engagement data, and sales insights</div>
+                <div class="mock-field-label">Server URL</div>
+                <div class="mock-text-field" data-field="url" style="font-size:11px;"></div>
+                <div class="mock-field-label" style="margin-top:8px;">Authentication</div>
+                <div class="mock-text-field" data-field="auth" style="font-size:11px;"></div>
+                <div class="mock-toggle-row" style="margin-top:12px;">
+                  <span style="font-size:12px;">Enable for all projects</span>
+                  <div class="mock-toggle" data-toggle="enable"></div>
+                </div>
+              </div>
+              <div data-section="mcp-verify" style="display:none;">
+                <div style="font-weight:600;font-size:13px;margin-bottom:12px;color:#2D7D46;">Connection Verified</div>
+                <div data-field="tools"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    const sidebar = this.mockupArea.querySelector('[data-item="integrations"]');
+    const mcpList = this.mockupArea.querySelector('[data-section="mcp-list"]');
+    const mcpDetail = this.mockupArea.querySelector('[data-section="mcp-detail"]');
+    const urlField = this.mockupArea.querySelector('[data-field="url"]');
+    const authField = this.mockupArea.querySelector('[data-field="auth"]');
+    const enableToggle = this.mockupArea.querySelector('[data-toggle="enable"]');
+    const verifySection = this.mockupArea.querySelector('[data-section="mcp-verify"]');
+    const toolsField = this.mockupArea.querySelector('[data-field="tools"]');
+    const tools = this.skill.mcpTools || ['find_account', 'get_scorecard', 'get_engaged_people'];
+
+    this.steps = [
+      {
+        title: 'Open Integrations',
+        detail: 'Go to Settings → Integrations in Claude.ai',
+        animate: async () => {
+          sidebar.classList.add('highlighted');
+          await this.wait(600);
+          sidebar.classList.remove('highlighted');
+          sidebar.classList.add('active');
+        }
+      },
+      {
+        title: 'Find People.ai MCP',
+        detail: 'Browse available MCP integrations',
+        animate: async () => {
+          const items = [
+            { name: 'People.ai', desc: 'CRM intelligence & sales insights', highlight: true },
+            { name: 'GitHub', desc: 'Repository access & code search', highlight: false },
+            { name: 'Slack', desc: 'Channel messages & search', highlight: false }
+          ];
+          for (const item of items) {
+            const row = document.createElement('div');
+            row.className = 'mock-mcp-item';
+            row.innerHTML = `<div style="font-weight:600;font-size:12px;">${item.name}</div><div style="font-size:10px;color:#8B7E6E;">${item.desc}</div>`;
+            if (item.highlight) row.classList.add('highlighted');
+            mcpList.appendChild(row);
+            await this.wait(300);
+            row.classList.add('visible');
+          }
+        }
+      },
+      {
+        title: 'Configure Connection',
+        detail: 'Enter the People.ai MCP server URL and authenticate',
+        animate: async () => {
+          mcpList.style.display = 'none';
+          mcpDetail.style.display = 'block';
+          urlField.classList.add('highlighted');
+          await this.wait(300);
+          await this.typeText(urlField, 'mcp.people.ai/v1', 30);
+          urlField.classList.remove('highlighted');
+          await this.wait(300);
+          authField.classList.add('highlighted');
+          await this.typeText(authField, 'OAuth: Connected ✓', 30);
+          authField.classList.remove('highlighted');
+        }
+      },
+      {
+        title: 'Enable Integration',
+        detail: 'Toggle on People.ai MCP for your projects',
+        animate: async () => {
+          enableToggle.classList.add('highlighted');
+          await this.wait(400);
+          enableToggle.classList.add('on');
+          enableToggle.classList.remove('highlighted');
+        }
+      },
+      {
+        title: 'Verify Connection',
+        detail: 'Confirm available tools are loaded',
+        animate: async () => {
+          mcpDetail.style.display = 'none';
+          verifySection.style.display = 'block';
+          const displayTools = tools.slice(0, 8);
+          for (const tool of displayTools) {
+            const chip = document.createElement('span');
+            chip.className = 'mock-file-chip';
+            chip.textContent = tool;
+            toolsField.appendChild(chip);
+            await this.wait(200);
+            chip.classList.add('visible');
+          }
+        }
+      }
+    ];
+    this.totalSteps = this.steps.length;
+  }
+
   buildClaudeMockup() {
     const skill = this.skill;
     const instructions = skill.platforms['claude-project']?.instructions || '';
