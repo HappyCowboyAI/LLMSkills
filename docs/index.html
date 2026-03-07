@@ -938,6 +938,76 @@
     padding: 4px;
   }
 
+  .mock-sf-login {
+    background: #f4f6f9;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #d8dde6;
+  }
+  .mock-sf-cloud {
+    width: 48px; height: 36px;
+    margin: 0 auto 8px;
+    background: #00a1e0;
+    border-radius: 12px 12px 4px 4px;
+    position: relative;
+  }
+  .mock-sf-cloud::before {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    background: #00a1e0;
+    border-radius: 50%;
+    top: -10px; left: 6px;
+  }
+  .mock-sf-cloud::after {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    background: #00a1e0;
+    border-radius: 50%;
+    top: -6px; right: 8px;
+  }
+  .mock-sf-input {
+    background: #fff;
+    border: 1px solid #d8dde6;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #16325c;
+    min-height: 16px;
+    text-align: left;
+  }
+  .mock-sf-input.highlighted {
+    border-color: #0070d2;
+    box-shadow: 0 0 4px rgba(0,112,210,0.3);
+    animation: setupPulse 1.5s ease-in-out infinite;
+  }
+  .mock-sf-btn {
+    flex: 1;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .mock-sf-btn.primary {
+    background: #0070d2;
+    color: #fff;
+    border: 1px solid #0070d2;
+  }
+  .mock-sf-btn.secondary {
+    background: #fff;
+    color: #16325c;
+    border: 1px solid #d8dde6;
+  }
+  .mock-sf-btn.highlighted {
+    animation: setupPulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0,112,210,0.4);
+  }
+
   .mock-claude-chat {
     display: flex;
     align-items: center;
@@ -2478,6 +2548,20 @@ class SetupWalkthrough {
                   <div class="mock-toggle" data-toggle="enable"></div>
                 </div>
               </div>
+              <div data-section="sf-oauth" style="display:none;">
+                <div class="mock-sf-login">
+                  <div class="mock-sf-cloud"></div>
+                  <div style="font-size:14px;color:#16325c;font-weight:300;margin-bottom:12px;">Use Custom Domain</div>
+                  <div style="font-size:11px;color:#54698d;margin-bottom:12px;">To go to your company's login page, enter the custom domain name.</div>
+                  <div style="font-size:10px;color:#54698d;margin-bottom:4px;">Custom Domain</div>
+                  <div class="mock-sf-input" data-field="sf-domain"></div>
+                  <div style="font-size:9px;color:#54698d;margin-top:4px;">https:// <em>domain</em>.my.salesforce.com</div>
+                  <div style="display:flex;gap:8px;margin-top:12px;">
+                    <div class="mock-sf-btn secondary">Back</div>
+                    <div class="mock-sf-btn primary" data-btn="sf-continue">Continue</div>
+                  </div>
+                </div>
+              </div>
               <div data-section="mcp-verify" style="display:none;">
                 <div style="font-weight:600;font-size:13px;margin-bottom:12px;color:#2D7D46;">Connection Verified</div>
                 <div data-field="tools"></div>
@@ -2493,6 +2577,9 @@ class SetupWalkthrough {
     const urlField = this.mockupArea.querySelector('[data-field="url"]');
     const authField = this.mockupArea.querySelector('[data-field="auth"]');
     const enableToggle = this.mockupArea.querySelector('[data-toggle="enable"]');
+    const sfOauth = this.mockupArea.querySelector('[data-section="sf-oauth"]');
+    const sfDomain = this.mockupArea.querySelector('[data-field="sf-domain"]');
+    const sfContinue = this.mockupArea.querySelector('[data-btn="sf-continue"]');
     const verifySection = this.mockupArea.querySelector('[data-section="mcp-verify"]');
     const toolsField = this.mockupArea.querySelector('[data-field="tools"]');
     const tools = this.skill.mcpTools || ['find_account', 'get_scorecard', 'get_engaged_people'];
@@ -2529,25 +2616,47 @@ class SetupWalkthrough {
         }
       },
       {
-        title: 'Configure Connection',
-        detail: 'Enter the People.ai MCP server URL and authenticate',
+        title: 'Enter MCP Server URL',
+        detail: 'Point to the People.ai MCP endpoint',
         animate: async () => {
           mcpList.style.display = 'none';
           mcpDetail.style.display = 'block';
           urlField.classList.add('highlighted');
           await this.wait(300);
-          await this.typeText(urlField, 'mcp.people.ai/v1', 30);
+          await this.typeText(urlField, 'https://mcp.people.ai/mcp', 30);
           urlField.classList.remove('highlighted');
-          await this.wait(300);
+        }
+      },
+      {
+        title: 'Authenticate with Salesforce',
+        detail: 'Connect your Salesforce CRM via OAuth',
+        animate: async () => {
           authField.classList.add('highlighted');
-          await this.typeText(authField, 'OAuth: Connected ✓', 30);
+          await this.wait(300);
+          await this.typeText(authField, 'Salesforce OAuth →', 30);
           authField.classList.remove('highlighted');
+          await this.wait(400);
+          mcpDetail.style.display = 'none';
+          sfOauth.style.display = 'block';
+          await this.wait(300);
+          sfDomain.classList.add('highlighted');
+          await this.typeText(sfDomain, 'acme', 60);
+          sfDomain.classList.remove('highlighted');
+          await this.wait(400);
+          sfContinue.classList.add('highlighted');
+          await this.wait(600);
+          sfContinue.classList.remove('highlighted');
+          sfOauth.innerHTML = '<div class="mock-sf-login"><div class="mock-sf-cloud"></div><div style="font-size:12px;color:#2D7D46;font-weight:600;">Salesforce Connected ✓</div><div style="font-size:10px;color:#54698d;margin-top:4px;">Authenticated as admin@acme.com</div></div>';
         }
       },
       {
         title: 'Enable Integration',
         detail: 'Toggle on People.ai MCP for your projects',
         animate: async () => {
+          sfOauth.style.display = 'none';
+          mcpDetail.style.display = 'block';
+          authField.textContent = 'Salesforce OAuth ✓ Connected';
+          authField.style.color = '#2D7D46';
           enableToggle.classList.add('highlighted');
           await this.wait(400);
           enableToggle.classList.add('on');
