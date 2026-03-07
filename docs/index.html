@@ -1251,6 +1251,127 @@
   }
   .setup-wt-copy-btn:hover { background: #2563eb; }
 
+  /* ── Platform-native chat results ── */
+  .mock-results-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 48px;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mock-chat-bubble {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .mock-chat-bubble.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* User bubble — right aligned */
+  .mock-chat-bubble.user {
+    align-self: flex-end;
+    font-weight: 600;
+  }
+  /* AI bubble — left aligned */
+  .mock-chat-bubble.ai {
+    align-self: flex-start;
+  }
+  /* Claude.ai theme */
+  .mock-claude .mock-chat-bubble.user {
+    background: #D4C9B8;
+    color: #2D2B28;
+  }
+  .mock-claude .mock-chat-bubble.ai {
+    background: white;
+    color: #2D2B28;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .mock-claude .mock-results-area {
+    background: #F5F0EA;
+  }
+  /* ChatGPT theme */
+  .mock-chatgpt .mock-chat-bubble.user {
+    background: #10A37F;
+    color: white;
+  }
+  .mock-chatgpt .mock-chat-bubble.ai {
+    background: #F7F7F8;
+    color: #343541;
+  }
+  .mock-chatgpt .mock-results-area {
+    background: white;
+  }
+  /* Tool call inside bubble */
+  .mock-bubble-tool {
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mock-claude .mock-bubble-tool {
+    background: #FAF7F2;
+    border: 1px solid #EDE7DD;
+    color: #5D5549;
+  }
+  .mock-chatgpt .mock-bubble-tool {
+    background: #ECECF1;
+    border: 1px solid #E5E5E5;
+    color: #6E6E80;
+  }
+  .mock-bubble-tool-status {
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .mock-bubble-tool-status.loading { color: #E8C031; }
+  .mock-bubble-tool-status.done { color: #28C840; }
+  /* Output bars in bubble */
+  .mock-bubble-output {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .mock-bubble-output-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .mock-bubble-output-item.visible { opacity: 1; }
+  .mock-bubble-output-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .mock-bubble-output-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    width: 0;
+    transition: width 0.6s;
+  }
+  .mock-claude .mock-bubble-output-bar-fill { background: #BF833E; }
+  .mock-chatgpt .mock-bubble-output-bar-fill { background: #10A37F; }
+
 </style>
 </head>
 <body>
@@ -2337,6 +2458,7 @@ class SetupWalkthrough {
                 </div>
               </div>
             </div>
+            <div class="mock-results-area" style="display:none;" data-section="results"></div>
             <div class="mock-claude-chat" style="display:none;" data-section="chat">
               <div class="mock-claude-chat-input" data-field="chat"></div>
               <div class="mock-claude-chat-send">&#8593;</div>
@@ -2353,6 +2475,7 @@ class SetupWalkthrough {
     const filesField = this.mockupArea.querySelector('[data-field="files"]');
     const mcpSection = this.mockupArea.querySelector('[data-section="mcp"]');
     const mcpToggle = this.mockupArea.querySelector('[data-toggle="mcp"]');
+    const resultsArea = this.mockupArea.querySelector('[data-section="results"]');
     const chatSection = this.mockupArea.querySelector('[data-section="chat"]');
     const chatInput = this.mockupArea.querySelector('[data-field="chat"]');
     const chatSend = this.mockupArea.querySelector('.mock-claude-chat-send');
@@ -2424,10 +2547,19 @@ class SetupWalkthrough {
         animate: async () => {
           dialog.classList.remove('visible');
           chatSection.style.display = 'flex';
+          resultsArea.style.display = 'flex';
           await this.wait(300);
           const example = skill.walkthrough?.input?.example || 'Acme Corp';
           await this.typeText(chatInput, example);
           chatSend.classList.add('visible');
+          // Add user message bubble
+          const userBubble = document.createElement('div');
+          userBubble.className = 'mock-chat-bubble user';
+          userBubble.textContent = example;
+          resultsArea.appendChild(userBubble);
+          await this.wait(200);
+          userBubble.classList.add('visible');
+          this._resultsArea = resultsArea;
         }
       }
     ];
@@ -2517,6 +2649,8 @@ class SetupWalkthrough {
           await this.wait(600);
           const l2 = addLine('<span class="mock-terminal-success">Running skill... ✓</span>');
           l2.classList.add('visible');
+          this._terminalBody = body;
+          this._addLine = addLine;
         }
       }
     ];
@@ -2554,6 +2688,7 @@ class SetupWalkthrough {
                 <div data-field="actions"></div>
               </div>
             </div>
+            <div class="mock-results-area" style="display:none;" data-section="results"></div>
             <div class="mock-chatgpt-chat" style="display:none;" data-section="chat">
               <div class="mock-chatgpt-chat-input" data-field="chat"></div>
               <div class="mock-chatgpt-chat-send">&#8593;</div>
@@ -2568,6 +2703,7 @@ class SetupWalkthrough {
     const instrField = this.mockupArea.querySelector('[data-field="instructions"]');
     const actionsSection = this.mockupArea.querySelector('[data-section="actions"]');
     const actionsField = this.mockupArea.querySelector('[data-field="actions"]');
+    const resultsArea = this.mockupArea.querySelector('[data-section="results"]');
     const chatSection = this.mockupArea.querySelector('[data-section="chat"]');
     const chatInput = this.mockupArea.querySelector('[data-field="chat"]');
     const chatSend = this.mockupArea.querySelector('.mock-chatgpt-chat-send');
@@ -2627,10 +2763,18 @@ class SetupWalkthrough {
         animate: async () => {
           form.classList.remove('visible');
           chatSection.style.display = 'flex';
+          resultsArea.style.display = 'flex';
           await this.wait(300);
           const example = skill.walkthrough?.input?.example || 'Acme Corp';
           await this.typeText(chatInput, example);
           chatSend.classList.add('visible');
+          const userBubble = document.createElement('div');
+          userBubble.className = 'mock-chat-bubble user';
+          userBubble.textContent = example;
+          resultsArea.appendChild(userBubble);
+          await this.wait(200);
+          userBubble.classList.add('visible');
+          this._resultsArea = resultsArea;
         }
       }
     ];
@@ -2643,27 +2787,30 @@ class SetupWalkthrough {
 
     const toolSteps = wt.steps.filter(s => s.type === 'tool');
     const analysisSteps = wt.steps.filter(s => s.type === 'analysis');
-    const mockupEl = this.mockupArea.querySelector('.setup-mockup');
+    const isTerminal = this.platformId === 'claude-code';
 
-    // Step: Transition — fade mockup to tool-call terminal view
-    this.steps.push({
-      title: 'Skill Running...',
-      detail: 'People.ai MCP tools activating',
-      animate: async () => {
-        // Create the tool-call panel inside the mockup
-        const toolPanel = document.createElement('div');
-        toolPanel.className = 'walkthrough';
-        toolPanel.id = 'setup-wt-toolpanel';
-        toolPanel.style.cssText = 'margin:0;border-radius:0;max-height:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10;opacity:0;transition:opacity 0.5s;overflow-y:auto;';
-        mockupEl.style.position = 'relative';
-        mockupEl.appendChild(toolPanel);
-        await this.wait(100);
-        toolPanel.style.opacity = '1';
-        this._toolPanel = toolPanel;
+    // Helper: add content to the active results area (chat bubble or terminal line)
+    const addBubble = (html, type = 'ai') => {
+      if (isTerminal) {
+        // Terminal: add as terminal lines
+        const line = document.createElement('div');
+        line.className = 'mock-terminal-line visible';
+        line.innerHTML = html;
+        this._terminalBody.appendChild(line);
+        return line;
+      } else {
+        // Chat UI: add as bubble
+        const bubble = document.createElement('div');
+        bubble.className = `mock-chat-bubble ${type}`;
+        bubble.innerHTML = html;
+        this._resultsArea.appendChild(bubble);
+        requestAnimationFrame(() => bubble.classList.add('visible'));
+        this._resultsArea.scrollTop = this._resultsArea.scrollHeight;
+        return bubble;
       }
-    });
+    };
 
-    // Group tool steps (handling parallel)
+    // Tool call steps — group parallel ones
     let i = 0;
     while (i < toolSteps.length) {
       const step = toolSteps[i];
@@ -2675,28 +2822,26 @@ class SetupWalkthrough {
           i++;
         }
         this.steps.push({
-          title: 'Calling MCP Tools (parallel)',
+          title: 'Calling MCP Tools',
           detail: group.map(g => g.name).join(', '),
           animate: async () => {
-            const panel = this._toolPanel;
-            const groupEl = document.createElement('div');
-            groupEl.className = 'wt-parallel-group';
-            groupEl.style.margin = '8px 16px';
-            groupEl.innerHTML = '<div class="wt-parallel-label">Parallel execution</div>';
-            group.forEach(g => {
-              const mock = this.getToolResponse(g.name);
-              groupEl.innerHTML += `<div class="wt-tool-call parallel">
-                <span class="wt-tool-name">${g.name}</span>
-                <span class="wt-tool-desc">— ${g.description}</span>
-                <span class="wt-tool-status loading">calling...</span>
-              </div>`;
-            });
-            panel.appendChild(groupEl);
-            await this.wait(800);
-            groupEl.querySelectorAll('.wt-tool-status').forEach(s => {
-              s.textContent = 'done';
-              s.className = 'wt-tool-status done';
-            });
+            if (isTerminal) {
+              for (const g of group) {
+                this._addLine(`<span class="mock-terminal-comment">  ↳ ${g.name}...</span>`).classList.add('visible');
+              }
+              await this.wait(800);
+              this._addLine('<span class="mock-terminal-success">  ✓ All tools returned</span>').classList.add('visible');
+            } else {
+              let toolHtml = group.map(g =>
+                `<div class="mock-bubble-tool"><span>${g.name}</span><span class="mock-bubble-tool-status loading">calling...</span></div>`
+              ).join('');
+              const bubble = addBubble(toolHtml);
+              await this.wait(800);
+              bubble.querySelectorAll('.mock-bubble-tool-status').forEach(s => {
+                s.textContent = '✓ done';
+                s.className = 'mock-bubble-tool-status done';
+              });
+            }
           }
         });
       } else {
@@ -2705,21 +2850,18 @@ class SetupWalkthrough {
           title: `Calling ${toolStep.name}`,
           detail: toolStep.description,
           animate: async () => {
-            const panel = this._toolPanel;
-            const mock = this.getToolResponse(toolStep.name);
-            const el = document.createElement('div');
-            el.style.margin = '8px 16px';
-            el.innerHTML = `<div class="wt-tool-call">
-              <span class="wt-tool-name">${toolStep.name}</span>
-              <span class="wt-tool-desc">— ${toolStep.description}</span>
-              <span class="wt-tool-status loading">calling...</span>
-              <div class="wt-tool-response-toggle" onclick="this.nextElementSibling.classList.toggle('expanded')">&#9660; View response</div>
-              <div class="wt-tool-response"><pre>${mock}</pre></div>
-            </div>`;
-            panel.appendChild(el);
-            await this.wait(800);
-            el.querySelector('.wt-tool-status').textContent = 'done';
-            el.querySelector('.wt-tool-status').className = 'wt-tool-status done';
+            if (isTerminal) {
+              this._addLine(`<span class="mock-terminal-comment">  ↳ ${toolStep.name}...</span>`).classList.add('visible');
+              await this.wait(800);
+              this._addLine(`<span class="mock-terminal-success">  ✓ ${toolStep.name} returned</span>`).classList.add('visible');
+            } else {
+              const bubble = addBubble(
+                `<div class="mock-bubble-tool"><span>${toolStep.name}</span><span class="mock-bubble-tool-status loading">calling...</span></div>`
+              );
+              await this.wait(800);
+              bubble.querySelector('.mock-bubble-tool-status').textContent = '✓ done';
+              bubble.querySelector('.mock-bubble-tool-status').className = 'mock-bubble-tool-status done';
+            }
           }
         });
         i++;
@@ -2732,14 +2874,13 @@ class SetupWalkthrough {
         title: step.title,
         detail: 'Analyzing data...',
         animate: async () => {
-          const panel = this._toolPanel;
-          const el = document.createElement('div');
-          el.style.cssText = 'margin:8px 16px;color:#7FECE9;font-style:italic;font-family:Proxima Nova,-apple-system,sans-serif;font-size:13px;opacity:0;transition:opacity 0.4s;';
-          el.innerHTML = `&#9881; ${step.title}...`;
-          panel.appendChild(el);
-          await this.wait(100);
-          el.style.opacity = '1';
-          await this.wait(600);
+          if (isTerminal) {
+            this._addLine(`<span class="mock-terminal-comment">  ⚙ ${step.title}...</span>`).classList.add('visible');
+            await this.wait(600);
+          } else {
+            addBubble(`<em style="color:#8B7E6E;font-size:11px;">⚙ ${step.title}...</em>`);
+            await this.wait(600);
+          }
         }
       });
     });
@@ -2750,24 +2891,29 @@ class SetupWalkthrough {
         title: 'Generating Output',
         detail: `${wt.outputSections.length} sections`,
         animate: async () => {
-          const panel = this._toolPanel;
-          const outEl = document.createElement('div');
-          outEl.style.cssText = 'margin:12px 16px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);font-family:Proxima Nova,-apple-system,sans-serif;';
-          let html = '';
-          wt.outputSections.forEach((section) => {
-            html += `<div class="wt-output-section" style="padding:4px 0;">
-              <div class="wt-output-section-name" style="color:white;font-size:13px;font-weight:600;">${section}</div>
-              <div class="wt-output-bar"><div class="wt-output-bar-fill"></div></div>
-            </div>`;
-          });
-          outEl.innerHTML = html;
-          panel.appendChild(outEl);
-          const sections = outEl.querySelectorAll('.wt-output-section');
-          for (const section of sections) {
-            section.classList.add('visible');
-            const bar = section.querySelector('.wt-output-bar-fill');
-            if (bar) bar.style.width = (60 + Math.random() * 40) + '%';
-            await this.wait(400);
+          if (isTerminal) {
+            this._addLine('<span class="mock-terminal-success">  ✓ Report generated:</span>').classList.add('visible');
+            for (const section of wt.outputSections) {
+              await this.wait(300);
+              this._addLine(`<span class="mock-terminal-file-content">    • ${section}</span>`).classList.add('visible');
+            }
+          } else {
+            let outHtml = '<div class="mock-bubble-output">';
+            wt.outputSections.forEach(section => {
+              outHtml += `<div class="mock-bubble-output-item">
+                <span>${section}</span>
+                <div class="mock-bubble-output-bar"><div class="mock-bubble-output-bar-fill"></div></div>
+              </div>`;
+            });
+            outHtml += '</div>';
+            const bubble = addBubble(outHtml);
+            const items = bubble.querySelectorAll('.mock-bubble-output-item');
+            for (const item of items) {
+              item.classList.add('visible');
+              const bar = item.querySelector('.mock-bubble-output-bar-fill');
+              if (bar) bar.style.width = (60 + Math.random() * 40) + '%';
+              await this.wait(400);
+            }
           }
         }
       });
