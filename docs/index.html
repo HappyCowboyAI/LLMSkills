@@ -1589,18 +1589,10 @@ function renderDetail(skillId) {
 
       <div class="tab-content" data-panel="setup" style="display:none">
         <div id="setup-walkthrough-container"></div>
-        ${skill.walkthrough ? `<div id="walkthrough-container" style="margin-top:32px;"></div>` : ''}
       </div>
     </div>`;
 
   document.getElementById('detail-content').innerHTML = html;
-
-  // Initialize walkthrough if available
-  if (skill.walkthrough) {
-    const wtContainer = document.getElementById('walkthrough-container');
-    const wt = new SkillWalkthrough(skill, wtContainer);
-    wt.init();
-  }
 
   // Initialize setup walkthrough
   const setupContainer = document.getElementById('setup-walkthrough-container');
@@ -2221,9 +2213,19 @@ class SetupWalkthrough {
     this.timer = null;
     this.platformId = null;
     this.mockupEl = null;
+    this.customData = null;
   }
 
-  init() {
+  async init() {
+    // Load custom walkthrough data if available
+    const wt = this.skill.walkthrough;
+    if (wt && wt.hasCustomData) {
+      try {
+        const res = await fetch(`../${this.skill.id}/assets/walkthrough-data.json`);
+        if (res.ok) this.customData = await res.json();
+      } catch (e) { /* use auto-generated */ }
+    }
+
     const allPlatforms = catalogData.catalog.platforms;
     this.availablePlatforms = allPlatforms.filter(p =>
       p.status === 'supported' && this.skill.platforms[p.id] !== null
@@ -2294,6 +2296,7 @@ class SetupWalkthrough {
     } else if (this.platformId === 'chatgpt-gpt') {
       this.buildChatgptMockup();
     }
+    this.appendToolCallSteps();
   }
 
   // Platform-specific mockup builders
@@ -2632,6 +2635,153 @@ class SetupWalkthrough {
       }
     ];
     this.totalSteps = this.steps.length;
+  }
+
+  appendToolCallSteps() {
+    const wt = this.skill.walkthrough;
+    if (!wt) return;
+
+    const toolSteps = wt.steps.filter(s => s.type === 'tool');
+    const analysisSteps = wt.steps.filter(s => s.type === 'analysis');
+    const mockupEl = this.mockupArea.querySelector('.setup-mockup');
+
+    // Step: Transition — fade mockup to tool-call terminal view
+    this.steps.push({
+      title: 'Skill Running...',
+      detail: 'People.ai MCP tools activating',
+      animate: async () => {
+        // Create the tool-call panel inside the mockup
+        const toolPanel = document.createElement('div');
+        toolPanel.className = 'walkthrough';
+        toolPanel.id = 'setup-wt-toolpanel';
+        toolPanel.style.cssText = 'margin:0;border-radius:0;max-height:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10;opacity:0;transition:opacity 0.5s;overflow-y:auto;';
+        mockupEl.style.position = 'relative';
+        mockupEl.appendChild(toolPanel);
+        await this.wait(100);
+        toolPanel.style.opacity = '1';
+        this._toolPanel = toolPanel;
+      }
+    });
+
+    // Group tool steps (handling parallel)
+    let i = 0;
+    while (i < toolSteps.length) {
+      const step = toolSteps[i];
+      if (step.parallel) {
+        const group = [];
+        const groupNum = step.stepNum;
+        while (i < toolSteps.length && toolSteps[i].parallel && toolSteps[i].stepNum === groupNum) {
+          group.push(toolSteps[i]);
+          i++;
+        }
+        this.steps.push({
+          title: 'Calling MCP Tools (parallel)',
+          detail: group.map(g => g.name).join(', '),
+          animate: async () => {
+            const panel = this._toolPanel;
+            const groupEl = document.createElement('div');
+            groupEl.className = 'wt-parallel-group';
+            groupEl.style.margin = '8px 16px';
+            groupEl.innerHTML = '<div class="wt-parallel-label">Parallel execution</div>';
+            group.forEach(g => {
+              const mock = this.getToolResponse(g.name);
+              groupEl.innerHTML += `<div class="wt-tool-call parallel">
+                <span class="wt-tool-name">${g.name}</span>
+                <span class="wt-tool-desc">— ${g.description}</span>
+                <span class="wt-tool-status loading">calling...</span>
+              </div>`;
+            });
+            panel.appendChild(groupEl);
+            await this.wait(800);
+            groupEl.querySelectorAll('.wt-tool-status').forEach(s => {
+              s.textContent = 'done';
+              s.className = 'wt-tool-status done';
+            });
+          }
+        });
+      } else {
+        const toolStep = toolSteps[i];
+        this.steps.push({
+          title: `Calling ${toolStep.name}`,
+          detail: toolStep.description,
+          animate: async () => {
+            const panel = this._toolPanel;
+            const mock = this.getToolResponse(toolStep.name);
+            const el = document.createElement('div');
+            el.style.margin = '8px 16px';
+            el.innerHTML = `<div class="wt-tool-call">
+              <span class="wt-tool-name">${toolStep.name}</span>
+              <span class="wt-tool-desc">— ${toolStep.description}</span>
+              <span class="wt-tool-status loading">calling...</span>
+              <div class="wt-tool-response-toggle" onclick="this.nextElementSibling.classList.toggle('expanded')">&#9660; View response</div>
+              <div class="wt-tool-response"><pre>${mock}</pre></div>
+            </div>`;
+            panel.appendChild(el);
+            await this.wait(800);
+            el.querySelector('.wt-tool-status').textContent = 'done';
+            el.querySelector('.wt-tool-status').className = 'wt-tool-status done';
+          }
+        });
+        i++;
+      }
+    }
+
+    // Analysis steps
+    analysisSteps.forEach(step => {
+      this.steps.push({
+        title: step.title,
+        detail: 'Analyzing data...',
+        animate: async () => {
+          const panel = this._toolPanel;
+          const el = document.createElement('div');
+          el.style.cssText = 'margin:8px 16px;color:#7FECE9;font-style:italic;font-family:Proxima Nova,-apple-system,sans-serif;font-size:13px;opacity:0;transition:opacity 0.4s;';
+          el.innerHTML = `&#9881; ${step.title}...`;
+          panel.appendChild(el);
+          await this.wait(100);
+          el.style.opacity = '1';
+          await this.wait(600);
+        }
+      });
+    });
+
+    // Output sections
+    if (wt.outputSections && wt.outputSections.length > 0) {
+      this.steps.push({
+        title: 'Generating Output',
+        detail: `${wt.outputSections.length} sections`,
+        animate: async () => {
+          const panel = this._toolPanel;
+          const outEl = document.createElement('div');
+          outEl.style.cssText = 'margin:12px 16px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);font-family:Proxima Nova,-apple-system,sans-serif;';
+          let html = '';
+          wt.outputSections.forEach((section) => {
+            html += `<div class="wt-output-section" style="padding:4px 0;">
+              <div class="wt-output-section-name" style="color:white;font-size:13px;font-weight:600;">${section}</div>
+              <div class="wt-output-bar"><div class="wt-output-bar-fill"></div></div>
+            </div>`;
+          });
+          outEl.innerHTML = html;
+          panel.appendChild(outEl);
+          const sections = outEl.querySelectorAll('.wt-output-section');
+          for (const section of sections) {
+            section.classList.add('visible');
+            const bar = section.querySelector('.wt-output-bar-fill');
+            if (bar) bar.style.width = (60 + Math.random() * 40) + '%';
+            await this.wait(400);
+          }
+        }
+      });
+    }
+
+    this.totalSteps = this.steps.length;
+  }
+
+  getToolResponse(toolName) {
+    if (this.customData && this.customData.tools && this.customData.tools[toolName]) {
+      return JSON.stringify(this.customData.tools[toolName].response, null, 2);
+    }
+    const input = this.customData ? this.customData.input : (this.skill.walkthrough?.input?.example || 'Acme Corp');
+    return getMockResponse(toolName, input);
   }
 
   renderDots() {
