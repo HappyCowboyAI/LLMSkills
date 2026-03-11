@@ -35,7 +35,8 @@ PLATFORMS = [
     {"id": "claude-project", "name": "Claude.ai Project", "status": "supported", "file": "claude-project.md"},
     {"id": "claude-code", "name": "Claude Code", "status": "supported", "file": "skill.md"},
     {"id": "chatgpt-gpt", "name": "ChatGPT Custom GPT", "status": "supported", "file": "chatgpt-gpt.md"},
-    {"id": "gemini", "name": "Google Gemini", "status": "coming-soon", "file": "gemini.md"},
+    {"id": "copilot", "name": "Microsoft Copilot", "status": "supported", "file": "copilot.md"},
+    {"id": "gemini", "name": "Google Gemini", "status": "supported", "file": "gemini.md"},
 ]
 
 
@@ -247,6 +248,22 @@ def get_setup_steps(platform_id: str, skill_name: str) -> list[str]:
             "Paste the instructions (use the Copy button)",
             "Configure Actions for each People.ai MCP tool listed",
             "Save and test with an account name",
+        ]
+    elif platform_id == "copilot":
+        return [
+            "Open Microsoft Copilot Studio and create a new agent",
+            f"Name it '{skill_name}'",
+            "Paste the instructions (use the Copy button)",
+            "Add People.ai as a connector plugin",
+            "Publish and test with an account name",
+        ]
+    elif platform_id == "gemini":
+        return [
+            "Open Google AI Studio and create a new Gem",
+            f"Name it '{skill_name}'",
+            "Paste the instructions (use the Copy button)",
+            "Configure People.ai MCP extension when available",
+            "Test with an account name",
         ]
     return []
 
