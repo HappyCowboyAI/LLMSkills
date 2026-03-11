@@ -273,7 +273,8 @@ def list_assets(skill_dir: Path) -> list[str]:
     assets_dir = skill_dir / "assets"
     if not assets_dir.exists():
         return []
-    return [f.name for f in assets_dir.iterdir() if f.is_file()]
+    exclude = {".DS_Store", "walkthrough-data.json"}
+    return [f.name for f in sorted(assets_dir.iterdir()) if f.is_file() and f.name not in exclude]
 
 
 def build_catalog():

@@ -1974,6 +1974,15 @@ function renderDetail(skillId) {
             </div>
           </div>`;
         }
+        const knowledgeFiles = skill.projectKnowledgeFiles || [];
+        const repoBase = 'https://raw.githubusercontent.com/HappyCowboyAI/LLMSkills/main';
+        const filesHtml = knowledgeFiles.length ? `
+          <div style="margin-top:16px;padding:16px;background:#f0f7ff;border-radius:8px;border:1px solid var(--pai-light-blue);">
+            <div style="font-weight:600;font-size:14px;margin-bottom:8px;color:var(--pai-dark-blue);">Knowledge Files</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              ${knowledgeFiles.map(f => `<a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" class="btn btn-download" style="font-size:13px;padding:6px 14px;text-decoration:none;">&#x2913; ${f}</a>`).join('')}
+            </div>
+          </div>` : '';
         return `<div class="tab-content" data-panel="${p.id}" style="display:none">
           <div class="instructions-block">${renderMarkdown(data.instructions)}</div>
           <div class="btn-actions">
@@ -1981,9 +1990,10 @@ function renderDetail(skillId) {
               Copy Instructions to Clipboard
             </button>
             <button class="btn btn-download" onclick="downloadInstructions('${skill.id}', '${p.id}')">
-              Download as File
+              Download Instructions
             </button>
           </div>
+          ${filesHtml}
         </div>`;
       }).join('')}
     </div>`;
@@ -2012,10 +2022,11 @@ function renderDetail(skillId) {
     }
 
     if (skill.projectKnowledgeFiles.length) {
+      const repoBase = 'https://raw.githubusercontent.com/HappyCowboyAI/LLMSkills/main';
       leftHtml += `
         <div class="detail-section">
           <h3>Knowledge Files</h3>
-          <ul>${skill.projectKnowledgeFiles.map(f => `<li>${f}</li>`).join('')}</ul>
+          <ul>${skill.projectKnowledgeFiles.map(f => `<li><a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" style="color:var(--pai-primary-blue);text-decoration:none;">${f} <span style="font-size:11px;">&#x2913;</span></a></li>`).join('')}</ul>
         </div>`;
     }
 

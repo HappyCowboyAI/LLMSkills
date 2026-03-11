@@ -77,8 +77,7 @@
       ],
       "projectKnowledgeFiles": [
         "Account Plan Agent.md",
-        "Peopleai Brand Knowledge Base.md",
-        "walkthrough-data.json"
+        "Peopleai Brand Knowledge Base.md"
       ],
       "status": "ready",
       "platforms": {
@@ -357,11 +356,10 @@
         "People.ai MCP"
       ],
       "projectKnowledgeFiles": [
-        "mapagent.md",
-        ".DS_Store",
         "enterprise_template.html",
-        "smb_template.html",
-        "midmarket_template.html"
+        "mapagent.md",
+        "midmarket_template.html",
+        "smb_template.html"
       ],
       "status": "ready",
       "platforms": {
