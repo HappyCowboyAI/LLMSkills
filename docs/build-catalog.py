@@ -164,13 +164,36 @@ def parse_source_md(path: Path) -> dict:
         "audience": r"## Audience\s*\n(.+?)(?=\n##|\Z)",
         "input": r"## Input\s*\n(.+?)(?=\n##|\Z)",
         "mcp_tools": r"## MCP Tools Used\s*\n(.+?)(?=\n##|\Z)",
+        "sample_output": r"## Sample Output\s*\n(.+?)(?=\n##|\Z)",
     }
 
     for key, pattern in section_patterns.items():
         match = re.search(pattern, text, re.MULTILINE | re.DOTALL)
         if match:
+            raw_value = match.group(1)
+            if key == "sample_output":
+                # Parse mockup metadata from HTML comments before stripping them
+                mockup_type = "slack"
+                bot_name = "Aria"
+                m_type = re.search(r'<!--mockup:(\w+)-->', raw_value)
+                if m_type:
+                    mockup_type = m_type.group(1)
+                m_bot = re.search(r'<!--bot:(.+?)-->', raw_value)
+                if m_bot:
+                    bot_name = m_bot.group(1)
+                bot_app = bool(re.search(r'<!--bot-app:true-->', raw_value))
+                content = re.sub(r'<!--.*?-->\n?', '', raw_value).strip()
+                if content:
+                    metadata[key] = {
+                        "mockup": mockup_type,
+                        "bot_name": bot_name,
+                        "bot_app": bot_app,
+                        "content": content,
+                    }
+                continue
+
             # Strip HTML comments and clean up
-            value = re.sub(r"<!--.*?-->", "", match.group(1), flags=re.DOTALL).strip()
+            value = re.sub(r"<!--.*?-->", "", raw_value, flags=re.DOTALL).strip()
             if not value:
                 continue
             if key == "audience":
@@ -294,6 +317,7 @@ def build_catalog():
             "status": status,
             "platforms": platforms,
             "walkthrough": walkthrough,
+            "sample_output": meta.get("sample_output"),
         }
         skills.append(skill)
 

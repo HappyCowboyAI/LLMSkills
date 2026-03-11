@@ -486,6 +486,135 @@
   }
   .stats-bar strong { color: var(--pai-dark-blue); }
 
+  /* Detail Split Layout */
+  .detail-split {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+  }
+  .detail-split-left {
+    flex: 1;
+    min-width: 0;
+  }
+  .detail-split-right {
+    flex: 1;
+    min-width: 0;
+    position: sticky;
+    top: 24px;
+  }
+  .detail-split-right h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--pai-off-black);
+    margin-bottom: 10px;
+  }
+  .detail-section {
+    margin-bottom: 20px;
+  }
+  .detail-section h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pai-off-black);
+    margin-bottom: 6px;
+  }
+  .detail-section ul {
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--pai-dark-gray);
+  }
+  .detail-section li {
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .detail-section p {
+    font-size: 14px;
+    color: var(--pai-dark-gray);
+    line-height: 1.6;
+  }
+
+  /* Sample Output Mockups */
+  .slack-mockup {
+    background: var(--pai-white);
+    border: 1px solid var(--pai-light-gray);
+    border-radius: 8px;
+    font-size: 13px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .slack-mockup-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px 0;
+  }
+  .slack-mockup-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--pai-primary-blue), var(--pai-blue));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .slack-mockup-botname {
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--pai-off-black);
+  }
+  .slack-mockup-app-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--pai-light-gray);
+    color: var(--pai-dark-gray);
+    padding: 1px 5px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+  .slack-mockup-time {
+    font-size: 11px;
+    color: var(--pai-med-gray);
+    margin-left: auto;
+  }
+  .slack-mockup-body {
+    padding: 6px 14px 14px 60px;
+    color: var(--pai-off-black);
+    line-height: 1.55;
+    font-size: 13px;
+  }
+  .slack-mockup-body p { margin: 0 0 4px; }
+  .slack-mockup-body strong { font-weight: 700; }
+  .slack-mockup-body em { font-style: italic; color: var(--pai-dark-gray); }
+  .slack-mockup-body ul { margin: 0 0 6px; padding-left: 18px; list-style: disc; }
+  .slack-mockup-body li { margin: 1px 0; }
+  .slack-mockup-body hr { border: none; border-top: 1px solid var(--pai-light-gray); margin: 8px 0; }
+  .slack-mockup-body .slack-mention {
+    background: rgba(29,155,209,0.1);
+    color: #1264A3;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .slack-mockup-body .slack-money {
+    background: rgba(0,184,148,0.12);
+    color: #00866A;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1px solid rgba(0,184,148,0.25);
+  }
+
+  @media (max-width: 768px) {
+    .detail-split { flex-direction: column; }
+    .detail-split-right { flex: none; width: 100%; position: static; }
+  }
+
   /* Print */
   @media print {
     .header { background: white !important; color: black !important; }
@@ -1714,6 +1843,55 @@ function renderCards() {
   }).join('');
 }
 
+// ── Sample Output Mockup ──
+function mdToHtml(text) {
+  // Convert simple markdown to HTML for mockup display
+  let html = '';
+  const lines = text.split('\n');
+  let inList = false;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    // Convert @mentions
+    let processed = trimmed.replace(/@([\w.]+)/g, '<span class="slack-mention">@$1</span>');
+    // Convert ===$amount=== to money badges
+    processed = processed.replace(/===\$?([\d,]+)===/g, '<span class="slack-money">$$$1</span>');
+    // Convert **bold**
+    processed = processed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // Convert *italic*
+    processed = processed.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>');
+
+    if (trimmed === '---') {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += '<hr>';
+    } else if (trimmed.startsWith('- ')) {
+      if (!inList) { html += '<ul>'; inList = true; }
+      html += `<li>${processed.slice(2)}</li>`;
+    } else {
+      if (inList) { html += '</ul>'; inList = false; }
+      html += `<p>${processed}</p>`;
+    }
+  }
+  if (inList) html += '</ul>';
+  return html;
+}
+
+function renderSlackMockup(sample) {
+  const initial = sample.bot_name ? sample.bot_name[0] : 'A';
+  const appBadge = sample.bot_app ? '<span class="slack-mockup-app-badge">APP</span>' : '';
+  return `
+    <div class="slack-mockup">
+      <div class="slack-mockup-header">
+        <div class="slack-mockup-avatar">${initial}</div>
+        <div>
+          <span class="slack-mockup-botname">${sample.bot_name || 'Bot'}</span>${appBadge}
+          <span class="slack-mockup-time">7:21 AM</span>
+        </div>
+      </div>
+      <div class="slack-mockup-body">${mdToHtml(sample.content)}</div>
+    </div>`;
+}
+
 // ── Detail Rendering ──
 function renderDetail(skillId) {
   const skill = catalogData.skills.find(s => s.id === skillId);
@@ -1755,7 +1933,7 @@ function renderDetail(skillId) {
     </div>
 
     <div class="tabs" id="detail-tabs">
-      <div class="tab active" data-tab="setup" onclick="switchTab('setup')">Setup</div>
+      <div class="tab active" data-tab="details" onclick="switchTab('details')">Details</div>
       ${allPlatforms.map(p => {
         const available = skill.platforms[p.id] !== null;
         const isComingSoon = p.status === 'coming-soon';
@@ -1767,10 +1945,14 @@ function renderDetail(skillId) {
           ${!available && !isComingSoon ? '<span class="tab-badge">N/A</span>' : ''}
         </div>`;
       }).join('')}
+      <div class="tab" data-tab="setup" onclick="switchTab('setup')">Setup</div>
     </div>
 
     <div id="tab-panels">
-      <div class="tab-content" data-panel="setup" style="display:block">
+      <div class="tab-content" data-panel="details" style="display:block">
+        <div id="details-content-container"></div>
+      </div>
+      <div class="tab-content" data-panel="setup" style="display:none">
         <div id="setup-walkthrough-container"></div>
       </div>
       ${allPlatforms.map(p => {
@@ -1807,6 +1989,49 @@ function renderDetail(skillId) {
     </div>`;
 
   document.getElementById('detail-content').innerHTML = html;
+
+  // Render Details tab content
+  const detailsContainer = document.getElementById('details-content-container');
+  if (detailsContainer) {
+    let leftHtml = `
+      <div class="detail-section">
+        <h3>Description</h3>
+        <p>${skill.description}</p>
+      </div>
+      <div class="detail-section">
+        <h3>Audience</h3>
+        <p>${skill.audience.join(', ')}</p>
+      </div>`;
+
+    if (skill.mcpTools.length) {
+      leftHtml += `
+        <div class="detail-section">
+          <h3>MCP Tools Used</h3>
+          <ul>${skill.mcpTools.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>`;
+    }
+
+    if (skill.projectKnowledgeFiles.length) {
+      leftHtml += `
+        <div class="detail-section">
+          <h3>Knowledge Files</h3>
+          <ul>${skill.projectKnowledgeFiles.map(f => `<li>${f}</li>`).join('')}</ul>
+        </div>`;
+    }
+
+    if (skill.sample_output) {
+      const rightHtml = `
+        <h3>Sample Output</h3>
+        ${renderSlackMockup(skill.sample_output)}`;
+      detailsContainer.innerHTML = `
+        <div class="detail-split">
+          <div class="detail-split-left">${leftHtml}</div>
+          <div class="detail-split-right">${rightHtml}</div>
+        </div>`;
+    } else {
+      detailsContainer.innerHTML = leftHtml;
+    }
+  }
 
   // Initialize setup walkthrough
   const setupContainer = document.getElementById('setup-walkthrough-container');
