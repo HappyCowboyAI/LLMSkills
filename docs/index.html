@@ -630,6 +630,70 @@
     color: var(--pai-med-gray);
   }
 
+  /* Guides */
+  .guides-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pai-dark-gray);
+    margin-bottom: 16px;
+  }
+  .guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .guide-card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--pai-light-gray);
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .guide-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--pai-primary-blue);
+  }
+  .guide-card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .guide-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--pai-dark-blue);
+    margin-bottom: 6px;
+  }
+  .guide-card-desc {
+    font-size: 13px;
+    color: var(--pai-dark-gray);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .guide-card-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--pai-light-blue);
+    color: var(--pai-primary-blue);
+  }
+  .guide-card-badge.coming-soon {
+    background: #fff3e0;
+    color: var(--pai-orange);
+  }
+  .guide-card.hero {
+    grid-column: 1 / -1;
+    border-left: 4px solid var(--pai-teal);
+  }
+
   /* Walkthrough */
   .walkthrough {
     background: var(--pai-dark-blue);
@@ -1610,6 +1674,7 @@
     </div>
   </div>
   <div style="display:flex;gap:8px;">
+    <a class="btn btn-secondary" href="#/guides">Setup Guides</a>
     <a class="btn btn-secondary" href="#/about">About</a>
     <button class="btn btn-primary" onclick="openWizard()">Get Started</button>
   </div>
@@ -1645,9 +1710,716 @@
       4. Start using the skill with any account name<br><br>
       <strong>Prerequisites:</strong><br>
       &bull; A Claude Pro/Team, ChatGPT Plus, or supported LLM account<br>
-      &bull; People.ai MCP integration connected (<a href="" id="mcp-setup-link" target="_blank">Setup Guide</a>)<br><br>
+      &bull; People.ai MCP integration connected (<a href="#/guide/mcp-setup" id="mcp-setup-link">Setup Guide</a>)<br><br>
       <strong>Maintained by:</strong> AI Innovation Team<br>
       <strong>Slack:</strong> #claude-users
+    </div>
+  </div>
+</div>
+
+<!-- MCP Setup Guide View -->
+<div id="mcp-guide-view" class="container detail-view">
+  <a class="back-link" onclick="navigate('#/guides')">&#8592; All Guides</a>
+  <div style="max-width:800px;">
+    <h2 style="color:var(--pai-dark-blue);margin-bottom:8px;">People.ai MCP Setup Guide</h2>
+    <p style="color:var(--pai-dark-gray);margin-bottom:24px;">
+      The <strong>People.ai Model Context Protocol (MCP)</strong> server is the core data source
+      for every skill in this catalog. It gives AI assistants direct access to account
+      activity, engagement data, opportunity status, and contact intelligence.
+    </p>
+
+    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:16px;">
+      <strong>What is MCP?</strong> Model Context Protocol is an open standard that lets AI assistants
+      call external tools and data sources. People.ai's MCP server exposes sales intelligence
+      as tools that assistants can invoke during conversations — no custom API integration needed.
+    </div>
+
+    <div style="padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:24px;">
+      <strong>Prerequisites:</strong> An active People.ai account with MCP access enabled, plus a supported LLM platform
+      (Claude.ai Pro/Team, ChatGPT Plus, Microsoft Copilot, or Google Gemini).
+    </div>
+
+    <!-- ============ WHAT YOU CAN DO ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">What You Can Do</h3>
+    <ul style="margin:8px 0 20px 20px;line-height:2;">
+      <li>Build AI skills that analyze accounts, opportunities, and stakeholder engagement in real time</li>
+      <li>Create interactive dashboards from live CRM and communication data</li>
+      <li>Generate meeting prep briefs, competitive battle cards, and executive summaries on demand</li>
+      <li>Score deal health, renewal risk, and pipeline quality using AI-powered analysis</li>
+      <li>Map relationships, detect engagement gaps, and recommend next best actions</li>
+    </ul>
+
+    <!-- ============ AVAILABLE TOOLS ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">Available MCP Tools</h3>
+    <p style="margin:8px 0;">The People.ai MCP server exposes these tools to connected AI assistants:</p>
+    <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
+      <thead>
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+          <th style="padding:10px 12px;text-align:left;">Tool</th>
+          <th style="padding:10px 12px;text-align:left;">Description</th>
+          <th style="padding:10px 12px;text-align:left;">Used By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>find_account</code></td>
+          <td style="padding:10px 12px;">Search for accounts by name or domain</td>
+          <td style="padding:10px 12px;">All skills</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_account_status</code></td>
+          <td style="padding:10px 12px;">Account health, engagement score, risk signals</td>
+          <td style="padding:10px 12px;">Account Plan, Sentiment, Renewal Risk</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_recent_account_activity</code></td>
+          <td style="padding:10px 12px;">Meetings, emails, calls in a time window</td>
+          <td style="padding:10px 12px;">Account Plan, Meeting Prep, QBR Generator</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_opportunity_status</code></td>
+          <td style="padding:10px 12px;">Deal stage, amount, close date, activity</td>
+          <td style="padding:10px 12px;">Opportunity Agent, MEDDPICC, Win Probability</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_recent_opportunity_activity</code></td>
+          <td style="padding:10px 12px;">Recent deal-level interactions and changes</td>
+          <td style="padding:10px 12px;">Opportunity Agent, Deal Debrief</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_engaged_people</code></td>
+          <td style="padding:10px 12px;">Contacts with recent engagement on an account</td>
+          <td style="padding:10px 12px;">Relationship Map, Multi-Threading Coach</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_scorecard</code></td>
+          <td style="padding:10px 12px;">Account plan sections with completion scores</td>
+          <td style="padding:10px 12px;">Account Plan, Engagement Scorecard</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>ask_sales_ai_about_account</code></td>
+          <td style="padding:10px 12px;">Natural language queries about any account (10-30s)</td>
+          <td style="padding:10px 12px;">Executive Briefing, Pipeline Review</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>ask_sales_ai_about_opportunity</code></td>
+          <td style="padding:10px 12px;">Natural language queries about any deal (10-30s)</td>
+          <td style="padding:10px 12px;">Opportunity Agent, Win Probability, MEDDPICC</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>top_records</code></td>
+          <td style="padding:10px 12px;">Top accounts/opps by activity, risk, or value</td>
+          <td style="padding:10px 12px;">Pipeline Review, Whitespace Mapper</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>account_company_news</code></td>
+          <td style="padding:10px 12px;">Recent news about an account's company</td>
+          <td style="padding:10px 12px;">Company News, Meeting Prep, Executive Briefing</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============ PLATFORM SETUP ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">1. Obtain MCP Credentials</h3>
+    <ol style="margin:12px 0 20px 20px;line-height:2;">
+      <li>Contact your <strong>People.ai administrator or CSM</strong> to request MCP API access</li>
+      <li>You'll receive two credentials:
+        <ul style="margin:4px 0 4px 20px;">
+          <li><strong>Client ID</strong> — your organization's MCP client identifier</li>
+          <li><strong>Client Secret</strong> — authentication secret</li>
+        </ul>
+      </li>
+      <li>Store these credentials securely — you'll need them for platform configuration</li>
+    </ol>
+    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--pai-orange);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+      <strong>Important:</strong> MCP credentials are different from People.ai REST API credentials. Make sure you request MCP-specific access.
+    </div>
+
+    <!-- ============ CLAUDE.AI ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">2. Configure in Claude.ai</h3>
+    <p style="margin:8px 0;">Claude.ai Projects support MCP integrations natively:</p>
+    <ol style="margin:8px 0 16px 20px;line-height:2;">
+      <li>Open <strong>Claude.ai</strong> and go to <strong>Settings</strong> &rarr; <strong>Integrations</strong></li>
+      <li>Find <strong>People.ai MCP</strong> in the available integrations</li>
+      <li>Click <strong>Connect</strong> and enter your Client ID and Client Secret</li>
+      <li>Enable the integration — it will now be available in all your Projects</li>
+      <li>Create a new Project, paste skill instructions, and start chatting</li>
+    </ol>
+    <div style="padding:12px 16px;background:#f0f7ff;border-radius:var(--radius);margin:8px 0 20px 0;">
+      <span style="color:var(--pai-primary-blue);font-weight:600;">Tip:</span>
+      <span style="font-size:13px;"> Each skill in this catalog includes a "Copy Instructions" button. Paste these directly into your Project's custom instructions.</span>
+    </div>
+
+    <!-- ============ CLAUDE CODE ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">3. Configure in Claude Code</h3>
+    <p style="margin:8px 0;">Add People.ai MCP to your Claude Code settings:</p>
+    <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;"># In your Claude Code MCP settings (settings.json or .mcp.json):
+{
+  "mcpServers": {
+    "peopleai": {
+      "url": "https://mcp.people.ai/mcp",
+      "transport": "sse",
+      "headers": {
+        "PAI-Client-Id": "your-client-id",
+        "PAI-Client-Secret": "your-client-secret",
+        "Content-Type": "application/json"
+      }
+    }
+  }
+}</pre>
+    <p style="margin:8px 0 20px 0;font-size:13px;color:var(--pai-dark-gray);">Copy skill instructions into your <code>CLAUDE.md</code> file or invoke them as slash commands.</p>
+
+    <!-- ============ CHATGPT ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">4. Configure in ChatGPT</h3>
+    <p style="margin:8px 0;">ChatGPT Custom GPTs use Actions to connect to external APIs:</p>
+    <ol style="margin:8px 0 16px 20px;line-height:2;">
+      <li>Go to <strong>ChatGPT</strong> &rarr; <strong>Explore GPTs</strong> &rarr; <strong>Create</strong></li>
+      <li>Paste the skill instructions into the <strong>Instructions</strong> field</li>
+      <li>Under <strong>Actions</strong>, click <strong>Create new action</strong></li>
+      <li>Configure API endpoints for each People.ai MCP tool the skill uses</li>
+      <li>Set authentication headers: <code>PAI-Client-Id</code> and <code>PAI-Client-Secret</code></li>
+      <li>Save and publish the GPT</li>
+    </ol>
+    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--pai-orange);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+      <strong>Header names are case-sensitive.</strong> Use exactly: <code>PAI-Client-Id</code> (not <code>PAI-Client-ID</code> or <code>pai-client-id</code>).
+    </div>
+
+    <!-- ============ COPILOT ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">5. Configure in Microsoft Copilot</h3>
+    <p style="margin:8px 0;">Use Copilot Studio to create agents with People.ai data:</p>
+    <ol style="margin:8px 0 16px 20px;line-height:2;">
+      <li>Open <strong>Microsoft Copilot Studio</strong> and create a new agent</li>
+      <li>Paste the skill instructions into the agent's instructions field</li>
+      <li>Under <strong>Plugins</strong>, add a new connector for People.ai</li>
+      <li>Configure the MCP endpoint: <code>https://mcp.people.ai/mcp</code></li>
+      <li>Add authentication headers: <code>PAI-Client-Id</code> and <code>PAI-Client-Secret</code></li>
+      <li>Publish and test the agent</li>
+    </ol>
+
+    <!-- ============ GEMINI ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">6. Configure in Google Gemini</h3>
+    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-med-blue);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+      <strong>Coming Soon:</strong> Google Gemini does not yet support MCP connections natively.
+      We've prepared Gemini Gem instructions for all skills so they're ready when the integration launches.
+      Check back for updates or follow the developer platforms section below.
+    </div>
+
+    <!-- ============ DEVELOPER PLATFORMS ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">7. Developer Platforms</h3>
+    <p style="margin:8px 0;">For programmatic access, use these SDK examples:</p>
+
+    <h4 style="margin-top:20px;">LangGraph (Python)</h4>
+    <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;">pip install langchain-mcp-adapters
+
+from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient({
+    "peopleai": {
+        "url": "https://mcp.people.ai/mcp",
+        "transport": "sse",
+        "headers": {
+            "PAI-Client-Id": os.environ["PEOPLEAI_CLIENT_ID"],
+            "PAI-Client-Secret": os.environ["PEOPLEAI_CLIENT_SECRET"],
+            "Content-Type": "application/json",
+        }
+    }
+})
+tools = await client.get_tools()</pre>
+
+    <h4 style="margin-top:20px;">Claude Agent SDK (Python)</h4>
+    <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;">pip install claude-agent-sdk anthropic
+
+from claude_agent_sdk import Agent
+import anthropic
+
+agent = Agent(
+    client=anthropic.Anthropic(),
+    model="claude-sonnet-4-20250514",
+    system="You are a sales intelligence assistant...",
+    mcp_servers=[{
+        "name": "peopleai",
+        "url": "https://mcp.people.ai/mcp",
+        "headers": {
+            "PAI-Client-Id": os.environ["PEOPLEAI_CLIENT_ID"],
+            "PAI-Client-Secret": os.environ["PEOPLEAI_CLIENT_SECRET"],
+            "Content-Type": "application/json",
+        }
+    }],
+)</pre>
+
+    <h4 style="margin-top:20px;">OpenAI Agents SDK (Python)</h4>
+    <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;">pip install openai-agents
+
+from agents import Agent
+from agents.mcp import MCPServerSse
+
+peopleai_mcp = MCPServerSse(
+    name="peopleai",
+    url="https://mcp.people.ai/mcp",
+    headers={
+        "PAI-Client-Id": os.environ["PEOPLEAI_CLIENT_ID"],
+        "PAI-Client-Secret": os.environ["PEOPLEAI_CLIENT_SECRET"],
+        "Content-Type": "application/json",
+    },
+)
+
+agent = Agent(
+    name="Sales Intelligence",
+    instructions="You are a sales intelligence assistant...",
+    mcp_servers=[peopleai_mcp],
+)</pre>
+
+    <!-- ============ ENV VARS ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">8. Environment Variables</h3>
+    <p style="margin:8px 0;">Set these for Python-based integrations:</p>
+    <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;">export PEOPLEAI_MCP_URL="https://mcp.people.ai/mcp"
+export PEOPLEAI_CLIENT_ID="your-client-id"
+export PEOPLEAI_CLIENT_SECRET="your-client-secret"
+
+# Also needed for the LLM:
+export ANTHROPIC_API_KEY="sk-ant-..."   # for Claude-based integrations
+export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
+
+    <!-- ============ TESTING ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">9. Test Your Connection</h3>
+    <p style="margin:8px 0;">Try these example queries to verify the connection works:</p>
+    <ul style="margin:8px 0 16px 20px;line-height:2;">
+      <li><code>"Find the account for Acme Corp"</code></li>
+      <li><code>"What are the risks for the Acme Enterprise deal?"</code></li>
+      <li><code>"Show me recent activity for Globex Industries"</code></li>
+    </ul>
+    <p style="margin:8px 0;">If the AI responds with real account data, you're connected. If it says it can't access People.ai tools, double-check your credentials and integration setup.</p>
+
+    <!-- ============ TROUBLESHOOTING ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">10. Troubleshooting</h3>
+    <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
+      <thead>
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+          <th style="padding:10px 12px;text-align:left;">Issue</th>
+          <th style="padding:10px 12px;text-align:left;">Cause</th>
+          <th style="padding:10px 12px;text-align:left;">Fix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">People.ai integration not available</td>
+          <td style="padding:10px 12px;">MCP access not enabled for your org</td>
+          <td style="padding:10px 12px;">Contact your People.ai CSM to enable MCP API access</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Authentication failed</td>
+          <td style="padding:10px 12px;">Wrong credentials or header names</td>
+          <td style="padding:10px 12px;">Header names are case-sensitive: <code>PAI-Client-Id</code>, <code>PAI-Client-Secret</code>. Verify MCP-specific credentials (not REST API keys).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">AI not using People.ai tools</td>
+          <td style="padding:10px 12px;">Instructions not explicit enough</td>
+          <td style="padding:10px 12px;">Use skill instructions from this catalog — they include explicit tool-calling workflows. Be specific: "Use find_account to look up Acme Corp."</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Slow responses (10-30s)</td>
+          <td style="padding:10px 12px;">AI-powered tools (<code>ask_sales_ai_*</code>) require deep analysis</td>
+          <td style="padding:10px 12px;">This is normal. Use simpler tools like <code>get_account_status</code> for faster responses.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Tool returns empty data</td>
+          <td style="padding:10px 12px;">Account name mismatch or no activity</td>
+          <td style="padding:10px 12px;">Use exact account names from Salesforce. Verify the account has recent engagement data.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">ChatGPT Actions not working</td>
+          <td style="padding:10px 12px;">API schema misconfigured</td>
+          <td style="padding:10px 12px;">Ensure each Action maps to the correct People.ai MCP endpoint with proper authentication headers.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ============ SECURITY ============ -->
+    <div style="margin-top:24px;padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;">
+      <strong>Security:</strong> Your People.ai data stays within the secure People.ai environment — AI assistants only send queries and receive specific responses.
+      All communication uses HTTPS/TLS encryption. The integration respects your People.ai permissions. Rotate credentials regularly.
+    </div>
+
+    <div style="margin-top:16px;padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:32px;">
+      <strong>Need help?</strong> For People.ai API issues, contact your CSM or email <strong>support@people.ai</strong>.
+      For platform-specific questions, consult
+      <a href="https://support.anthropic.com" target="_blank" style="color:var(--pai-primary-blue);">Claude Support</a>,
+      <a href="https://help.openai.com" target="_blank" style="color:var(--pai-primary-blue);">OpenAI Help</a>, or
+      <a href="https://support.microsoft.com/copilot" target="_blank" style="color:var(--pai-primary-blue);">Microsoft Copilot Support</a>.
+    </div>
+  </div>
+</div>
+
+<!-- Guides Landing Page -->
+<div id="guides-view" class="container detail-view">
+  <a class="back-link" onclick="navigate('#/')">&#8592; Back to Catalog</a>
+  <div style="max-width:900px;">
+    <h2 style="color:var(--pai-dark-blue);margin-bottom:8px;">Setup Guides</h2>
+    <p style="color:var(--pai-dark-gray);margin-bottom:28px;">
+      Step-by-step instructions for connecting People.ai MCP to your preferred AI platform.
+    </p>
+
+    <div class="guides-section-title">Data Source</div>
+    <div class="guides-grid">
+      <a class="guide-card hero" href="#/guide/mcp-setup">
+        <div class="guide-card-icon">&#129504;</div>
+        <div class="guide-card-title">People.ai MCP</div>
+        <div class="guide-card-desc">
+          Core data source for all skills. MCP server setup, authentication, credentials,
+          available tools, and multi-platform integration guide.
+        </div>
+        <span class="guide-card-badge">Required for all skills</span>
+      </a>
+    </div>
+
+    <div class="guides-section-title">LLM Platforms</div>
+    <div class="guides-grid">
+      <a class="guide-card" href="#/guide/claude-project">
+        <div class="guide-card-icon">&#9670;</div>
+        <div class="guide-card-title">Claude.ai Projects</div>
+        <div class="guide-card-desc">
+          Connect People.ai MCP in Claude.ai Settings, create a Project,
+          and paste skill instructions. Native MCP support.
+        </div>
+        <span class="guide-card-badge">Recommended</span>
+      </a>
+      <a class="guide-card" href="#/guide/claude-code">
+        <div class="guide-card-icon">&#9654;</div>
+        <div class="guide-card-title">Claude Code</div>
+        <div class="guide-card-desc">
+          Configure People.ai MCP in your settings.json or .mcp.json.
+          Use skills as CLAUDE.md instructions or slash commands.
+        </div>
+        <span class="guide-card-badge">Developer</span>
+      </a>
+      <a class="guide-card" href="#/guide/chatgpt">
+        <div class="guide-card-icon">&#11044;</div>
+        <div class="guide-card-title">ChatGPT Custom GPTs</div>
+        <div class="guide-card-desc">
+          Create a Custom GPT with Actions pointing to People.ai API endpoints.
+          Configure authentication headers and API schema.
+        </div>
+        <span class="guide-card-badge">Actions required</span>
+      </a>
+      <a class="guide-card" href="#/guide/copilot">
+        <div class="guide-card-icon">&#11214;</div>
+        <div class="guide-card-title">Microsoft Copilot</div>
+        <div class="guide-card-desc">
+          Build a Copilot Studio agent with People.ai plugins.
+          Configure MCP endpoint and authentication in the plugin settings.
+        </div>
+        <span class="guide-card-badge">Copilot Studio</span>
+      </a>
+      <a class="guide-card" href="#/guide/gemini">
+        <div class="guide-card-icon">&#10022;</div>
+        <div class="guide-card-title">Google Gemini</div>
+        <div class="guide-card-desc">
+          Create a Gemini Gem with People.ai extensions.
+          MCP extension support is coming — instructions are ready for launch.
+        </div>
+        <span class="guide-card-badge coming-soon">Coming soon</span>
+      </a>
+      <a class="guide-card" href="#/guide/agentforce">
+        <div class="guide-card-icon">&#9729;</div>
+        <div class="guide-card-title">Salesforce Agentforce</div>
+        <div class="guide-card-desc">
+          Connect People.ai MCP as an Agentforce Action. Configure Topics,
+          map MCP tools to agent actions, and deploy within Salesforce.
+        </div>
+        <span class="guide-card-badge">New</span>
+      </a>
+    </div>
+
+    <div class="guides-section-title">Developer SDKs</div>
+    <div class="guides-grid">
+      <a class="guide-card" href="#/guide/mcp-setup#dev-platforms">
+        <div class="guide-card-icon">&#128187;</div>
+        <div class="guide-card-title">LangGraph / Claude SDK / OpenAI SDK</div>
+        <div class="guide-card-desc">
+          Python SDK examples for connecting People.ai MCP programmatically.
+          LangChain adapters, Claude Agent SDK, and OpenAI Agents SDK.
+        </div>
+        <span class="guide-card-badge">Python</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Agentforce Setup Guide -->
+<div id="guide-agentforce-view" class="container detail-view">
+  <a class="back-link" onclick="navigate('#/guides')">&#8592; All Guides</a>
+  <div style="max-width:800px;">
+    <h2 style="color:var(--pai-dark-blue);margin-bottom:8px;">Salesforce Agentforce + People.ai MCP</h2>
+    <p style="color:var(--pai-dark-gray);margin-bottom:24px;">
+      Connect People.ai's MCP server to Salesforce Agentforce to bring real-time sales intelligence
+      directly into your Salesforce environment. Agentforce agents can use People.ai data to
+      analyze accounts, score opportunities, and recommend next best actions — all within Salesforce.
+    </p>
+
+    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:16px;">
+      <strong>What is Agentforce?</strong> Salesforce Agentforce is an AI agent platform that lets you build
+      autonomous agents operating inside Salesforce. Agents use <strong>Topics</strong> (categories of work)
+      and <strong>Actions</strong> (tools they can call) to complete tasks using natural language.
+    </div>
+
+    <div style="padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:24px;">
+      <strong>Prerequisites:</strong>
+      <ul style="margin:8px 0 0 20px;line-height:1.8;">
+        <li>Salesforce org with <strong>Agentforce</strong> enabled (Enterprise Edition or higher)</li>
+        <li>Active People.ai account with <strong>MCP API access</strong> enabled</li>
+        <li>Salesforce admin permissions to create agents and external services</li>
+        <li>People.ai MCP credentials (Client ID and Client Secret)</li>
+      </ul>
+    </div>
+
+    <!-- ============ WHY AGENTFORCE ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">Why Agentforce + People.ai?</h3>
+    <ul style="margin:8px 0 20px 20px;line-height:2;">
+      <li><strong>Embedded in Salesforce</strong> — agents surface insights where reps already work, no context switching</li>
+      <li><strong>Dual data access</strong> — combine native Salesforce objects with People.ai communication intelligence</li>
+      <li><strong>Event-driven triggers</strong> — fire agents automatically on stage changes, close date shifts, or activity gaps</li>
+      <li><strong>Write-back capabilities</strong> — agents can update Salesforce fields, create tasks, and log activities</li>
+      <li><strong>Governed by Salesforce Trust Layer</strong> — data masking, audit trails, and permission-based access</li>
+    </ul>
+
+    <!-- ============ STEP 1 ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">1. Register People.ai as an External Service</h3>
+    <ol style="margin:12px 0 20px 20px;line-height:2;">
+      <li>In Salesforce Setup, search for <strong>Named Credentials</strong></li>
+      <li>Click <strong>New Named Credential</strong> and configure:
+        <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;">
+          <tbody>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;font-weight:bold;width:180px;">Label</td>
+              <td style="padding:8px 12px;"><code>People_ai_MCP</code></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;font-weight:bold;">URL</td>
+              <td style="padding:8px 12px;"><code>https://mcp.people.ai/mcp</code></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;font-weight:bold;">Identity Type</td>
+              <td style="padding:8px 12px;"><strong>Named Principal</strong></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;font-weight:bold;">Authentication Protocol</td>
+              <td style="padding:8px 12px;"><strong>Custom Header</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Add custom headers:
+        <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;">
+          <thead>
+            <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+              <th style="padding:8px 12px;text-align:left;">Header Name</th>
+              <th style="padding:8px 12px;text-align:left;">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;"><code>PAI-Client-Id</code></td>
+              <td style="padding:8px 12px;">[Your Client ID]</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;"><code>PAI-Client-Secret</code></td>
+              <td style="padding:8px 12px;">[Your Client Secret]</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;"><code>Content-Type</code></td>
+              <td style="padding:8px 12px;"><code>application/json</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Save the Named Credential</li>
+    </ol>
+    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--pai-orange);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+      <strong>Header names are case-sensitive.</strong> Use exactly: <code>PAI-Client-Id</code> (not <code>PAI-Client-ID</code> or <code>pai-client-id</code>).
+    </div>
+
+    <!-- ============ STEP 2 ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">2. Create Agentforce Actions for MCP Tools</h3>
+    <p style="margin:8px 0;">Each People.ai MCP tool becomes an Agentforce Action. Create these as <strong>External Service Actions</strong> or <strong>Apex Invocable Actions</strong>:</p>
+
+    <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
+      <thead>
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+          <th style="padding:10px 12px;text-align:left;">MCP Tool</th>
+          <th style="padding:10px 12px;text-align:left;">Agentforce Action Name</th>
+          <th style="padding:10px 12px;text-align:left;">Input</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>find_account</code></td>
+          <td style="padding:10px 12px;">Find People.ai Account</td>
+          <td style="padding:10px 12px;">Account Name or Domain</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_account_status</code></td>
+          <td style="padding:10px 12px;">Get Account Health Status</td>
+          <td style="padding:10px 12px;">Account ID</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_opportunity_status</code></td>
+          <td style="padding:10px 12px;">Get Opportunity Status</td>
+          <td style="padding:10px 12px;">Opportunity ID</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_engaged_people</code></td>
+          <td style="padding:10px 12px;">Get Engaged Contacts</td>
+          <td style="padding:10px 12px;">Account ID</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>ask_sales_ai_about_account</code></td>
+          <td style="padding:10px 12px;">Ask Sales AI About Account</td>
+          <td style="padding:10px 12px;">Account ID, Question</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>ask_sales_ai_about_opportunity</code></td>
+          <td style="padding:10px 12px;">Ask Sales AI About Deal</td>
+          <td style="padding:10px 12px;">Opportunity ID, Question</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>get_scorecard</code></td>
+          <td style="padding:10px 12px;">Get Performance Scorecard</td>
+          <td style="padding:10px 12px;">Account ID</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;"><code>top_records</code></td>
+          <td style="padding:10px 12px;">Get Top Records</td>
+          <td style="padding:10px 12px;">Record Type, Sort Criteria</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="padding:12px 16px;background:#1e1e2e;border-radius:var(--radius);margin:8px 0 20px 0;">
+      <span style="color:#89b4fa;font-weight:600;">Apex Example:</span>
+      <pre style="color:#cdd6f4;margin:8px 0 0 0;font-size:13px;overflow-x:auto;">@InvocableMethod(label='Get Account Status from People.ai'
+    description='Retrieves account health and engagement data')
+public static List&lt;AccountStatusResult&gt; getAccountStatus(
+    List&lt;AccountStatusRequest&gt; requests
+) {
+    HttpRequest req = new HttpRequest();
+    req.setEndpoint('callout:People_ai_MCP/get_account_status');
+    req.setMethod('POST');
+    req.setBody(JSON.serialize(new Map&lt;String, Object&gt;{
+        'account_id' => requests[0].accountId
+    }));
+    HttpResponse res = new Http().send(req);
+    // Parse and return results
+}</pre>
+    </div>
+
+    <!-- ============ STEP 3 ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">3. Create an Agentforce Agent</h3>
+    <ol style="margin:12px 0 20px 20px;line-height:2;">
+      <li>In Setup, go to <strong>Agentforce Agents</strong> (or search "Agent Builder")</li>
+      <li>Click <strong>New Agent</strong></li>
+      <li>Give it a name (e.g., <code>Sales Intelligence Agent</code>)</li>
+      <li>Add a <strong>Topic</strong> for each skill category:
+        <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;">
+          <thead>
+            <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+              <th style="padding:8px 12px;text-align:left;">Topic</th>
+              <th style="padding:8px 12px;text-align:left;">Description</th>
+              <th style="padding:8px 12px;text-align:left;">Actions to Assign</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;">Account Intelligence</td>
+              <td style="padding:8px 12px;">Analyze account health, engagement, and relationships</td>
+              <td style="padding:8px 12px;">Find Account, Get Account Health, Get Engaged Contacts, Ask Sales AI</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;">Deal Management</td>
+              <td style="padding:8px 12px;">Opportunity analysis, win probability, and deal coaching</td>
+              <td style="padding:8px 12px;">Get Opportunity Status, Ask Sales AI About Deal, Get Scorecard</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+              <td style="padding:8px 12px;">Pipeline Review</td>
+              <td style="padding:8px 12px;">Pipeline health, forecasting, and territory analysis</td>
+              <td style="padding:8px 12px;">Get Top Records, Get Opportunity Status, Ask Sales AI</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>Paste the skill instructions from this catalog into each Topic's <strong>Instructions</strong> field</li>
+      <li>Assign the People.ai Actions you created in Step 2 to each Topic</li>
+      <li>Click <strong>Activate</strong> to deploy the agent</li>
+    </ol>
+
+    <!-- ============ STEP 4 ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">4. Configure Triggers (Optional)</h3>
+    <p style="margin:8px 0;">Agentforce agents can run automatically based on Salesforce events:</p>
+    <ul style="margin:8px 0 20px 20px;line-height:2;">
+      <li><strong>Stage Change</strong> — Run opportunity analysis when a deal moves to a new stage</li>
+      <li><strong>Close Date Shift</strong> — Trigger risk assessment when a close date is pushed</li>
+      <li><strong>Activity Gap</strong> — Alert when no meetings or emails logged for 14+ days</li>
+      <li><strong>New Account Assignment</strong> — Auto-generate account plan when an AE is assigned a new account</li>
+    </ul>
+    <p style="margin:8px 0;font-size:13px;color:var(--pai-dark-gray);">Configure triggers in <strong>Setup &rarr; Process Builder</strong> or <strong>Flow Builder</strong>, invoking your Agentforce agent as the action.</p>
+
+    <!-- ============ STEP 5 ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">5. Test Your Agent</h3>
+    <p style="margin:8px 0;">Try these queries in the Agentforce test console:</p>
+    <ul style="margin:8px 0 16px 20px;line-height:2;">
+      <li><code>"Analyze the Acme Corp account — what's the engagement health?"</code></li>
+      <li><code>"What's the win probability for the Globex Enterprise deal?"</code></li>
+      <li><code>"Who are the key stakeholders at Initech and when did we last meet?"</code></li>
+    </ul>
+    <p style="margin:8px 0;">If the agent responds with People.ai data, you're connected. Check the agent's execution log for tool call details.</p>
+
+    <!-- ============ TROUBLESHOOTING ============ -->
+    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">6. Troubleshooting</h3>
+    <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
+      <thead>
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+          <th style="padding:10px 12px;text-align:left;">Issue</th>
+          <th style="padding:10px 12px;text-align:left;">Cause</th>
+          <th style="padding:10px 12px;text-align:left;">Fix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Callout exception</td>
+          <td style="padding:10px 12px;">Named Credential misconfigured</td>
+          <td style="padding:10px 12px;">Verify URL is exactly <code>https://mcp.people.ai/mcp</code>. Check Remote Site Settings include <code>mcp.people.ai</code>.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">401 Unauthorized</td>
+          <td style="padding:10px 12px;">Wrong credentials or header names</td>
+          <td style="padding:10px 12px;">Headers are case-sensitive: <code>PAI-Client-Id</code>, <code>PAI-Client-Secret</code>. Verify MCP credentials, not REST API keys.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Agent not selecting People.ai actions</td>
+          <td style="padding:10px 12px;">Actions not assigned to Topic</td>
+          <td style="padding:10px 12px;">Ensure each People.ai Action is explicitly assigned to the relevant Topic in Agent Builder.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Timeout on ask_sales_ai calls</td>
+          <td style="padding:10px 12px;">AI analysis takes 10-30 seconds</td>
+          <td style="padding:10px 12px;">Increase callout timeout in Named Credential. Consider async pattern with Platform Events for long-running analysis.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+          <td style="padding:10px 12px;">Permission errors</td>
+          <td style="padding:10px 12px;">User profile lacks Agentforce access</td>
+          <td style="padding:10px 12px;">Assign the <code>Agentforce User</code> permission set to target users. Verify agent sharing settings.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:24px;padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;">
+      <strong>Security:</strong> Agentforce inherits Salesforce's Trust Layer — all People.ai data queries are governed by your org's
+      sharing rules, field-level security, and audit logging. Credentials are stored securely in Named Credentials, never in code.
+    </div>
+
+    <div style="margin-top:16px;padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:32px;">
+      <strong>Need help?</strong> For People.ai MCP issues, contact your CSM or email <strong>support@people.ai</strong>.
+      For Agentforce questions, see <a href="https://help.salesforce.com/s/articleView?id=sf.agentforce_overview.htm" target="_blank" style="color:var(--pai-primary-blue);">Salesforce Agentforce Documentation</a>
+      or the <a href="https://trailhead.salesforce.com" target="_blank" style="color:var(--pai-primary-blue);">Trailhead Agentforce modules</a>.
     </div>
   </div>
 </div>
@@ -1667,7 +2439,7 @@
       <div style="background:#F8F9FB;border-radius:8px;padding:16px;margin-bottom:16px;font-size:13px;">
         <strong>For Claude.ai:</strong> Settings &rarr; Integrations &rarr; Enable "People.ai MCP"<br><br>
         <strong>For ChatGPT:</strong> Configure Actions in your Custom GPT pointing to People.ai API endpoints<br><br>
-        <a href="" id="wizard-mcp-link" target="_blank" style="color:var(--pai-primary-blue);">Full setup guide &rarr;</a>
+        <a href="#/guide/mcp-setup" id="wizard-mcp-link" style="color:var(--pai-primary-blue);">Full setup guide &rarr;</a>
       </div>
       <div class="wizard-actions">
         <div></div>
@@ -1747,7 +2519,7 @@ function navigate(hash) { location.hash = hash; }
 
 function handleRoute() {
   const hash = location.hash || '#/';
-  const views = ['catalog-view', 'detail-view', 'about-view'];
+  const views = ['catalog-view', 'detail-view', 'about-view', 'mcp-guide-view', 'guides-view', 'guide-agentforce-view'];
   views.forEach(v => {
     document.getElementById(v).style.display = 'none';
     document.getElementById(v).classList.remove('active');
@@ -1758,6 +2530,19 @@ function handleRoute() {
     document.getElementById('detail-view').style.display = 'block';
     document.getElementById('detail-view').classList.add('active');
     renderDetail(id);
+  } else if (hash === '#/guides') {
+    document.getElementById('guides-view').style.display = 'block';
+    document.getElementById('guides-view').classList.add('active');
+  } else if (hash === '#/guide/mcp-setup') {
+    document.getElementById('mcp-guide-view').style.display = 'block';
+    document.getElementById('mcp-guide-view').classList.add('active');
+  } else if (hash === '#/guide/agentforce') {
+    document.getElementById('guide-agentforce-view').style.display = 'block';
+    document.getElementById('guide-agentforce-view').classList.add('active');
+  } else if (hash.startsWith('#/guide/')) {
+    // Platform guides that link to MCP setup sections
+    document.getElementById('mcp-guide-view').style.display = 'block';
+    document.getElementById('mcp-guide-view').classList.add('active');
   } else if (hash === '#/about') {
     document.getElementById('about-view').style.display = 'block';
     document.getElementById('about-view').classList.add('active');
