@@ -4,6 +4,7 @@
     "version": "1.0",
     "lastUpdated": "2026-03-04",
     "mcpSetupUrl": "https://help.people.ai/en/?q=mcp",
+    "repoRawBase": "https://raw.githubusercontent.com/HappyCowboyAI/LLMSkills/main",
     "platforms": [
       {
         "id": "claude-project",
@@ -44,19 +45,24 @@
       "icon": "trending-up"
     },
     {
-      "id": "analytics",
-      "name": "Analytics & Performance",
-      "icon": "bar-chart"
+      "id": "meeting-review-prep",
+      "name": "Meeting & Review Prep",
+      "icon": "calendar"
     },
     {
-      "id": "outreach",
-      "name": "Outreach & Communication",
-      "icon": "mail"
-    },
-    {
-      "id": "automation",
-      "name": "Automation",
+      "id": "action-growth",
+      "name": "Action & Growth",
       "icon": "zap"
+    },
+    {
+      "id": "transitions-learning",
+      "name": "Transitions & Learning",
+      "icon": "repeat"
+    },
+    {
+      "id": "engagement-analytics",
+      "name": "Engagement Analytics",
+      "icon": "bar-chart"
     }
   ],
   "skills": [
@@ -71,7 +77,13 @@
         "CSMs"
       ],
       "input": "Account name",
-      "mcpTools": [],
+      "mcpTools": [
+        "find_account",
+        "get_account_status",
+        "get_scorecard",
+        "get_engaged_people",
+        "get_recent_account_activity"
+      ],
       "mcpConnectors": [
         "People.ai MCP"
       ],
@@ -1108,7 +1120,7 @@
       "id": "08-meeting-prep-agent",
       "number": "08",
       "name": "Meeting Prep Agent",
-      "category": "analytics",
+      "category": "meeting-review-prep",
       "description": "Generates a concise one-page briefing before any customer meeting \u2014 recent activity, open issues, stakeholder context, talking points, and risks to address.",
       "audience": [
         "AEs",
@@ -1248,7 +1260,7 @@
       "id": "09-qbr-generator-agent",
       "number": "09",
       "name": "QBR Generator Agent",
-      "category": "analytics",
+      "category": "meeting-review-prep",
       "description": "Generates draft Quarterly Business Review content \u2014 value delivered, engagement trends, risks, renewal readiness, and recommended discussion topics.",
       "audience": [
         "CSMs"
@@ -1405,7 +1417,7 @@
       "id": "10-multi-threading-coach-agent",
       "number": "10",
       "name": "Multi-Threading Coach Agent",
-      "category": "outreach",
+      "category": "action-growth",
       "description": "Identifies single-threaded relationship risk across opportunities and recommends specific people to engage based on engagement data and org structure.",
       "audience": [
         "AEs",
@@ -1564,7 +1576,7 @@
       "id": "11-next-best-action-agent",
       "number": "11",
       "name": "Next Best Action Agent",
-      "category": "automation",
+      "category": "action-growth",
       "description": "Surfaces the top 3 actions to take today across your accounts \u2014 prioritized by urgency, deal value, and risk signals from recent activity.",
       "audience": [
         "AEs",
@@ -1706,7 +1718,7 @@
       "id": "12-whitespace-mapper-agent",
       "number": "12",
       "name": "Whitespace Mapper Agent",
-      "category": "other",
+      "category": "action-growth",
       "description": "Identifies expansion opportunities by analyzing engaged stakeholders across departments and business units \u2014 surfaces where engagement exists but revenue doesn't.",
       "audience": [
         "AEs",
@@ -1851,7 +1863,7 @@
       "id": "13-pipeline-review-agent",
       "number": "13",
       "name": "Pipeline Review Agent",
-      "category": "other",
+      "category": "action-growth",
       "description": "Portfolio-level pipeline review for managers \u2014 aggregates deal health, stalled opportunities, coaching priorities, and forecast risks across multiple accounts.",
       "audience": [
         "Sales managers",
@@ -1993,7 +2005,7 @@
       "id": "14-competitive-battle-card-agent",
       "number": "14",
       "name": "Competitive Battle Card Agent",
-      "category": "other",
+      "category": "action-growth",
       "description": "Generates live competitive battle cards when competitors surface in deal activity \u2014 positioning, differentiators, talk tracks, and objection handling from deal context.",
       "audience": [
         "AEs",
@@ -2147,7 +2159,7 @@
       "id": "15-executive-briefing-agent",
       "number": "15",
       "name": "Executive Briefing Agent",
-      "category": "other",
+      "category": "action-growth",
       "description": "Internal-facing executive summary for when leadership asks \"what's going on with this account?\" \u2014 pipeline risk, revenue impact, and strategic posture in one concise brief.",
       "audience": [
         "Sales leaders",
@@ -2296,7 +2308,7 @@
       "id": "16-renewal-risk-agent",
       "number": "16",
       "name": "Renewal Risk Agent",
-      "category": "other",
+      "category": "action-growth",
       "description": "Predicts renewal likelihood by scoring engagement decay, sentiment shifts, stakeholder turnover, and competitive mentions \u2014 then generates a save plan for at-risk accounts.",
       "audience": [
         "CSMs",
@@ -2461,7 +2473,7 @@
       "id": "17-handoff-agent",
       "number": "17",
       "name": "Handoff Agent",
-      "category": "other",
+      "category": "transitions-learning",
       "description": "Generates comprehensive account handoff documents when a rep or CSM transitions \u2014 relationship history, stakeholder map, open issues, deal context, and personality insights from communication tone.",
       "audience": [
         "AEs",
@@ -2622,7 +2634,7 @@
       "id": "18-deal-debrief-agent",
       "number": "18",
       "name": "Deal Debrief Agent",
-      "category": "other",
+      "category": "transitions-learning",
       "description": "Post-close analysis for won or lost deals \u2014 what worked, what didn't, decisive stakeholders, competitive dynamics, and lessons learned for institutional knowledge.",
       "audience": [
         "AEs",
@@ -2778,7 +2790,7 @@
       "id": "19-engagement-scorecard-agent",
       "number": "19",
       "name": "Engagement Scorecard Agent",
-      "category": "other",
+      "category": "engagement-analytics",
       "description": "Weekly/monthly engagement metrics report \u2014 trending up or down, who's going dark, who's newly active. Pure data-driven engagement tracking.",
       "audience": [
         "AEs",

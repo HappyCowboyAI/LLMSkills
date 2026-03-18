@@ -2,6 +2,29 @@
 
 Shareable Claude skills powered by the People.ai MCP. These skills help customers jump-start their use of the People.ai MCP integration with Claude.
 
+## Start here (customer setup)
+
+**Fastest path: Claude.ai Project**
+
+- Pick a skill folder (e.g. `01-account-plan-agent`)
+- Open `claude-project.md`
+- Copy the **Custom Instructions** block into a new Claude.ai Project
+- Upload any files in that skill’s `assets/` folder (if present)
+- Connect **People.ai MCP** in Claude (Settings → Integrations)
+- Start a chat in the project and provide the skill input (usually an **account name**)
+
+**Optional: Browse the catalog UI**
+
+The `docs/` folder contains a static catalog page. To run it locally:
+
+```bash
+cd docs
+python3 build-catalog.py
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080` and click a skill.
+
 ## Skills
 
 ### Account Research & Planning
@@ -55,6 +78,14 @@ Each skill folder contains:
 - `claude-project.md` — Claude.ai project template
 - `chatgpt-gpt.md` — ChatGPT Custom GPT template
 - `assets/` — Knowledge files and supporting documents
+
+## Validation (for maintainers)
+
+To verify every skill is complete and consistent before publishing:
+
+```bash
+python3 docs/validate-skills.py
+```
 
 ## Prerequisites
 

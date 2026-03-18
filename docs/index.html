@@ -2688,6 +2688,7 @@ function renderDetail(skillId) {
 
   const cat = catalogData.categories.find(c => c.id === skill.category);
   const allPlatforms = catalogData.catalog.platforms;
+  const repoRawBase = (catalogData.catalog && catalogData.catalog.repoRawBase) ? catalogData.catalog.repoRawBase : '';
 
   // Determine first available platform tab
   const firstAvailable = allPlatforms.find(p => skill.platforms[p.id] !== null);
@@ -2760,12 +2761,12 @@ function renderDetail(skillId) {
           </div>`;
         }
         const knowledgeFiles = skill.projectKnowledgeFiles || [];
-        const repoBase = 'https://raw.githubusercontent.com/HappyCowboyAI/LLMSkills/main';
+        const repoBase = repoRawBase;
         const filesHtml = knowledgeFiles.length ? `
           <div style="margin-top:16px;padding:16px;background:#f0f7ff;border-radius:8px;border:1px solid var(--pai-light-blue);">
             <div style="font-weight:600;font-size:14px;margin-bottom:8px;color:var(--pai-dark-blue);">Knowledge Files</div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;">
-              ${knowledgeFiles.map(f => `<a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" class="btn btn-download" style="font-size:13px;padding:6px 14px;text-decoration:none;">&#x2913; ${f}</a>`).join('')}
+              ${repoBase ? knowledgeFiles.map(f => `<a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" class="btn btn-download" style="font-size:13px;padding:6px 14px;text-decoration:none;">&#x2913; ${f}</a>`).join('') : '<div style="font-size:13px;color:var(--pai-dark-gray);">Knowledge-file downloads are not configured for this build.</div>'}
             </div>
           </div>` : '';
         return `<div class="tab-content" data-panel="${p.id}" style="display:none">
@@ -2807,11 +2808,11 @@ function renderDetail(skillId) {
     }
 
     if (skill.projectKnowledgeFiles.length) {
-      const repoBase = 'https://raw.githubusercontent.com/HappyCowboyAI/LLMSkills/main';
+      const repoBase = repoRawBase;
       leftHtml += `
         <div class="detail-section">
           <h3>Knowledge Files</h3>
-          <ul>${skill.projectKnowledgeFiles.map(f => `<li><a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" style="color:var(--pai-primary-blue);text-decoration:none;">${f} <span style="font-size:11px;">&#x2913;</span></a></li>`).join('')}</ul>
+          ${repoBase ? `<ul>${skill.projectKnowledgeFiles.map(f => `<li><a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" style="color:var(--pai-primary-blue);text-decoration:none;">${f} <span style="font-size:11px;">&#x2913;</span></a></li>`).join('')}</ul>` : '<div style="font-size:13px;color:var(--pai-dark-gray);">Knowledge-file downloads are not configured for this build.</div>'}
         </div>`;
     }
 

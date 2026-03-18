@@ -18,17 +18,20 @@ OUTPUT_FILE = Path(__file__).parent / "skills.json"
 CATEGORY_MAP = {
     range(1, 5): "account-research",
     range(5, 8): "opportunity-management",
-    range(8, 10): "analytics",
-    range(10, 11): "outreach",
-    range(11, 12): "automation",
+    range(8, 10): "meeting-review-prep",
+    range(10, 12): "action-growth",
+    range(12, 17): "action-growth",
+    range(17, 19): "transitions-learning",
+    range(19, 20): "engagement-analytics",
 }
 
 CATEGORIES = [
     {"id": "account-research", "name": "Account Research & Planning", "icon": "search"},
     {"id": "opportunity-management", "name": "Opportunity & Deal Management", "icon": "trending-up"},
-    {"id": "analytics", "name": "Analytics & Performance", "icon": "bar-chart"},
-    {"id": "outreach", "name": "Outreach & Communication", "icon": "mail"},
-    {"id": "automation", "name": "Automation", "icon": "zap"},
+    {"id": "meeting-review-prep", "name": "Meeting & Review Prep", "icon": "calendar"},
+    {"id": "action-growth", "name": "Action & Growth", "icon": "zap"},
+    {"id": "transitions-learning", "name": "Transitions & Learning", "icon": "repeat"},
+    {"id": "engagement-analytics", "name": "Engagement Analytics", "icon": "bar-chart"},
 ]
 
 PLATFORMS = [
@@ -345,6 +348,13 @@ def build_catalog():
             "version": "1.0",
             "lastUpdated": "2026-03-04",
             "mcpSetupUrl": "https://help.people.ai/en/?q=mcp",
+            # Used by the catalog UI to generate knowledge-file download links.
+            # Override for forks / branches, e.g.
+            #   REPO_RAW_BASE="https://raw.githubusercontent.com/<owner>/<repo>/main"
+            "repoRawBase": os.getenv(
+                "REPO_RAW_BASE",
+                "https://raw.githubusercontent.com/HappyCowboyAI/LLMSkills/main",
+            ),
             "platforms": [
                 {k: v for k, v in p.items() if k != "file"} for p in PLATFORMS
             ],

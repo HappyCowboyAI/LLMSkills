@@ -11,7 +11,11 @@ Account name
 
 ## MCP Tools Used
 <!-- List the specific People.ai MCP tools this skill calls -->
-- 
+- find_account
+- get_account_status
+- get_scorecard
+- get_engaged_people
+- get_recent_account_activity
 
 ## Custom Instructions
 <!-- Paste the full custom instructions / system prompt from your Claude.ai project below -->

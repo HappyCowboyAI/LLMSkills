@@ -1,0 +1,11 @@
+.DS_Store
+**/.DS_Store
+
+# Editor / workspace files
+*.code-workspace
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
