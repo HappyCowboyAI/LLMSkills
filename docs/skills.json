@@ -2958,7 +2958,7 @@
         "people-ai-mcp"
       ],
       "projectKnowledgeFiles": [
-        "PeopleaiMetricLibrary.csv"
+        "opportunity_insights_agent.md"
       ],
       "status": "ready",
       "platforms": {
