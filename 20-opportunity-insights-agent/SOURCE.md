@@ -27,4 +27,4 @@ Builds interactive pipeline intelligence dashboards that classify every open opp
 
 ## Project Knowledge Files
 
-- PeopleaiMetricLibrary.csv (72 OOTB metric slugs with variation IDs for Insights API queries)
+- opportunity_insights_agent.md (Full system prompt with data sources, classification rules, dashboard instructions, and brand guidelines)
