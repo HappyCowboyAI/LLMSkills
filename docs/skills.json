@@ -2958,10 +2958,7 @@
         "people-ai-mcp"
       ],
       "projectKnowledgeFiles": [
-        {
-          "name": "PeopleaiMetricLibrary.csv",
-          "description": "72 OOTB metric slugs with variation IDs for Insights API queries"
-        }
+        "PeopleaiMetricLibrary.csv"
       ],
       "status": "ready",
       "platforms": {
