@@ -34,12 +34,12 @@ When the user provides an account name:
 
 ## Rules
 - Data first — numbers, not analysis
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Always show directional trends
 - "Going Dark" and "Newly Active" are most valuable
 - No recommendations — just the data
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 - `find_account`, `get_engaged_people`, `get_recent_account_activity`, `get_account_status`, `ask_sales_ai_about_account`
 
 ## Setup Instructions for ChatGPT Users

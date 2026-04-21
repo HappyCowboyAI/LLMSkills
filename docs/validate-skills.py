@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Repo validator for the People.ai LLM Skills library.
+Repo validator for the Backstory LLM Skills library.
 
 Checks:
 - Each numbered skill dir has required platform files.
@@ -60,7 +60,7 @@ def parse_bullets(text: str) -> list[str]:
 
 
 def referenced_tools(skill_md: str) -> set[str]:
-    # Conservative: collect all backticked identifiers and filter to People.ai-ish verbs.
+    # Conservative: collect all backticked identifiers and filter to Backstory-ish verbs.
     candidates = {m.group(1) for m in TOOL_NAME_RE.finditer(skill_md)}
     return {c for c in candidates if re.match(r"^(find_|get_|ask_|account_|top_)\w+$", c)}
 

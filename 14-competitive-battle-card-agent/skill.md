@@ -83,7 +83,7 @@ A 30-second elevator pitch positioning against this specific competitor, tailore
 
 ## Rules
 - Detect competitors from communication data — don't require the user to name them
-- Use ONLY verified data from People.ai MCP — never fabricate competitive mentions
+- Use ONLY verified data from Backstory MCP — never fabricate competitive mentions
 - Be honest about competitor strengths — reps need to know, not be blindsided
 - Tailor positioning to what THIS customer cares about, not generic differentiators
 - Every objection response should reference the specific deal context

@@ -34,11 +34,11 @@ Type one or more account names. You'll get a portfolio-level pipeline review wit
 
 ## Rules
 - Portfolio view across multiple accounts
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - Be honest about pipeline health
 - Rank by revenue impact
 - Keep per-deal summaries to 1-2 sentences
 - Flag forecast risks explicitly
 
 ## Required Integrations
-- **People.ai MCP** — for account and opportunity intelligence
+- **Backstory MCP** — for account and opportunity intelligence

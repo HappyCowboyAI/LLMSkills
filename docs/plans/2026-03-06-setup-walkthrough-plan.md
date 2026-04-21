@@ -863,7 +863,7 @@ buildClaudeMockup() {
               <div data-section="mcp" style="display:none;">
                 <div class="mock-field-label">Integrations</div>
                 <div class="mock-toggle-row">
-                  <span style="font-size:12px;">People.ai MCP</span>
+                  <span style="font-size:12px;">Backstory MCP</span>
                   <div class="mock-toggle" data-toggle="mcp"></div>
                 </div>
               </div>
@@ -941,7 +941,7 @@ buildClaudeMockup() {
         }
       },
       {
-        title: 'Connect People.ai MCP',
+        title: 'Connect Backstory MCP',
         detail: 'Enable the MCP integration in project settings',
         animate: async () => {
           mcpSection.style.display = 'block';
@@ -1048,12 +1048,12 @@ buildTerminalMockup() {
       },
       {
         title: 'Verify MCP Connection',
-        detail: 'Confirm People.ai MCP is available',
+        detail: 'Confirm Backstory MCP is available',
         animate: async () => {
           const l1 = addLine('<span class="mock-terminal-prompt">$</span> <span class="mock-terminal-cmd">claude mcp list</span>');
           l1.classList.add('visible');
           await this.wait(500);
-          const l2 = addLine('<span class="mock-terminal-success">People.ai MCP ✓ Connected</span>');
+          const l2 = addLine('<span class="mock-terminal-success">Backstory MCP ✓ Connected</span>');
           l2.classList.add('visible');
           await this.wait(200);
           if (tools.length) {
@@ -1188,7 +1188,7 @@ buildChatgptMockup() {
       },
       {
         title: 'Configure Actions',
-        detail: 'Add People.ai API endpoints as actions',
+        detail: 'Add Backstory API endpoints as actions',
         animate: async () => {
           actionsSection.style.display = 'block';
           const actionTools = tools.length > 0 ? tools.slice(0, 6) : ['find_account', 'get_scorecard', 'get_engaged_people'];

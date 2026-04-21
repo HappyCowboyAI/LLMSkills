@@ -34,12 +34,12 @@ When the user provides an account name:
 
 ## Rules
 - Data first — numbers, not analysis
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Always show directional trends
 - "Going Dark" and "Newly Active" are most valuable
 - No recommendations — just the data
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 - `find_account`, `get_engaged_people`, `get_recent_account_activity`, `get_account_status`, `ask_sales_ai_about_account`
 
 Configure these extensions in your Gemini Gem
@@ -47,7 +47,7 @@ Configure these extensions in your Gemini Gem
 ## Setup Instructions for Google Gemini Users
 1. Go to **Google AI Studio** > **Create** > **New Gem**
 2. Set Gem Name and Gem Description from above
-3. Paste Instructions into the Instructions field, configure extensions for each People.ai tool
+3. Paste Instructions into the Instructions field, configure extensions for each Backstory tool
 4. Test by typing an account name
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.

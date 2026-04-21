@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Vision**: Create a real-time, time-sensitive win probability scoring system for sales opportunities using People.ai MCP data integration, designed for executive-level business intelligence.
+**Vision**: Create a real-time, time-sensitive win probability scoring system for sales opportunities using Backstory MCP data integration, designed for executive-level business intelligence.
 
 **Core Innovation**: Dynamic probability scoring that factors in timeline pressure - same qualification gaps have dramatically different business impact based on time available to address them.
 
@@ -47,7 +47,7 @@
 
 ## Technical Architecture v1.1
 
-### Data Sources (People.ai MCP)
+### Data Sources (Backstory MCP)
 - `find_account`: Account discovery and opportunity identification
 - `get_opportunity_status`: Risk assessment with stakeholder analysis
 - `get_recent_opportunity_activity`: Communication intelligence and engagement metrics
@@ -116,7 +116,7 @@ Business-appropriate next steps by timeline:
 ## Success Metrics v1.1
 
 ### Accuracy Validation
-- **Algorithm Alignment**: Strong correlation with People.ai SalesAI range validation
+- **Algorithm Alignment**: Strong correlation with Backstory SalesAI range validation
 - **Stakeholder Feedback**: Business language and insights resonate with sales professionals
 - **Timeline Sensitivity**: Demonstrates measurable probability variance across time scenarios
 
@@ -148,7 +148,7 @@ Business-appropriate next steps by timeline:
 ## Business Requirements v1.1
 
 ### Infrastructure Specifications
-- **People.ai MCP**: Real-time data connection with authentication management
+- **Backstory MCP**: Real-time data connection with authentication management
 - **Enterprise APIs**: RESTful endpoints for CRM and BI tool integration
 - **Security**: SOC 2 compliant data processing and storage
 - **Scalability**: Support for enterprise-level opportunity volume
@@ -179,7 +179,7 @@ Business-appropriate next steps by timeline:
 1. **Timeline Pressure is Paramount** - Same stakeholder issues have exponentially different business impact based on available resolution time
 2. **Professional Presentation Drives Adoption** - Executive-ready interface essential for business stakeholder acceptance
 3. **Action Orientation Creates Value** - Probability scores without actionable next steps provide limited business intelligence
-4. **People.ai Integration Enables Sophistication** - Rich communication data allows nuanced stakeholder and timeline analysis
+4. **Backstory Integration Enables Sophistication** - Rich communication data allows nuanced stakeholder and timeline analysis
 
 ### Unexpected Business Insights
 - **Long Sales Cycles Aren't Automatically Negative** - 600+ day processes acceptable with sufficient close runway

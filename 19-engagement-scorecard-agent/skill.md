@@ -85,7 +85,7 @@ Top discussion topics from recent communications:
 
 ## Rules
 - DATA FIRST — this is a scorecard, not an analysis. Present the numbers.
-- Use ONLY verified data from People.ai MCP — every number must be real
+- Use ONLY verified data from Backstory MCP — every number must be real
 - Trends matter most — always show directional indicators (↑↓→)
 - "Going Dark" section is critical — surface people who stopped engaging
 - "Newly Active" is equally important — surface new opportunities

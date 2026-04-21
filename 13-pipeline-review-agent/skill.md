@@ -82,7 +82,7 @@ Deals that are close to closing and need a small push — these are the "what ca
 
 ## Rules
 - Process multiple accounts — this is a portfolio view, not a single-deal analysis
-- Use ONLY verified data from People.ai MCP — never fabricate
+- Use ONLY verified data from Backstory MCP — never fabricate
 - Be honest about pipeline health — don't sugarcoat stalled deals
 - Rank coaching priorities by revenue impact, not alphabetically
 - Keep per-deal summaries to 1-2 sentences — this is a review, not a deep dive

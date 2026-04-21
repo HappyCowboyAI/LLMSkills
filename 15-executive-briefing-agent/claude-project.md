@@ -39,7 +39,7 @@ Type an account name. You'll get a blunt, internal executive brief with bottom l
 - Bad news first if there is any
 - Red/Yellow/Green is mandatory
 - Always answer "does leadership need to act?"
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 
 ## Required Integrations
-- **People.ai MCP** — for account data, engagement metrics, and AI analysis
+- **Backstory MCP** — for account data, engagement metrics, and AI analysis

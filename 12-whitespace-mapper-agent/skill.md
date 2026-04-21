@@ -88,7 +88,7 @@ For each opportunity:
 
 ## Rules
 - `get_engaged_people` is the foundation — map every single contact
-- Use ONLY verified data from People.ai MCP — never fabricate departments or contacts
+- Use ONLY verified data from Backstory MCP — never fabricate departments or contacts
 - Distinguish clearly between hot (active engagement) and speculative whitespace
 - Tie every expansion signal to specific communication evidence
 - Don't inflate potential — be honest about confidence levels

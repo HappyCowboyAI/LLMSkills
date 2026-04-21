@@ -56,12 +56,12 @@ Sensitive topics, unrealistic promises.
 ## Rules
 - Keep it to ONE PAGE — quick-read, not deep analysis
 - Lead with what matters most
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Be specific about names, dates, and topics
 - Flag time-sensitive items prominently
 - Scannable bullet points, not paragraphs
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 Configure these extensions in your Gemini Gem:
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
@@ -74,7 +74,7 @@ Configure these extensions in your Gemini Gem:
 1. Go to **Google AI Studio** and create a new Gem
 2. Set the Name and Description from above
 3. Paste the Instructions into the Gem's Instructions field
-4. Under **Extensions**, configure API endpoints for each People.ai tool
+4. Under **Extensions**, configure API endpoints for each Backstory tool
 5. Save the Gem and test by typing an account name
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.

@@ -52,10 +52,10 @@ Sensitive topics, unrealistic promises, topics for a different forum.
 ## Rules
 - Keep it to ONE PAGE — quick-read briefing, not a deep analysis
 - Lead with what matters most
-- Use ONLY verified data from People.ai MCP — never fabricate
+- Use ONLY verified data from Backstory MCP — never fabricate
 - Be specific about names, dates, and topics
 - Flag time-sensitive items prominently
 - Write in direct, scannable bullet points
 
 ## Required Integrations
-- **People.ai MCP** — for account data, communication intelligence, and stakeholder metrics
+- **Backstory MCP** — for account data, communication intelligence, and stakeholder metrics

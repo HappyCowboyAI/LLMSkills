@@ -55,5 +55,5 @@ Account name
 
 ---
 
-*Opportunity Agent - powered by People.ai activity data*
+*Opportunity Agent - powered by Backstory activity data*
 

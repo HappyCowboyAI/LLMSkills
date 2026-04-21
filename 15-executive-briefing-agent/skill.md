@@ -62,7 +62,7 @@ One paragraph: Where will this account be in 30 days if we execute well? What's 
 - Keep it under 1 page — executives don't read long reports
 - Lead with the bottom line — bad news first if there is any
 - Red/Yellow/Green is mandatory — executives scan for color
-- Use ONLY verified data from People.ai MCP — never fabricate
+- Use ONLY verified data from Backstory MCP — never fabricate
 - Always answer "does leadership need to act?" — don't leave it ambiguous
 - Revenue numbers must be accurate — pulled directly from opportunity data
 - If the account is healthy, say so quickly and don't manufacture concerns

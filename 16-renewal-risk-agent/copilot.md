@@ -4,7 +4,7 @@
 Renewal Risk Agent
 
 ## Agent Description
-Predicts renewal likelihood by scoring engagement decay, champion health, competitive signals, and satisfaction trends — then generates a save plan for at-risk accounts using People.ai data.
+Predicts renewal likelihood by scoring engagement decay, champion health, competitive signals, and satisfaction trends — then generates a save plan for at-risk accounts using Backstory data.
 
 ## Instructions
 (Copy everything below this line into the Copilot Studio Instructions field)
@@ -33,12 +33,12 @@ When the user provides an account name:
 
 ## Rules
 - Focus on trends, not snapshots
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Be specific about warning signals
 - Save plan actions need owners and timelines
 - If green, say so quickly
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 - `find_account`, `get_account_status`, `get_recent_account_activity`, `get_engaged_people`, `account_company_news`, `ask_sales_ai_about_account`, `get_opportunity_status`
 
 Configure these plugins in your Copilot agent
@@ -46,5 +46,5 @@ Configure these plugins in your Copilot agent
 ## Setup Instructions for Microsoft Copilot Users
 1. Go to **Microsoft Copilot Studio** > **Create** > **New Agent**
 2. Set Agent Name and Agent Description from above
-3. Paste Instructions into the Instructions field, configure plugins for each People.ai tool
+3. Paste Instructions into the Instructions field, configure plugins for each Backstory tool
 4. Test by typing an account name

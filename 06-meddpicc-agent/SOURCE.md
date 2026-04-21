@@ -46,5 +46,5 @@ Account name
 
 ---
 
-*MEDDPICC Agent - powered by People.ai activity data*
+*MEDDPICC Agent - powered by Backstory activity data*
 

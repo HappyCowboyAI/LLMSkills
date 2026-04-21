@@ -60,7 +60,7 @@ def extract_walkthrough(skill_dir: Path) -> dict | None:
         # Check if this step mentions parallel execution
         parallel = bool(re.search(r"parallel|simultaneous", step_content, re.IGNORECASE))
 
-        # Extract backticked tool names (People.ai MCP tool pattern)
+        # Extract backticked tool names (Backstory MCP tool pattern)
         tool_names = re.findall(r"`((?:find_|get_|ask_|account_|top_)\w+)`", step_content)
 
         if tool_names:
@@ -182,7 +182,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
     margin-bottom: 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .walkthrough-title {
     font-size: 15px;
@@ -229,7 +229,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
     color: var(--pai-teal);
     font-weight: 600;
     font-size: 12px;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-mcp-tools {
     display: flex;
@@ -278,7 +278,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
   .wt-tool-status {
     float: right;
     font-size: 11px;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-tool-status.loading { color: var(--pai-yellow); }
   .wt-tool-status.done { color: var(--pai-teal); }
@@ -301,7 +301,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
     color: var(--pai-med-gray);
     cursor: pointer;
     margin-top: 4px;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-tool-response-toggle:hover { color: white; }
 
@@ -310,7 +310,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
     padding: 8px 12px;
     color: var(--pai-light-teal);
     font-style: italic;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
     font-size: 13px;
   }
 
@@ -319,7 +319,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
     margin-top: 16px;
     padding-top: 12px;
     border-top: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-output-section {
     padding: 4px 0;
@@ -355,7 +355,7 @@ Insert before the closing `</style>` tag (line 503) in `docs/index.html`:
   .wt-parallel-label {
     font-size: 10px;
     color: var(--pai-yellow);
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -513,7 +513,7 @@ function getMockResponse(toolName, inputValue) {
 git add docs/index.html
 git commit -m "feat: add mock data generator for walkthrough tool responses
 
-Keyed on People.ai MCP tool name patterns with plausible enterprise
+Keyed on Backstory MCP tool name patterns with plausible enterprise
 sales data. Falls back gracefully for unknown tools.
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
@@ -687,9 +687,9 @@ class SkillWalkthrough {
     const tools = this.wt.steps.filter(s => s.type === 'tool').map(s => s.name);
     const uniqueTools = [...new Set(tools)];
     return `
-      <div style="font-family:'Proxima Nova',-apple-system,sans-serif;font-size:13px;">
-        <div style="font-weight:700;margin-bottom:8px;color:white;">Step 0: Connect People.ai MCP</div>
-        <div style="color:var(--pai-med-gray);margin-bottom:8px;">Settings &rarr; Integrations &rarr; People.ai MCP</div>
+      <div style="font-family:'Roboto',-apple-system,sans-serif;font-size:13px;">
+        <div style="font-weight:700;margin-bottom:8px;color:white;">Step 0: Connect Backstory MCP</div>
+        <div style="color:var(--pai-med-gray);margin-bottom:8px;">Settings &rarr; Integrations &rarr; Backstory MCP</div>
         <div class="wt-mcp-connected" style="display:none;" data-connected>
           &#10003; Connected — tools available:
         </div>
@@ -700,7 +700,7 @@ class SkillWalkthrough {
   }
 
   renderMcpCollapsed() {
-    return `<div class="wt-mcp-connected">&#10003; People.ai MCP Connected <span style="color:var(--pai-med-gray);font-weight:400;margin-left:8px;">(click to replay)</span></div>`;
+    return `<div class="wt-mcp-connected">&#10003; Backstory MCP Connected <span style="color:var(--pai-med-gray);font-weight:400;margin-left:8px;">(click to replay)</span></div>`;
   }
 
   async animateMcp() {

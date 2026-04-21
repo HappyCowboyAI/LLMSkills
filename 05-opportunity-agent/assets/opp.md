@@ -2,9 +2,9 @@
 
 ## Agent Overview
 
-The **SalesAI Opportunity Agent** creates comprehensive, actionable opportunity health dashboards for B2B deals using **People.ai MCP intelligence**. This system provides real-time deal health scoring, stakeholder engagement analysis, risk assessment, and strategic outreach recommendations to accelerate deal closure and prevent churn.
+The **SalesAI Opportunity Agent** creates comprehensive, actionable opportunity health dashboards for B2B deals using **Backstory MCP intelligence**. This system provides real-time deal health scoring, stakeholder engagement analysis, risk assessment, and strategic outreach recommendations to accelerate deal closure and prevent churn.
 
-**Core Principle: Transform People.ai data into actionable deal intelligence with specific ownership and accountability.**
+**Core Principle: Transform Backstory data into actionable deal intelligence with specific ownership and accountability.**
 
 ---
 
@@ -13,7 +13,7 @@ The **SalesAI Opportunity Agent** creates comprehensive, actionable opportunity 
 ### âœ… Comprehensive Deal Health Analysis
 - **Health Score Calculation** (0-100) based on stakeholder engagement, deal progression, and risk factors
 - **Visual Health Dashboards** with interactive gauges, engagement tracking, and risk matrices
-- **Real-time Intelligence** from People.ai communication history and SalesAI analysis
+- **Real-time Intelligence** from Backstory communication history and SalesAI analysis
 
 ### âœ… Strategic Stakeholder Intelligence
 - **Complete Contact Mapping** with influence levels and engagement scores
@@ -555,7 +555,7 @@ account_team = {
 ### Phase 3: Monitoring & Optimization (Ongoing)
 
 **Weekly Health Score Updates:**
-- Refresh People.ai intelligence data
+- Refresh Backstory intelligence data
 - Update stakeholder engagement levels
 - Monitor action plan execution progress
 - Adjust strategies based on new intelligence
@@ -573,7 +573,7 @@ account_team = {
 ### Data Validation Checklist
 
 **âœ… Opportunity Data Integrity**
-- [ ] Opportunity exists in People.ai with recent activity (last 90 days)
+- [ ] Opportunity exists in Backstory with recent activity (last 90 days)
 - [ ] Deal size and close date information current and realistic
 - [ ] Stage progression data matches CRM records
 - [ ] Account team ownership assignments verified
@@ -663,7 +663,7 @@ def predict_deal_outcome(opportunity_data, historical_patterns):
 ## Getting Started Checklist
 
 ### Prerequisites Verification
-1. [ ] **People.ai MCP Access**: Confirm tool availability and permissions
+1. [ ] **Backstory MCP Access**: Confirm tool availability and permissions
 2. [ ] **Account Team Structure**: Identify AE, CSM, PS, and advisor roles
 3. [ ] **Target Opportunity Selection**: Choose deals with >$10K value and recent activity
 4. [ ] **Success Criteria Definition**: Establish specific goals for opportunity health improvement
@@ -733,7 +733,7 @@ salesai-opportunity-agent/
 ---
 
 **Core Success Factors:**
-1. **People.ai Intelligence Foundation**: All insights grounded in verified communication data
+1. **Backstory Intelligence Foundation**: All insights grounded in verified communication data
 2. **Account Team Accountability**: Clear ownership assignments with specific timelines
 3. **Strategic Outreach Templates**: Ready-to-use messaging that resonates with stakeholder types
 4. **Visual Dashboard Communication**: Executive-friendly health visualization for quick decision-making

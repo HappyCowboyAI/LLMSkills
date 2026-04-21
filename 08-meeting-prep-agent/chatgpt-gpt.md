@@ -56,12 +56,12 @@ Sensitive topics, unrealistic promises.
 ## Rules
 - Keep it to ONE PAGE — quick-read, not deep analysis
 - Lead with what matters most
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Be specific about names, dates, and topics
 - Flag time-sensitive items prominently
 - Scannable bullet points, not paragraphs
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 Configure these Actions in your Custom GPT:
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
@@ -74,5 +74,5 @@ Configure these Actions in your Custom GPT:
 1. Go to ChatGPT and click **Explore GPTs** > **Create**
 2. Set the Name and Description from above
 3. Paste the Instructions into the GPT's Instructions field
-4. Under **Actions**, configure API endpoints for each People.ai tool
+4. Under **Actions**, configure API endpoints for each Backstory tool
 5. Save the GPT and test by typing an account name

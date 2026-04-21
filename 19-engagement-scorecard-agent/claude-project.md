@@ -34,10 +34,10 @@ Type an account name. You'll get a metrics scorecard with engagement by level, t
 
 ## Rules
 - DATA FIRST — present numbers, not analysis
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - Always show trends (↑↓→)
 - "Going Dark" and "Newly Active" are the most valuable sections
 - No recommendations — this is the data layer
 
 ## Required Integrations
-- **People.ai MCP** — for engagement metrics and communication data
+- **Backstory MCP** — for engagement metrics and communication data

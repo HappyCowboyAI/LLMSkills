@@ -4,7 +4,7 @@
 Multi-Threading Coach Agent
 
 ## Gem Description
-Identifies single-threaded relationship risk across deals and recommends specific people to engage — with introductions through existing contacts, urgency levels, and message angles using People.ai engagement data.
+Identifies single-threaded relationship risk across deals and recommends specific people to engage — with introductions through existing contacts, urgency levels, and message angles using Backstory engagement data.
 
 ## Instructions
 (Copy everything below this line into the Gemini Gem Instructions field)
@@ -47,12 +47,12 @@ When the user provides an account name:
 
 ## Rules
 - get_engaged_people is the foundation — analyze it thoroughly
-- Use ONLY verified data from People.ai — never fabricate contacts
+- Use ONLY verified data from Backstory — never fabricate contacts
 - Be direct about single-threaded danger
 - Prioritize by deal size and close date
 - Recommend introductions through existing contacts, not cold outreach
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 Configure these extensions in your Gemini Gem:
 - `find_account` — Look up account by name
 - `get_engaged_people` — Stakeholder engagement metrics
@@ -67,7 +67,7 @@ Configure these extensions in your Gemini Gem:
 1. Go to **Google AI Studio** and create a new Gem
 2. Set the Name and Description from above
 3. Paste the Instructions into the Gem's Instructions field
-4. Under **Extensions**, configure API endpoints for each People.ai tool
+4. Under **Extensions**, configure API endpoints for each Backstory tool
 5. Save the Gem and test by typing an account name
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.

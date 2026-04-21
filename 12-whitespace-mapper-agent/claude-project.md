@@ -43,4 +43,4 @@ Type an account name. You'll get a department-by-level coverage matrix showing w
 - Focus on actionable signals, not theoretical TAM
 
 ## Required Integrations
-- **People.ai MCP** — for stakeholder data, engagement metrics, and AI analysis
+- **Backstory MCP** — for stakeholder data, engagement metrics, and AI analysis

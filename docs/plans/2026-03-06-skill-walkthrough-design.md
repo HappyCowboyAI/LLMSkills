@@ -55,7 +55,7 @@ Every skill walkthrough begins with a simulated MCP connection flow. This is the
 
 ### Sequence
 
-1. **"Connect People.ai MCP"** — simulates navigating to Settings > Integrations
+1. **"Connect Backstory MCP"** — simulates navigating to Settings > Integrations
 2. **"Authorize"** — animated OAuth/connection prompt with "Connect" button
 3. **"Connection verified"** — green checkmark, available MCP tools light up (skill-specific tool list)
 

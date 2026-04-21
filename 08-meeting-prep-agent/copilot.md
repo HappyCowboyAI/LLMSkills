@@ -56,12 +56,12 @@ Sensitive topics, unrealistic promises.
 ## Rules
 - Keep it to ONE PAGE — quick-read, not deep analysis
 - Lead with what matters most
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Be specific about names, dates, and topics
 - Flag time-sensitive items prominently
 - Scannable bullet points, not paragraphs
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 Configure these plugins in your Copilot agent:
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
@@ -74,5 +74,5 @@ Configure these plugins in your Copilot agent:
 1. Go to **Microsoft Copilot Studio** and create a new agent
 2. Set the Name and Description from above
 3. Paste the Instructions into the agent's Instructions field
-4. Under **Plugins**, configure API endpoints for each People.ai tool
+4. Under **Plugins**, configure API endpoints for each Backstory tool
 5. Save the agent and test by typing an account name

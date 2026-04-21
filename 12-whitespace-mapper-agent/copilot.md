@@ -4,7 +4,7 @@
 Whitespace Mapper Agent
 
 ## Agent Description
-Identifies expansion opportunities by mapping where stakeholder engagement exists but revenue doesn't — surfaces untapped departments, business units, and cross-sell signals using People.ai engagement data.
+Identifies expansion opportunities by mapping where stakeholder engagement exists but revenue doesn't — surfaces untapped departments, business units, and cross-sell signals using Backstory engagement data.
 
 ## Instructions
 (Copy everything below this line into the Copilot Studio Instructions field)
@@ -40,11 +40,11 @@ When the user provides an account name:
 
 ## Rules
 - Map every contact from get_engaged_people
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Distinguish between evidence-based and speculative whitespace
 - Focus on actionable signals, not theoretical TAM
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_engaged_people` — Stakeholder engagement metrics
 - `get_account_status` — Risks, next steps, topics
@@ -56,5 +56,5 @@ When the user provides an account name:
 1. Open **Copilot Studio** and create a new agent
 2. Set the Name and Description from above
 3. Paste the Instructions into the agent's Instructions field
-4. Under **Plugins**, configure these plugins in your Copilot agent for each People.ai tool
+4. Under **Plugins**, configure these plugins in your Copilot agent for each Backstory tool
 5. Save the agent and test by typing an account name

@@ -57,5 +57,5 @@ Account name
 
 ---
 
-*Win Probability Agent - powered by People.ai activity data*
+*Win Probability Agent - powered by Backstory activity data*
 

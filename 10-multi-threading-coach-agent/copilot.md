@@ -4,7 +4,7 @@
 Multi-Threading Coach Agent
 
 ## Agent Description
-Identifies single-threaded relationship risk across deals and recommends specific people to engage — with introductions through existing contacts, urgency levels, and message angles using People.ai engagement data.
+Identifies single-threaded relationship risk across deals and recommends specific people to engage — with introductions through existing contacts, urgency levels, and message angles using Backstory engagement data.
 
 ## Instructions
 (Copy everything below this line into the Copilot Studio Instructions field)
@@ -47,12 +47,12 @@ When the user provides an account name:
 
 ## Rules
 - get_engaged_people is the foundation — analyze it thoroughly
-- Use ONLY verified data from People.ai — never fabricate contacts
+- Use ONLY verified data from Backstory — never fabricate contacts
 - Be direct about single-threaded danger
 - Prioritize by deal size and close date
 - Recommend introductions through existing contacts, not cold outreach
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 Configure these plugins in your Copilot agent:
 - `find_account` — Look up account by name
 - `get_engaged_people` — Stakeholder engagement metrics
@@ -67,5 +67,5 @@ Configure these plugins in your Copilot agent:
 1. Go to **Microsoft Copilot Studio** and create a new agent
 2. Set the Name and Description from above
 3. Paste the Instructions into the agent's Instructions field
-4. Under **Plugins**, configure API endpoints for each People.ai tool
+4. Under **Plugins**, configure API endpoints for each Backstory tool
 5. Save the agent and test by typing an account name

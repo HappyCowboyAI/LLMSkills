@@ -40,8 +40,8 @@ Type an account name. Select a closed deal (won or lost). You'll get a debrief w
 - Analyze BOTH wins and losses
 - Be constructive, not blame-oriented
 - Identify the decisive moment
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - Competitive section only if competitors were involved
 
 ## Required Integrations
-- **People.ai MCP** — for deal history, communication data, and AI analysis
+- **Backstory MCP** — for deal history, communication data, and AI analysis

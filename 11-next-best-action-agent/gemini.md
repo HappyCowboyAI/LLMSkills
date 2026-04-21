@@ -41,9 +41,9 @@ When the user provides an account name:
 - Every action names a specific person
 - Every action includes what to say or do
 - Be direct — "Call Sarah Chen today" not "Consider engaging stakeholders"
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
 - `get_recent_account_activity` — Communication summaries (30 days)
@@ -55,7 +55,7 @@ When the user provides an account name:
 1. Open **Google AI Studio** and create a new Gem
 2. Set the Name and Description from above
 3. Paste the Instructions into the Gem's Instructions field
-4. Under **Extensions**, configure these extensions in your Gemini Gem for each People.ai tool
+4. Under **Extensions**, configure these extensions in your Gemini Gem for each Backstory tool
 5. Save the Gem and test by typing an account name
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.

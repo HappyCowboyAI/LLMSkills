@@ -42,10 +42,10 @@ Type an account name and press enter. You'll get a threading risk assessment acr
 
 ## Rules
 - `get_engaged_people` is the foundation — analyze it thoroughly
-- Use ONLY verified data from People.ai MCP — never fabricate contacts
+- Use ONLY verified data from Backstory MCP — never fabricate contacts
 - Be direct about single-threaded danger
 - Prioritize by deal size and close date
 - Recommend introductions through existing contacts, not cold outreach
 
 ## Required Integrations
-- **People.ai MCP** — for stakeholder data, engagement metrics, and AI analysis
+- **Backstory MCP** — for stakeholder data, engagement metrics, and AI analysis

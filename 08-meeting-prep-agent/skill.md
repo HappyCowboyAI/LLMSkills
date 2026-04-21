@@ -62,7 +62,7 @@ For each known attendee (or likely attendees based on engagement data):
 ## Rules
 - Keep it to ONE PAGE equivalent — this is a quick-read briefing, not a deep analysis
 - Lead with what matters most — if there's a fire, say so first
-- Use ONLY verified data from People.ai MCP — never fabricate
+- Use ONLY verified data from Backstory MCP — never fabricate
 - Be specific about names, dates, and topics — vague briefings are useless
 - Flag anything time-sensitive prominently
 - Write in direct, scannable bullet points — no prose paragraphs

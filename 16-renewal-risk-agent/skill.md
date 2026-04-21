@@ -121,7 +121,7 @@ For each key person in the save plan:
 
 ## Rules
 - Focus on TRENDS, not snapshots — "engagement dropped 40% in 60 days" is more useful than "engagement is moderate"
-- Use ONLY verified data from People.ai MCP — never fabricate risk signals
+- Use ONLY verified data from Backstory MCP — never fabricate risk signals
 - Be specific about early warning signals — vague risk is useless
 - Every save plan action must have a specific owner and timeline
 - If the account is green, say so quickly — don't manufacture risk

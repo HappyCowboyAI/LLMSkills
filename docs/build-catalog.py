@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build script for the People.ai LLM Skills Catalog.
+Build script for the Backstory LLM Skills Catalog.
 Reads skill folders and generates skills.json for the catalog UI.
 
 Usage: python3 build-catalog.py
@@ -94,7 +94,7 @@ def extract_walkthrough(skill_dir: Path) -> dict | None:
         # Check if this step mentions parallel execution
         parallel = bool(re.search(r"parallel|simultaneous", step_content, re.IGNORECASE))
 
-        # Extract backticked tool names (People.ai MCP tool pattern)
+        # Extract backticked tool names (Backstory MCP tool pattern)
         tool_names = re.findall(r"`((?:find_|get_|ask_|account_|top_)\w+)`", step_content)
         # Deduplicate within this step (same tool mentioned multiple times)
         unique_tools = list(dict.fromkeys(tool_names))
@@ -235,13 +235,13 @@ def get_setup_steps(platform_id: str, skill_name: str) -> list[str]:
             f"Name it '{skill_name}'",
             "Paste the custom instructions (use the Copy button)",
             "Upload any knowledge files from the assets/ folder",
-            "Ensure the People.ai MCP integration is connected (Settings > Integrations)",
+            "Ensure the Backstory MCP integration is connected (Settings > Integrations)",
             "Open a conversation and type an account name",
         ]
     elif platform_id == "claude-code":
         return [
             "Copy the skill instructions to your CLAUDE.md or skill file",
-            "Ensure People.ai MCP is configured in your Claude Code settings",
+            "Ensure Backstory MCP is configured in your Claude Code settings",
             "Run Claude Code and invoke the skill",
         ]
     elif platform_id == "chatgpt-gpt":
@@ -249,7 +249,7 @@ def get_setup_steps(platform_id: str, skill_name: str) -> list[str]:
             "Go to ChatGPT and click 'Explore GPTs' > 'Create'",
             f"Name your GPT '{skill_name}'",
             "Paste the instructions (use the Copy button)",
-            "Configure Actions for each People.ai MCP tool listed",
+            "Configure Actions for each Backstory MCP tool listed",
             "Save and test with an account name",
         ]
     elif platform_id == "copilot":
@@ -257,7 +257,7 @@ def get_setup_steps(platform_id: str, skill_name: str) -> list[str]:
             "Open Microsoft Copilot Studio and create a new agent",
             f"Name it '{skill_name}'",
             "Paste the instructions (use the Copy button)",
-            "Add People.ai as a connector plugin",
+            "Add Backstory as a connector plugin",
             "Publish and test with an account name",
         ]
     elif platform_id == "gemini":
@@ -265,7 +265,7 @@ def get_setup_steps(platform_id: str, skill_name: str) -> list[str]:
             "Open Google AI Studio and create a new Gem",
             f"Name it '{skill_name}'",
             "Paste the instructions (use the Copy button)",
-            "Configure People.ai MCP extension when available",
+            "Configure Backstory MCP extension when available",
             "Test with an account name",
         ]
     return []
@@ -333,7 +333,7 @@ def build_catalog():
             "audience": meta.get("audience", []),
             "input": meta.get("input", ""),
             "mcpTools": meta.get("mcp_tools", []),
-            "mcpConnectors": ["People.ai MCP"],
+            "mcpConnectors": ["Backstory MCP"],
             "projectKnowledgeFiles": list_assets(skill_dir),
             "status": status,
             "platforms": platforms,
@@ -344,7 +344,7 @@ def build_catalog():
 
     catalog = {
         "catalog": {
-            "title": "People.ai LLM Skills Catalog",
+            "title": "Backstory LLM Skills Catalog",
             "version": "1.0",
             "lastUpdated": "2026-03-04",
             "mcpSetupUrl": "https://help.people.ai/en/?q=mcp",

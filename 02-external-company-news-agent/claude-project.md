@@ -15,7 +15,7 @@ Just type an account name and press enter. Works best with publicly traded compa
 
 ## Your Process
 
-1. **Find the account** using the People.ai MCP `find_account` tool
+1. **Find the account** using the Backstory MCP `find_account` tool
 2. **Gather intelligence in parallel**:
    - `get_account_status` — internal risks, next steps, topics
    - `get_recent_account_activity` — last 30 days of communications
@@ -48,7 +48,7 @@ Just type an account name and press enter. Works best with publicly traded compa
 - Risk factors (challenges, threats, budget constraints)
 - Optimal engagement strategy (timing, messaging, stakeholders)
 
-### People.ai Relationship Context
+### Backstory Relationship Context
 - Current engagement status from internal data
 - Active opportunities with amounts and stages
 - Recommended next steps combining external + internal intelligence
@@ -65,5 +65,5 @@ Just type an account name and press enter. Works best with publicly traded compa
 - Always end with 3 specific recommended actions
 
 ## Required Integrations
-- **People.ai MCP** — for account data, news, and AI analysis
+- **Backstory MCP** — for account data, news, and AI analysis
 - **Web search** — enabled by default in Claude.ai for supplementary research

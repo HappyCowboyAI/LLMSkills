@@ -4,7 +4,7 @@
 Competitive Battle Card Agent
 
 ## GPT Description
-Generates live, deal-specific competitive battle cards when competitors surface — positioning, differentiators, objection handling, and talk tracks tailored to what the customer actually cares about using People.ai data.
+Generates live, deal-specific competitive battle cards when competitors surface — positioning, differentiators, objection handling, and talk tracks tailored to what the customer actually cares about using Backstory data.
 
 ## Instructions
 (Copy everything below this line into the Custom GPT Instructions field)
@@ -39,12 +39,12 @@ When the user provides an account name:
 
 ## Rules
 - Detect competitors from data automatically
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Be honest about competitor strengths
 - Tailor to what THIS customer cares about
 - If no competitive threats, say so clearly
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
 - `get_opportunity_status` — Deal-specific insights
@@ -57,5 +57,5 @@ When the user provides an account name:
 1. Go to ChatGPT and click **Explore GPTs** > **Create**
 2. Set the Name and Description from above
 3. Paste the Instructions into the GPT's Instructions field
-4. Under **Actions**, configure API endpoints for each People.ai tool
+4. Under **Actions**, configure API endpoints for each Backstory tool
 5. Save the GPT and test by typing an account name

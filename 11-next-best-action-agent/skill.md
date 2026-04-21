@@ -70,7 +70,7 @@ Brief explanation of what was deprioritized and why these rose to the top.
 - Every action must name a specific person to contact
 - Every action must include what to say or do — not "reach out to discuss"
 - Lead with the most urgent action first
-- Use ONLY verified data from People.ai MCP — never fabricate contacts or signals
+- Use ONLY verified data from Backstory MCP — never fabricate contacts or signals
 - Be direct and opinionated — "You need to call Sarah Chen today" not "Consider engaging stakeholders"
 - If there's nothing urgent, say so — don't manufacture urgency
 

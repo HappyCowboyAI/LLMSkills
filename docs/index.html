@@ -3,42 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>People.ai LLM Skills Library</title>
+<title>Backstory LLM Skills Library</title>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Chivo+Mono:wght@400;500;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --pai-primary-blue: #006885;
-    --pai-dark-blue: #00204E;
-    --pai-blue: #0A41AA;
-    --pai-med-blue: #8CB8ED;
-    --pai-light-blue: #CDE6FF;
-    --pai-teal: #00D9D3;
-    --pai-light-teal: #7FECE9;
-    --pai-dark-gray: #54667D;
-    --pai-med-gray: #A9B2BE;
-    --pai-light-gray: #D4D9DE;
-    --pai-off-black: #0A1225;
-    --pai-white: #FFFFFF;
-    --pai-yellow: #E8C031;
-    --pai-orange: #EB8D35;
-    --pai-red: #F8544D;
+    /* Neutrals (dominant) */
+    --bs-black: #000000;
+    --bs-white: #FFFFFF;
+    --bs-graphite: #171721;
+    --bs-surface-gray: #BBBCBC;
+    --bs-border-subtle: #E4E6E8;
+    --bs-bg-surface: #F5F5F5;
+
+    /* Primary palette (supporting) */
+    --bs-horizon: #6296AD;
+    --bs-horizon-hover: #447C93;
+    --bs-horizon-subtle: #DBEBF2;
+
+    /* Secondary palette (accent only) */
+    --bs-indigo: #275198;
+    --bs-cobalt: #21B5FF;
+    --bs-plum: #B08FA2;
+    --bs-mint: #8FCDA8;
+    --bs-cinder: #C05527;
+
+    /* Text tokens */
+    --bs-text-default: #171721;
+    --bs-text-secondary: #55555E;
+    --bs-text-tertiary: #7F7F85;
+
+    /* Feedback */
+    --bs-success: #5BA779;
+    --bs-warning: #B49650;
+
     --radius: 8px;
-    --shadow: 0 2px 8px rgba(0,32,78,0.08);
-    --shadow-hover: 0 4px 16px rgba(0,32,78,0.14);
+    --shadow: 0 2px 8px rgba(23,23,33,0.08);
+    --shadow-hover: 0 4px 16px rgba(23,23,33,0.14);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Proxima Nova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: var(--pai-off-black);
-    background: #F5F7FA;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--bs-text-default);
+    background: var(--bs-bg-surface);
     line-height: 1.5;
+  }
+
+  h1, h2, h3, .header-title, .detail-title {
+    font-family: 'Cardo', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+
+  code, pre, .mono {
+    font-family: 'Chivo Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   }
 
   /* Header */
   .header {
-    background: linear-gradient(135deg, var(--pai-dark-blue) 0%, var(--pai-primary-blue) 100%);
+    background: linear-gradient(135deg, var(--bs-graphite) 0%, var(--bs-horizon) 100%);
     color: white;
     padding: 24px 32px;
     display: flex;
@@ -47,11 +73,12 @@
   }
   .header-left { display: flex; align-items: center; gap: 16px; }
   .header-logo {
-    font-size: 18px;
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 22px;
     font-weight: 700;
-    opacity: 0.7;
+    letter-spacing: -0.01em;
+    opacity: 0.85;
   }
-  .header-logo span { color: var(--pai-teal); }
   .header-title {
     font-size: 24px;
     font-weight: 700;
@@ -75,10 +102,10 @@
     text-decoration: none;
   }
   .btn-primary {
-    background: var(--pai-teal);
-    color: var(--pai-dark-blue);
+    background: var(--bs-mint);
+    color: var(--bs-graphite);
   }
-  .btn-primary:hover { background: var(--pai-light-teal); }
+  .btn-primary:hover { background: var(--bs-horizon-subtle); }
   .btn-secondary {
     background: rgba(255,255,255,0.15);
     color: white;
@@ -87,26 +114,26 @@
   .btn-secondary:hover { background: rgba(255,255,255,0.25); }
   .btn-outline {
     background: transparent;
-    color: var(--pai-primary-blue);
-    border: 1px solid var(--pai-light-gray);
+    color: var(--bs-horizon);
+    border: 1px solid var(--bs-border-subtle);
   }
-  .btn-outline:hover { border-color: var(--pai-primary-blue); background: var(--pai-light-blue); }
+  .btn-outline:hover { border-color: var(--bs-horizon); background: var(--bs-horizon-subtle); }
   .btn-copy {
-    background: var(--pai-primary-blue);
+    background: var(--bs-horizon);
     color: white;
     padding: 12px 24px;
     font-size: 15px;
   }
-  .btn-copy:hover { background: var(--pai-dark-blue); }
+  .btn-copy:hover { background: var(--bs-graphite); }
   .btn-copy.copied { background: #0a8a5e; }
   .btn-download {
     background: transparent;
-    color: var(--pai-primary-blue);
-    border: 1px solid var(--pai-primary-blue);
+    color: var(--bs-horizon);
+    border: 1px solid var(--bs-horizon);
     padding: 12px 24px;
     font-size: 15px;
   }
-  .btn-download:hover { background: var(--pai-light-blue); }
+  .btn-download:hover { background: var(--bs-horizon-subtle); }
   .btn-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
   /* Container */
@@ -123,7 +150,7 @@
   .filter-label {
     font-size: 13px;
     font-weight: 600;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     margin-right: 4px;
   }
   .filter-btn {
@@ -132,21 +159,21 @@
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     background: white;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     transition: all 0.2s;
   }
-  .filter-btn:hover { border-color: var(--pai-primary-blue); color: var(--pai-primary-blue); }
+  .filter-btn:hover { border-color: var(--bs-horizon); color: var(--bs-horizon); }
   .filter-btn.active {
-    background: var(--pai-primary-blue);
+    background: var(--bs-horizon);
     color: white;
-    border-color: var(--pai-primary-blue);
+    border-color: var(--bs-horizon);
   }
   .filter-divider {
     width: 1px;
     height: 24px;
-    background: var(--pai-light-gray);
+    background: var(--bs-border-subtle);
     margin: 0 8px;
   }
 
@@ -160,7 +187,7 @@
   .card {
     background: white;
     border-radius: var(--radius);
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     padding: 20px;
     cursor: pointer;
     transition: all 0.2s;
@@ -171,13 +198,13 @@
     box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
   }
-  .card.status-ready { border-left-color: var(--pai-teal); }
-  .card.status-draft { border-left-color: var(--pai-orange); }
+  .card.status-ready { border-left-color: var(--bs-mint); }
+  .card.status-draft { border-left-color: var(--bs-cinder); }
 
   .card-number {
     font-size: 12px;
     font-weight: 700;
-    color: var(--pai-med-gray);
+    color: var(--bs-text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -185,11 +212,11 @@
     font-size: 17px;
     font-weight: 700;
     margin: 4px 0 8px;
-    color: var(--pai-dark-blue);
+    color: var(--bs-graphite);
   }
   .card-desc {
     font-size: 13px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     margin-bottom: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -206,8 +233,8 @@
     font-weight: 600;
   }
   .badge-audience {
-    background: var(--pai-light-blue);
-    color: var(--pai-blue);
+    background: var(--bs-horizon-subtle);
+    color: var(--bs-indigo);
   }
   .badge-platform {
     background: #E8F7F7;
@@ -222,8 +249,8 @@
     color: #B06800;
   }
   .badge-status-coming-soon {
-    background: var(--pai-light-gray);
-    color: var(--pai-dark-gray);
+    background: var(--bs-border-subtle);
+    color: var(--bs-text-secondary);
   }
 
   /* Skill Detail View */
@@ -234,7 +261,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--pai-primary-blue);
+    color: var(--bs-horizon);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -246,19 +273,19 @@
   .detail-header {
     background: white;
     border-radius: var(--radius);
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     padding: 24px;
     margin-bottom: 20px;
   }
   .detail-title {
     font-size: 24px;
     font-weight: 700;
-    color: var(--pai-dark-blue);
+    color: var(--bs-graphite);
     margin-bottom: 8px;
   }
   .detail-desc {
     font-size: 15px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     margin-bottom: 16px;
   }
   .detail-meta-row {
@@ -266,15 +293,15 @@
     gap: 24px;
     flex-wrap: wrap;
     font-size: 13px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
   }
-  .detail-meta-item strong { color: var(--pai-off-black); }
+  .detail-meta-item strong { color: var(--bs-graphite); }
 
   /* Tabs */
   .tabs {
     display: flex;
     gap: 0;
-    border-bottom: 2px solid var(--pai-light-gray);
+    border-bottom: 2px solid var(--bs-border-subtle);
     margin-bottom: 20px;
   }
   .tab {
@@ -284,16 +311,16 @@
     cursor: pointer;
     border-bottom: 2px solid transparent;
     margin-bottom: -2px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     transition: all 0.2s;
     display: flex;
     align-items: center;
     gap: 6px;
   }
-  .tab:hover { color: var(--pai-primary-blue); }
+  .tab:hover { color: var(--bs-horizon); }
   .tab.active {
-    color: var(--pai-primary-blue);
-    border-bottom-color: var(--pai-primary-blue);
+    color: var(--bs-horizon);
+    border-bottom-color: var(--bs-horizon);
   }
   .tab.disabled {
     opacity: 0.4;
@@ -303,20 +330,20 @@
     font-size: 10px;
     padding: 1px 6px;
     border-radius: 8px;
-    background: var(--pai-light-gray);
-    color: var(--pai-dark-gray);
+    background: var(--bs-border-subtle);
+    color: var(--bs-text-secondary);
   }
 
   .tab-content {
     background: white;
     border-radius: var(--radius);
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     padding: 24px;
   }
 
   .instructions-block {
     background: #F8F9FB;
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     border-radius: var(--radius);
     padding: 20px;
     margin-bottom: 16px;
@@ -336,7 +363,7 @@
     font-size: 13px;
   }
   .instructions-block pre {
-    background: var(--pai-dark-blue);
+    background: var(--bs-graphite);
     color: #E8EDF2;
     padding: 12px;
     border-radius: 6px;
@@ -351,7 +378,7 @@
     font-size: 13px;
   }
   .instructions-block th, .instructions-block td {
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     padding: 6px 10px;
     text-align: left;
   }
@@ -363,7 +390,7 @@
     counter-increment: step;
     padding: 12px 0 12px 48px;
     position: relative;
-    border-bottom: 1px solid var(--pai-light-gray);
+    border-bottom: 1px solid var(--bs-border-subtle);
     font-size: 14px;
   }
   .setup-steps li:last-child { border-bottom: none; }
@@ -375,8 +402,8 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--pai-light-blue);
-    color: var(--pai-primary-blue);
+    background: var(--bs-horizon-subtle);
+    color: var(--bs-horizon);
     font-weight: 700;
     font-size: 14px;
     display: flex;
@@ -413,7 +440,7 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
   }
   .wizard-step { display: none; }
   .wizard-step.active { display: block; }
@@ -426,19 +453,19 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--pai-light-gray);
+    background: var(--bs-border-subtle);
   }
-  .wizard-dot.active { background: var(--pai-primary-blue); }
-  .wizard-dot.done { background: var(--pai-teal); }
+  .wizard-dot.active { background: var(--bs-horizon); }
+  .wizard-dot.done { background: var(--bs-mint); }
   .wizard-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--pai-dark-blue);
+    color: var(--bs-graphite);
     margin-bottom: 8px;
   }
   .wizard-text {
     font-size: 14px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     margin-bottom: 20px;
     line-height: 1.6;
   }
@@ -452,7 +479,7 @@
   .coming-soon {
     text-align: center;
     padding: 40px 20px;
-    color: var(--pai-med-gray);
+    color: var(--bs-text-tertiary);
   }
   .coming-soon-icon { font-size: 40px; margin-bottom: 12px; }
   .coming-soon-text { font-size: 15px; font-weight: 600; }
@@ -462,7 +489,7 @@
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: var(--pai-dark-blue);
+    background: var(--bs-graphite);
     color: white;
     padding: 12px 20px;
     border-radius: var(--radius);
@@ -482,9 +509,9 @@
     padding: 16px 0;
     margin-bottom: 8px;
     font-size: 13px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
   }
-  .stats-bar strong { color: var(--pai-dark-blue); }
+  .stats-bar strong { color: var(--bs-graphite); }
 
   /* Detail Split Layout */
   .detail-split {
@@ -505,7 +532,7 @@
   .detail-split-right h3 {
     font-size: 16px;
     font-weight: 700;
-    color: var(--pai-off-black);
+    color: var(--bs-graphite);
     margin-bottom: 10px;
   }
   .detail-section {
@@ -514,13 +541,13 @@
   .detail-section h3 {
     font-size: 15px;
     font-weight: 700;
-    color: var(--pai-off-black);
+    color: var(--bs-graphite);
     margin-bottom: 6px;
   }
   .detail-section ul {
     padding-left: 20px;
     font-size: 14px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
   }
   .detail-section li {
     margin-bottom: 4px;
@@ -528,14 +555,14 @@
   }
   .detail-section p {
     font-size: 14px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     line-height: 1.6;
   }
 
   /* Sample Output Mockups */
   .slack-mockup {
-    background: var(--pai-white);
-    border: 1px solid var(--pai-light-gray);
+    background: var(--bs-white);
+    border: 1px solid var(--bs-border-subtle);
     border-radius: 8px;
     font-size: 13px;
     overflow: hidden;
@@ -551,7 +578,7 @@
     width: 36px;
     height: 36px;
     border-radius: 6px;
-    background: linear-gradient(135deg, var(--pai-primary-blue), var(--pai-blue));
+    background: linear-gradient(135deg, var(--bs-horizon), var(--bs-indigo));
     color: white;
     display: flex;
     align-items: center;
@@ -563,14 +590,14 @@
   .slack-mockup-botname {
     font-weight: 900;
     font-size: 14px;
-    color: var(--pai-off-black);
+    color: var(--bs-graphite);
   }
   .slack-mockup-app-badge {
     display: inline-block;
     font-size: 10px;
     font-weight: 700;
-    background: var(--pai-light-gray);
-    color: var(--pai-dark-gray);
+    background: var(--bs-border-subtle);
+    color: var(--bs-text-secondary);
     padding: 1px 5px;
     border-radius: 3px;
     vertical-align: middle;
@@ -578,21 +605,21 @@
   }
   .slack-mockup-time {
     font-size: 11px;
-    color: var(--pai-med-gray);
+    color: var(--bs-text-tertiary);
     margin-left: auto;
   }
   .slack-mockup-body {
     padding: 6px 14px 14px 60px;
-    color: var(--pai-off-black);
+    color: var(--bs-graphite);
     line-height: 1.55;
     font-size: 13px;
   }
   .slack-mockup-body p { margin: 0 0 4px; }
   .slack-mockup-body strong { font-weight: 700; }
-  .slack-mockup-body em { font-style: italic; color: var(--pai-dark-gray); }
+  .slack-mockup-body em { font-style: italic; color: var(--bs-text-secondary); }
   .slack-mockup-body ul { margin: 0 0 6px; padding-left: 18px; list-style: disc; }
   .slack-mockup-body li { margin: 1px 0; }
-  .slack-mockup-body hr { border: none; border-top: 1px solid var(--pai-light-gray); margin: 8px 0; }
+  .slack-mockup-body hr { border: none; border-top: 1px solid var(--bs-border-subtle); margin: 8px 0; }
   .slack-mockup-body .slack-mention {
     background: rgba(29,155,209,0.1);
     color: #1264A3;
@@ -627,7 +654,7 @@
   .empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: var(--pai-med-gray);
+    color: var(--bs-text-tertiary);
   }
 
   /* Guides */
@@ -636,7 +663,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     margin-bottom: 16px;
   }
   .guides-grid {
@@ -648,7 +675,7 @@
   .guide-card {
     background: white;
     border-radius: var(--radius);
-    border: 1px solid var(--pai-light-gray);
+    border: 1px solid var(--bs-border-subtle);
     padding: 24px;
     cursor: pointer;
     transition: all 0.2s;
@@ -658,7 +685,7 @@
   }
   .guide-card:hover {
     box-shadow: var(--shadow-hover);
-    border-color: var(--pai-primary-blue);
+    border-color: var(--bs-horizon);
   }
   .guide-card-icon {
     font-size: 28px;
@@ -667,12 +694,12 @@
   .guide-card-title {
     font-size: 16px;
     font-weight: 700;
-    color: var(--pai-dark-blue);
+    color: var(--bs-graphite);
     margin-bottom: 6px;
   }
   .guide-card-desc {
     font-size: 13px;
-    color: var(--pai-dark-gray);
+    color: var(--bs-text-secondary);
     line-height: 1.6;
     margin-bottom: 12px;
   }
@@ -682,21 +709,21 @@
     font-weight: 600;
     padding: 3px 10px;
     border-radius: 12px;
-    background: var(--pai-light-blue);
-    color: var(--pai-primary-blue);
+    background: var(--bs-horizon-subtle);
+    color: var(--bs-horizon);
   }
   .guide-card-badge.coming-soon {
     background: #fff3e0;
-    color: var(--pai-orange);
+    color: var(--bs-cinder);
   }
   .guide-card.hero {
     grid-column: 1 / -1;
-    border-left: 4px solid var(--pai-teal);
+    border-left: 4px solid var(--bs-mint);
   }
 
   /* Walkthrough */
   .walkthrough {
-    background: var(--pai-dark-blue);
+    background: var(--bs-graphite);
     border-radius: var(--radius);
     padding: 24px;
     margin-bottom: 20px;
@@ -715,7 +742,7 @@
     margin-bottom: 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .walkthrough-title {
     font-size: 15px;
@@ -739,7 +766,7 @@
     transition: all 0.2s;
   }
   .walkthrough-btn:hover { background: rgba(255,255,255,0.2); }
-  .walkthrough-btn.active { background: var(--pai-teal); color: var(--pai-dark-blue); border-color: var(--pai-teal); }
+  .walkthrough-btn.active { background: var(--bs-mint); color: var(--bs-graphite); border-color: var(--bs-mint); }
 
   /* MCP Connection Step 0 */
   .wt-mcp-step {
@@ -747,7 +774,7 @@
     padding: 12px 16px;
     border-radius: 6px;
     background: rgba(255,255,255,0.05);
-    border-left: 3px solid var(--pai-teal);
+    border-left: 3px solid var(--bs-mint);
   }
   .wt-mcp-step.collapsed {
     padding: 8px 16px;
@@ -759,10 +786,10 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--pai-teal);
+    color: var(--bs-mint);
     font-weight: 600;
     font-size: 12px;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-mcp-tools {
     display: flex;
@@ -775,7 +802,7 @@
     border-radius: 3px;
     font-size: 11px;
     background: rgba(0,217,211,0.1);
-    color: var(--pai-teal);
+    color: var(--bs-mint);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -791,30 +818,30 @@
   .wt-step.visible { opacity: 1; transform: translateY(0); }
 
   .wt-user-input {
-    color: var(--pai-teal);
+    color: var(--bs-mint);
     margin-bottom: 8px;
   }
-  .wt-user-input .wt-prompt { color: var(--pai-med-gray); margin-right: 8px; }
-  .wt-user-input .wt-typed { border-right: 2px solid var(--pai-teal); padding-right: 2px; }
+  .wt-user-input .wt-prompt { color: var(--bs-text-tertiary); margin-right: 8px; }
+  .wt-user-input .wt-typed { border-right: 2px solid var(--bs-mint); padding-right: 2px; }
 
   .wt-tool-call {
     padding: 8px 12px;
     border-radius: 4px;
     background: rgba(255,255,255,0.03);
-    border-left: 2px solid var(--pai-med-blue);
+    border-left: 2px solid var(--bs-horizon);
     margin-bottom: 4px;
   }
-  .wt-tool-call.parallel { border-left-color: var(--pai-yellow); }
-  .wt-tool-name { color: var(--pai-med-blue); font-weight: 600; }
-  .wt-tool-call.parallel .wt-tool-name { color: var(--pai-yellow); }
-  .wt-tool-desc { color: var(--pai-med-gray); margin-left: 8px; font-size: 12px; }
+  .wt-tool-call.parallel { border-left-color: var(--bs-warning); }
+  .wt-tool-name { color: var(--bs-horizon); font-weight: 600; }
+  .wt-tool-call.parallel .wt-tool-name { color: var(--bs-warning); }
+  .wt-tool-desc { color: var(--bs-text-tertiary); margin-left: 8px; font-size: 12px; }
   .wt-tool-status {
     float: right;
     font-size: 11px;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
-  .wt-tool-status.loading { color: var(--pai-yellow); }
-  .wt-tool-status.done { color: var(--pai-teal); }
+  .wt-tool-status.loading { color: var(--bs-warning); }
+  .wt-tool-status.done { color: var(--bs-mint); }
 
   .wt-tool-response {
     margin-top: 6px;
@@ -822,7 +849,7 @@
     border-radius: 3px;
     background: rgba(0,0,0,0.2);
     font-size: 11px;
-    color: var(--pai-med-gray);
+    color: var(--bs-text-tertiary);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s;
@@ -831,19 +858,19 @@
   .wt-tool-response.expanded { max-height: 200px; overflow-y: auto; }
   .wt-tool-response-toggle {
     font-size: 11px;
-    color: var(--pai-med-gray);
+    color: var(--bs-text-tertiary);
     cursor: pointer;
     margin-top: 4px;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-tool-response-toggle:hover { color: white; }
 
   /* Analysis steps */
   .wt-analysis {
     padding: 8px 12px;
-    color: var(--pai-light-teal);
+    color: var(--bs-horizon-subtle);
     font-style: italic;
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
     font-size: 13px;
   }
 
@@ -852,7 +879,7 @@
     margin-top: 16px;
     padding-top: 12px;
     border-top: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    font-family: 'Roboto', -apple-system, sans-serif;
   }
   .wt-output-section {
     padding: 4px 0;
@@ -872,7 +899,7 @@
   }
   .wt-output-bar-fill {
     height: 100%;
-    background: var(--pai-teal);
+    background: var(--bs-mint);
     border-radius: 2px;
     width: 0;
     transition: width 0.6s;
@@ -880,15 +907,15 @@
 
   /* Parallel indicator */
   .wt-parallel-group {
-    border-left: 2px solid var(--pai-yellow);
+    border-left: 2px solid var(--bs-warning);
     padding-left: 12px;
     margin-left: 4px;
     position: relative;
   }
   .wt-parallel-label {
     font-size: 10px;
-    color: var(--pai-yellow);
-    font-family: 'Proxima Nova', -apple-system, sans-serif;
+    color: var(--bs-warning);
+    font-family: 'Roboto', -apple-system, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -897,10 +924,10 @@
 
   /* ── Setup Walkthrough CSS ── */
   .setup-wt {
-    background: var(--pai-white);
+    background: var(--bs-white);
     border-radius: 12px;
     padding: 20px;
-    border: 1px solid var(--pai-border);
+    border: 1px solid var(--bs-border-subtle);
   }
   .setup-wt-tabs {
     display: flex;
@@ -914,16 +941,16 @@
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    background: var(--pai-light-blue);
-    color: var(--pai-dark-blue);
+    background: var(--bs-horizon-subtle);
+    color: var(--bs-graphite);
     transition: all 0.2s;
     border: 2px solid transparent;
   }
   .setup-wt-tab:hover { background: #dbeafe; }
   .setup-wt-tab.active {
-    background: var(--pai-primary-blue);
+    background: var(--bs-horizon);
     color: white;
-    border-color: var(--pai-primary-blue);
+    border-color: var(--bs-horizon);
   }
 
   .setup-mockup {
@@ -1451,9 +1478,9 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 1px solid var(--pai-border);
+    border: 1px solid var(--bs-border-subtle);
     background: white;
-    color: var(--pai-dark-blue);
+    color: var(--bs-graphite);
     font-size: 12px;
     cursor: pointer;
     display: flex;
@@ -1461,11 +1488,11 @@
     justify-content: center;
     transition: all 0.2s;
   }
-  .setup-wt-btn:hover { background: var(--pai-light-blue); }
+  .setup-wt-btn:hover { background: var(--bs-horizon-subtle); }
   .setup-wt-btn.primary {
     width: 44px;
     height: 44px;
-    background: var(--pai-primary-blue);
+    background: var(--bs-horizon);
     color: white;
     border: none;
     font-size: 16px;
@@ -1485,18 +1512,18 @@
     transition: all 0.3s;
   }
   .setup-wt-dot.active {
-    background: var(--pai-primary-blue);
+    background: var(--bs-horizon);
     transform: scale(1.3);
   }
   .setup-wt-dot.done {
-    background: var(--pai-teal);
+    background: var(--bs-mint);
   }
 
   .setup-wt-step-desc {
     text-align: center;
     font-size: 14px;
     font-weight: 600;
-    color: var(--pai-dark-blue);
+    color: var(--bs-graphite);
     margin-top: 12px;
     min-height: 20px;
   }
@@ -1522,7 +1549,7 @@
     display: block;
     margin: 8px auto;
     padding: 6px 16px;
-    background: var(--pai-primary-blue);
+    background: var(--bs-horizon);
     color: white;
     border: none;
     border-radius: 6px;
@@ -1624,7 +1651,7 @@
     font-size: 10px;
     font-weight: 600;
   }
-  .mock-bubble-tool-status.loading { color: #E8C031; }
+  .mock-bubble-tool-status.loading { color: var(--bs-warning); }
   .mock-bubble-tool-status.done { color: #28C840; }
   /* Output bars in bubble */
   .mock-bubble-output {
@@ -1666,11 +1693,11 @@
 <div class="header">
   <div class="header-left">
     <div>
-      <div class="header-logo">people<span>.</span>ai</div>
+      <div class="header-logo">Backstory</div>
     </div>
     <div>
       <div class="header-title">LLM Skills Library</div>
-      <div class="header-subtitle">Ready-to-deploy AI skills powered by People.ai MCP</div>
+      <div class="header-subtitle">Ready-to-deploy AI skills powered by Backstory MCP</div>
     </div>
   </div>
   <div style="display:flex;gap:8px;">
@@ -1699,7 +1726,7 @@
   <div class="detail-header">
     <div class="detail-title">About the LLM Skills Library</div>
     <div class="detail-desc">
-      This library contains ready-to-deploy AI skills that leverage the People.ai MCP (Model Context Protocol) integration.
+      This library contains ready-to-deploy AI skills that leverage the Backstory MCP (Model Context Protocol) integration.
       Each skill is a pre-built template that transforms raw CRM and communication data into actionable intelligence.
     </div>
     <div style="margin-top:16px;font-size:14px;line-height:1.8;">
@@ -1710,7 +1737,7 @@
       4. Start using the skill with any account name<br><br>
       <strong>Prerequisites:</strong><br>
       &bull; A Claude Pro/Team, ChatGPT Plus, or supported LLM account<br>
-      &bull; People.ai MCP integration connected (<a href="#/guide/mcp-setup" id="mcp-setup-link">Setup Guide</a>)<br><br>
+      &bull; Backstory MCP integration connected (<a href="#/guide/mcp-setup" id="mcp-setup-link">Setup Guide</a>)<br><br>
       <strong>Maintained by:</strong> AI Innovation Team<br>
       <strong>Slack:</strong> #claude-users
     </div>
@@ -1721,26 +1748,26 @@
 <div id="mcp-guide-view" class="container detail-view">
   <a class="back-link" onclick="navigate('#/guides')">&#8592; All Guides</a>
   <div style="max-width:800px;">
-    <h2 style="color:var(--pai-dark-blue);margin-bottom:8px;">People.ai MCP Setup Guide</h2>
-    <p style="color:var(--pai-dark-gray);margin-bottom:24px;">
-      The <strong>People.ai Model Context Protocol (MCP)</strong> server is the core data source
+    <h2 style="color:var(--bs-graphite);margin-bottom:8px;">Backstory MCP Setup Guide</h2>
+    <p style="color:var(--bs-text-secondary);margin-bottom:24px;">
+      The <strong>Backstory Model Context Protocol (MCP)</strong> server is the core data source
       for every skill in this library. It gives AI assistants direct access to account
       activity, engagement data, opportunity status, and contact intelligence.
     </p>
 
-    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:16px;">
+    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--bs-horizon);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:16px;">
       <strong>What is MCP?</strong> Model Context Protocol is an open standard that lets AI assistants
-      call external tools and data sources. People.ai's MCP server exposes sales intelligence
+      call external tools and data sources. Backstory's MCP server exposes sales intelligence
       as tools that assistants can invoke during conversations — no custom API integration needed.
     </div>
 
     <div style="padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:24px;">
-      <strong>Prerequisites:</strong> An active People.ai account with MCP access enabled, plus a supported LLM platform
+      <strong>Prerequisites:</strong> An active Backstory account with MCP access enabled, plus a supported LLM platform
       (Claude.ai Pro/Team, ChatGPT Plus, Microsoft Copilot, or Google Gemini).
     </div>
 
     <!-- ============ WHAT YOU CAN DO ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">What You Can Do</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">What You Can Do</h3>
     <ul style="margin:8px 0 20px 20px;line-height:2;">
       <li>Build AI skills that analyze accounts, opportunities, and stakeholder engagement in real time</li>
       <li>Create interactive dashboards from live CRM and communication data</li>
@@ -1750,68 +1777,68 @@
     </ul>
 
     <!-- ============ AVAILABLE TOOLS ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">Available MCP Tools</h3>
-    <p style="margin:8px 0;">The People.ai MCP server exposes these tools to connected AI assistants:</p>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">Available MCP Tools</h3>
+    <p style="margin:8px 0;">The Backstory MCP server exposes these tools to connected AI assistants:</p>
     <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
       <thead>
-        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--bs-border-subtle);">
           <th style="padding:10px 12px;text-align:left;">Tool</th>
           <th style="padding:10px 12px;text-align:left;">Description</th>
           <th style="padding:10px 12px;text-align:left;">Used By</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>find_account</code></td>
           <td style="padding:10px 12px;">Search for accounts by name or domain</td>
           <td style="padding:10px 12px;">All skills</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_account_status</code></td>
           <td style="padding:10px 12px;">Account health, engagement score, risk signals</td>
           <td style="padding:10px 12px;">Account Plan, Sentiment, Renewal Risk</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_recent_account_activity</code></td>
           <td style="padding:10px 12px;">Meetings, emails, calls in a time window</td>
           <td style="padding:10px 12px;">Account Plan, Meeting Prep, QBR Generator</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_opportunity_status</code></td>
           <td style="padding:10px 12px;">Deal stage, amount, close date, activity</td>
           <td style="padding:10px 12px;">Opportunity Agent, MEDDPICC, Win Probability</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_recent_opportunity_activity</code></td>
           <td style="padding:10px 12px;">Recent deal-level interactions and changes</td>
           <td style="padding:10px 12px;">Opportunity Agent, Deal Debrief</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_engaged_people</code></td>
           <td style="padding:10px 12px;">Contacts with recent engagement on an account</td>
           <td style="padding:10px 12px;">Relationship Map, Multi-Threading Coach</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_scorecard</code></td>
           <td style="padding:10px 12px;">Account plan sections with completion scores</td>
           <td style="padding:10px 12px;">Account Plan, Engagement Scorecard</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>ask_sales_ai_about_account</code></td>
           <td style="padding:10px 12px;">Natural language queries about any account (10-30s)</td>
           <td style="padding:10px 12px;">Executive Briefing, Pipeline Review</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>ask_sales_ai_about_opportunity</code></td>
           <td style="padding:10px 12px;">Natural language queries about any deal (10-30s)</td>
           <td style="padding:10px 12px;">Opportunity Agent, Win Probability, MEDDPICC</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>top_records</code></td>
           <td style="padding:10px 12px;">Top accounts/opps by activity, risk, or value</td>
           <td style="padding:10px 12px;">Pipeline Review, Whitespace Mapper</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>account_company_news</code></td>
           <td style="padding:10px 12px;">Recent news about an account's company</td>
           <td style="padding:10px 12px;">Company News, Meeting Prep, Executive Briefing</td>
@@ -1820,9 +1847,9 @@
     </table>
 
     <!-- ============ PLATFORM SETUP ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">1. Obtain MCP Credentials</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">1. Obtain MCP Credentials</h3>
     <ol style="margin:12px 0 20px 20px;line-height:2;">
-      <li>Contact your <strong>People.ai administrator or CSM</strong> to request MCP API access</li>
+      <li>Contact your <strong>Backstory administrator or CSM</strong> to request MCP API access</li>
       <li>You'll receive two credentials:
         <ul style="margin:4px 0 4px 20px;">
           <li><strong>Client ID</strong> — your organization's MCP client identifier</li>
@@ -1831,28 +1858,28 @@
       </li>
       <li>Store these credentials securely — you'll need them for platform configuration</li>
     </ol>
-    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--pai-orange);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
-      <strong>Important:</strong> MCP credentials are different from People.ai REST API credentials. Make sure you request MCP-specific access.
+    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--bs-cinder);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+      <strong>Important:</strong> MCP credentials are different from Backstory REST API credentials. Make sure you request MCP-specific access.
     </div>
 
     <!-- ============ CLAUDE.AI ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">2. Configure in Claude.ai</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">2. Configure in Claude.ai</h3>
     <p style="margin:8px 0;">Claude.ai Projects support MCP integrations natively:</p>
     <ol style="margin:8px 0 16px 20px;line-height:2;">
       <li>Open <strong>Claude.ai</strong> and go to <strong>Settings</strong> &rarr; <strong>Integrations</strong></li>
-      <li>Find <strong>People.ai MCP</strong> in the available integrations</li>
+      <li>Find <strong>Backstory MCP</strong> in the available integrations</li>
       <li>Click <strong>Connect</strong> and enter your Client ID and Client Secret</li>
       <li>Enable the integration — it will now be available in all your Projects</li>
       <li>Create a new Project, paste skill instructions, and start chatting</li>
     </ol>
     <div style="padding:12px 16px;background:#f0f7ff;border-radius:var(--radius);margin:8px 0 20px 0;">
-      <span style="color:var(--pai-primary-blue);font-weight:600;">Tip:</span>
+      <span style="color:var(--bs-horizon);font-weight:600;">Tip:</span>
       <span style="font-size:13px;"> Each skill in this library includes a "Copy Instructions" button. Paste these directly into your Project's custom instructions.</span>
     </div>
 
     <!-- ============ CLAUDE CODE ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">3. Configure in Claude Code</h3>
-    <p style="margin:8px 0;">Add People.ai MCP to your Claude Code settings:</p>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">3. Configure in Claude Code</h3>
+    <p style="margin:8px 0;">Add Backstory MCP to your Claude Code settings:</p>
     <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;"># In your Claude Code MCP settings (settings.json or .mcp.json):
 {
   "mcpServers": {
@@ -1867,45 +1894,45 @@
     }
   }
 }</pre>
-    <p style="margin:8px 0 20px 0;font-size:13px;color:var(--pai-dark-gray);">Copy skill instructions into your <code>CLAUDE.md</code> file or invoke them as slash commands.</p>
+    <p style="margin:8px 0 20px 0;font-size:13px;color:var(--bs-text-secondary);">Copy skill instructions into your <code>CLAUDE.md</code> file or invoke them as slash commands.</p>
 
     <!-- ============ CHATGPT ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">4. Configure in ChatGPT</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">4. Configure in ChatGPT</h3>
     <p style="margin:8px 0;">ChatGPT Custom GPTs use Actions to connect to external APIs:</p>
     <ol style="margin:8px 0 16px 20px;line-height:2;">
       <li>Go to <strong>ChatGPT</strong> &rarr; <strong>Explore GPTs</strong> &rarr; <strong>Create</strong></li>
       <li>Paste the skill instructions into the <strong>Instructions</strong> field</li>
       <li>Under <strong>Actions</strong>, click <strong>Create new action</strong></li>
-      <li>Configure API endpoints for each People.ai MCP tool the skill uses</li>
+      <li>Configure API endpoints for each Backstory MCP tool the skill uses</li>
       <li>Set authentication headers: <code>PAI-Client-Id</code> and <code>PAI-Client-Secret</code></li>
       <li>Save and publish the GPT</li>
     </ol>
-    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--pai-orange);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--bs-cinder);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
       <strong>Header names are case-sensitive.</strong> Use exactly: <code>PAI-Client-Id</code> (not <code>PAI-Client-ID</code> or <code>pai-client-id</code>).
     </div>
 
     <!-- ============ COPILOT ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">5. Configure in Microsoft Copilot</h3>
-    <p style="margin:8px 0;">Use Copilot Studio to create agents with People.ai data:</p>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">5. Configure in Microsoft Copilot</h3>
+    <p style="margin:8px 0;">Use Copilot Studio to create agents with Backstory data:</p>
     <ol style="margin:8px 0 16px 20px;line-height:2;">
       <li>Open <strong>Microsoft Copilot Studio</strong> and create a new agent</li>
       <li>Paste the skill instructions into the agent's instructions field</li>
-      <li>Under <strong>Plugins</strong>, add a new connector for People.ai</li>
+      <li>Under <strong>Plugins</strong>, add a new connector for Backstory</li>
       <li>Configure the MCP endpoint: <code>https://mcp.people.ai/mcp</code></li>
       <li>Add authentication headers: <code>PAI-Client-Id</code> and <code>PAI-Client-Secret</code></li>
       <li>Publish and test the agent</li>
     </ol>
 
     <!-- ============ GEMINI ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">6. Configure in Google Gemini</h3>
-    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-med-blue);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">6. Configure in Google Gemini</h3>
+    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--bs-horizon);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
       <strong>Coming Soon:</strong> Google Gemini does not yet support MCP connections natively.
       We've prepared Gemini Gem instructions for all skills so they're ready when the integration launches.
       Check back for updates or follow the developer platforms section below.
     </div>
 
     <!-- ============ DEVELOPER PLATFORMS ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">7. Developer Platforms</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">7. Developer Platforms</h3>
     <p style="margin:8px 0;">For programmatic access, use these SDK examples:</p>
 
     <h4 style="margin-top:20px;">LangGraph (Python)</h4>
@@ -1970,7 +1997,7 @@ agent = Agent(
 )</pre>
 
     <!-- ============ ENV VARS ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">8. Environment Variables</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">8. Environment Variables</h3>
     <p style="margin:8px 0;">Set these for Python-based integrations:</p>
     <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:var(--radius);margin:8px 0 16px 0;overflow-x:auto;font-size:13px;">export PEOPLEAI_MCP_URL="https://mcp.people.ai/mcp"
 export PEOPLEAI_CLIENT_ID="your-client-id"
@@ -1981,71 +2008,71 @@ export ANTHROPIC_API_KEY="sk-ant-..."   # for Claude-based integrations
 export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
 
     <!-- ============ TESTING ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">9. Test Your Connection</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">9. Test Your Connection</h3>
     <p style="margin:8px 0;">Try these example queries to verify the connection works:</p>
     <ul style="margin:8px 0 16px 20px;line-height:2;">
       <li><code>"Find the account for Acme Corp"</code></li>
       <li><code>"What are the risks for the Acme Enterprise deal?"</code></li>
       <li><code>"Show me recent activity for Globex Industries"</code></li>
     </ul>
-    <p style="margin:8px 0;">If the AI responds with real account data, you're connected. If it says it can't access People.ai tools, double-check your credentials and integration setup.</p>
+    <p style="margin:8px 0;">If the AI responds with real account data, you're connected. If it says it can't access Backstory tools, double-check your credentials and integration setup.</p>
 
     <!-- ============ TROUBLESHOOTING ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">10. Troubleshooting</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">10. Troubleshooting</h3>
     <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
       <thead>
-        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--bs-border-subtle);">
           <th style="padding:10px 12px;text-align:left;">Issue</th>
           <th style="padding:10px 12px;text-align:left;">Cause</th>
           <th style="padding:10px 12px;text-align:left;">Fix</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
-          <td style="padding:10px 12px;">People.ai integration not available</td>
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
+          <td style="padding:10px 12px;">Backstory integration not available</td>
           <td style="padding:10px 12px;">MCP access not enabled for your org</td>
-          <td style="padding:10px 12px;">Contact your People.ai CSM to enable MCP API access</td>
+          <td style="padding:10px 12px;">Contact your Backstory CSM to enable MCP API access</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">Authentication failed</td>
           <td style="padding:10px 12px;">Wrong credentials or header names</td>
           <td style="padding:10px 12px;">Header names are case-sensitive: <code>PAI-Client-Id</code>, <code>PAI-Client-Secret</code>. Verify MCP-specific credentials (not REST API keys).</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
-          <td style="padding:10px 12px;">AI not using People.ai tools</td>
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
+          <td style="padding:10px 12px;">AI not using Backstory tools</td>
           <td style="padding:10px 12px;">Instructions not explicit enough</td>
           <td style="padding:10px 12px;">Use skill instructions from this library — they include explicit tool-calling workflows. Be specific: "Use find_account to look up Acme Corp."</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">Slow responses (10-30s)</td>
           <td style="padding:10px 12px;">AI-powered tools (<code>ask_sales_ai_*</code>) require deep analysis</td>
           <td style="padding:10px 12px;">This is normal. Use simpler tools like <code>get_account_status</code> for faster responses.</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">Tool returns empty data</td>
           <td style="padding:10px 12px;">Account name mismatch or no activity</td>
           <td style="padding:10px 12px;">Use exact account names from Salesforce. Verify the account has recent engagement data.</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">ChatGPT Actions not working</td>
           <td style="padding:10px 12px;">API schema misconfigured</td>
-          <td style="padding:10px 12px;">Ensure each Action maps to the correct People.ai MCP endpoint with proper authentication headers.</td>
+          <td style="padding:10px 12px;">Ensure each Action maps to the correct Backstory MCP endpoint with proper authentication headers.</td>
         </tr>
       </tbody>
     </table>
 
     <!-- ============ SECURITY ============ -->
-    <div style="margin-top:24px;padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;">
-      <strong>Security:</strong> Your People.ai data stays within the secure People.ai environment — AI assistants only send queries and receive specific responses.
-      All communication uses HTTPS/TLS encryption. The integration respects your People.ai permissions. Rotate credentials regularly.
+    <div style="margin-top:24px;padding:16px;background:#f0f7ff;border-left:4px solid var(--bs-horizon);border-radius:0 var(--radius) var(--radius) 0;">
+      <strong>Security:</strong> Your Backstory data stays within the secure Backstory environment — AI assistants only send queries and receive specific responses.
+      All communication uses HTTPS/TLS encryption. The integration respects your Backstory permissions. Rotate credentials regularly.
     </div>
 
     <div style="margin-top:16px;padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:32px;">
-      <strong>Need help?</strong> For People.ai API issues, contact your CSM or email <strong>support@people.ai</strong>.
+      <strong>Need help?</strong> For Backstory API issues, contact your CSM or email <strong>support@backstory.ai</strong>.
       For platform-specific questions, consult
-      <a href="https://support.anthropic.com" target="_blank" style="color:var(--pai-primary-blue);">Claude Support</a>,
-      <a href="https://help.openai.com" target="_blank" style="color:var(--pai-primary-blue);">OpenAI Help</a>, or
-      <a href="https://support.microsoft.com/copilot" target="_blank" style="color:var(--pai-primary-blue);">Microsoft Copilot Support</a>.
+      <a href="https://support.anthropic.com" target="_blank" style="color:var(--bs-horizon);">Claude Support</a>,
+      <a href="https://help.openai.com" target="_blank" style="color:var(--bs-horizon);">OpenAI Help</a>, or
+      <a href="https://support.microsoft.com/copilot" target="_blank" style="color:var(--bs-horizon);">Microsoft Copilot Support</a>.
     </div>
   </div>
 </div>
@@ -2054,16 +2081,16 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
 <div id="guides-view" class="container detail-view">
   <a class="back-link" onclick="navigate('#/')">&#8592; Back to Library</a>
   <div style="max-width:900px;">
-    <h2 style="color:var(--pai-dark-blue);margin-bottom:8px;">Setup Guides</h2>
-    <p style="color:var(--pai-dark-gray);margin-bottom:28px;">
-      Step-by-step instructions for connecting People.ai MCP to your preferred AI platform.
+    <h2 style="color:var(--bs-graphite);margin-bottom:8px;">Setup Guides</h2>
+    <p style="color:var(--bs-text-secondary);margin-bottom:28px;">
+      Step-by-step instructions for connecting Backstory MCP to your preferred AI platform.
     </p>
 
     <div class="guides-section-title">Data Source</div>
     <div class="guides-grid">
       <a class="guide-card hero" href="#/guide/mcp-setup">
         <div class="guide-card-icon">&#129504;</div>
-        <div class="guide-card-title">People.ai MCP</div>
+        <div class="guide-card-title">Backstory MCP</div>
         <div class="guide-card-desc">
           Core data source for all skills. MCP server setup, authentication, credentials,
           available tools, and multi-platform integration guide.
@@ -2078,7 +2105,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#9670;</div>
         <div class="guide-card-title">Claude.ai Projects</div>
         <div class="guide-card-desc">
-          Connect People.ai MCP in Claude.ai Settings, create a Project,
+          Connect Backstory MCP in Claude.ai Settings, create a Project,
           and paste skill instructions. Native MCP support.
         </div>
         <span class="guide-card-badge">Recommended</span>
@@ -2087,7 +2114,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#9654;</div>
         <div class="guide-card-title">Claude Code</div>
         <div class="guide-card-desc">
-          Configure People.ai MCP in your settings.json or .mcp.json.
+          Configure Backstory MCP in your settings.json or .mcp.json.
           Use skills as CLAUDE.md instructions or slash commands.
         </div>
         <span class="guide-card-badge">Developer</span>
@@ -2096,7 +2123,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#11044;</div>
         <div class="guide-card-title">ChatGPT Custom GPTs</div>
         <div class="guide-card-desc">
-          Create a Custom GPT with Actions pointing to People.ai API endpoints.
+          Create a Custom GPT with Actions pointing to Backstory API endpoints.
           Configure authentication headers and API schema.
         </div>
         <span class="guide-card-badge">Actions required</span>
@@ -2105,7 +2132,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#11214;</div>
         <div class="guide-card-title">Microsoft Copilot</div>
         <div class="guide-card-desc">
-          Build a Copilot Studio agent with People.ai plugins.
+          Build a Copilot Studio agent with Backstory plugins.
           Configure MCP endpoint and authentication in the plugin settings.
         </div>
         <span class="guide-card-badge">Copilot Studio</span>
@@ -2114,7 +2141,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#10022;</div>
         <div class="guide-card-title">Google Gemini</div>
         <div class="guide-card-desc">
-          Create a Gemini Gem with People.ai extensions.
+          Create a Gemini Gem with Backstory extensions.
           MCP extension support is coming — instructions are ready for launch.
         </div>
         <span class="guide-card-badge coming-soon">Coming soon</span>
@@ -2123,7 +2150,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#9729;</div>
         <div class="guide-card-title">Salesforce Agentforce</div>
         <div class="guide-card-desc">
-          Connect People.ai MCP as an Agentforce Action. Configure Topics,
+          Connect Backstory MCP as an Agentforce Action. Configure Topics,
           map MCP tools to agent actions, and deploy within Salesforce.
         </div>
         <span class="guide-card-badge">New</span>
@@ -2136,7 +2163,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
         <div class="guide-card-icon">&#128187;</div>
         <div class="guide-card-title">LangGraph / Claude SDK / OpenAI SDK</div>
         <div class="guide-card-desc">
-          Python SDK examples for connecting People.ai MCP programmatically.
+          Python SDK examples for connecting Backstory MCP programmatically.
           LangChain adapters, Claude Agent SDK, and OpenAI Agents SDK.
         </div>
         <span class="guide-card-badge">Python</span>
@@ -2149,14 +2176,14 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
 <div id="guide-agentforce-view" class="container detail-view">
   <a class="back-link" onclick="navigate('#/guides')">&#8592; All Guides</a>
   <div style="max-width:800px;">
-    <h2 style="color:var(--pai-dark-blue);margin-bottom:8px;">Salesforce Agentforce + People.ai MCP</h2>
-    <p style="color:var(--pai-dark-gray);margin-bottom:24px;">
-      Connect People.ai's MCP server to Salesforce Agentforce to bring real-time sales intelligence
-      directly into your Salesforce environment. Agentforce agents can use People.ai data to
+    <h2 style="color:var(--bs-graphite);margin-bottom:8px;">Salesforce Agentforce + Backstory MCP</h2>
+    <p style="color:var(--bs-text-secondary);margin-bottom:24px;">
+      Connect Backstory's MCP server to Salesforce Agentforce to bring real-time sales intelligence
+      directly into your Salesforce environment. Agentforce agents can use Backstory data to
       analyze accounts, score opportunities, and recommend next best actions — all within Salesforce.
     </p>
 
-    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:16px;">
+    <div style="padding:16px;background:#f0f7ff;border-left:4px solid var(--bs-horizon);border-radius:0 var(--radius) var(--radius) 0;margin-bottom:16px;">
       <strong>What is Agentforce?</strong> Salesforce Agentforce is an AI agent platform that lets you build
       autonomous agents operating inside Salesforce. Agents use <strong>Topics</strong> (categories of work)
       and <strong>Actions</strong> (tools they can call) to complete tasks using natural language.
@@ -2166,42 +2193,42 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
       <strong>Prerequisites:</strong>
       <ul style="margin:8px 0 0 20px;line-height:1.8;">
         <li>Salesforce org with <strong>Agentforce</strong> enabled (Enterprise Edition or higher)</li>
-        <li>Active People.ai account with <strong>MCP API access</strong> enabled</li>
+        <li>Active Backstory account with <strong>MCP API access</strong> enabled</li>
         <li>Salesforce admin permissions to create agents and external services</li>
-        <li>People.ai MCP credentials (Client ID and Client Secret)</li>
+        <li>Backstory MCP credentials (Client ID and Client Secret)</li>
       </ul>
     </div>
 
     <!-- ============ WHY AGENTFORCE ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">Why Agentforce + People.ai?</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">Why Agentforce + Backstory?</h3>
     <ul style="margin:8px 0 20px 20px;line-height:2;">
       <li><strong>Embedded in Salesforce</strong> — agents surface insights where reps already work, no context switching</li>
-      <li><strong>Dual data access</strong> — combine native Salesforce objects with People.ai communication intelligence</li>
+      <li><strong>Dual data access</strong> — combine native Salesforce objects with Backstory communication intelligence</li>
       <li><strong>Event-driven triggers</strong> — fire agents automatically on stage changes, close date shifts, or activity gaps</li>
       <li><strong>Write-back capabilities</strong> — agents can update Salesforce fields, create tasks, and log activities</li>
       <li><strong>Governed by Salesforce Trust Layer</strong> — data masking, audit trails, and permission-based access</li>
     </ul>
 
     <!-- ============ STEP 1 ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">1. Register People.ai as an External Service</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">1. Register Backstory as an External Service</h3>
     <ol style="margin:12px 0 20px 20px;line-height:2;">
       <li>In Salesforce Setup, search for <strong>Named Credentials</strong></li>
       <li>Click <strong>New Named Credential</strong> and configure:
         <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;">
           <tbody>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;font-weight:bold;width:180px;">Label</td>
               <td style="padding:8px 12px;"><code>People_ai_MCP</code></td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;font-weight:bold;">URL</td>
               <td style="padding:8px 12px;"><code>https://mcp.people.ai/mcp</code></td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;font-weight:bold;">Identity Type</td>
               <td style="padding:8px 12px;"><strong>Named Principal</strong></td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;font-weight:bold;">Authentication Protocol</td>
               <td style="padding:8px 12px;"><strong>Custom Header</strong></td>
             </tr>
@@ -2211,21 +2238,21 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
       <li>Add custom headers:
         <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;">
           <thead>
-            <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+            <tr style="background:#f0f7ff;border-bottom:2px solid var(--bs-border-subtle);">
               <th style="padding:8px 12px;text-align:left;">Header Name</th>
               <th style="padding:8px 12px;text-align:left;">Value</th>
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;"><code>PAI-Client-Id</code></td>
               <td style="padding:8px 12px;">[Your Client ID]</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;"><code>PAI-Client-Secret</code></td>
               <td style="padding:8px 12px;">[Your Client Secret]</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;"><code>Content-Type</code></td>
               <td style="padding:8px 12px;"><code>application/json</code></td>
             </tr>
@@ -2234,59 +2261,59 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
       </li>
       <li>Save the Named Credential</li>
     </ol>
-    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--pai-orange);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
+    <div style="padding:16px;background:#fff8e6;border-left:4px solid var(--bs-cinder);border-radius:0 var(--radius) var(--radius) 0;margin:8px 0 20px 0;">
       <strong>Header names are case-sensitive.</strong> Use exactly: <code>PAI-Client-Id</code> (not <code>PAI-Client-ID</code> or <code>pai-client-id</code>).
     </div>
 
     <!-- ============ STEP 2 ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">2. Create Agentforce Actions for MCP Tools</h3>
-    <p style="margin:8px 0;">Each People.ai MCP tool becomes an Agentforce Action. Create these as <strong>External Service Actions</strong> or <strong>Apex Invocable Actions</strong>:</p>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">2. Create Agentforce Actions for MCP Tools</h3>
+    <p style="margin:8px 0;">Each Backstory MCP tool becomes an Agentforce Action. Create these as <strong>External Service Actions</strong> or <strong>Apex Invocable Actions</strong>:</p>
 
     <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
       <thead>
-        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--bs-border-subtle);">
           <th style="padding:10px 12px;text-align:left;">MCP Tool</th>
           <th style="padding:10px 12px;text-align:left;">Agentforce Action Name</th>
           <th style="padding:10px 12px;text-align:left;">Input</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>find_account</code></td>
-          <td style="padding:10px 12px;">Find People.ai Account</td>
+          <td style="padding:10px 12px;">Find Backstory Account</td>
           <td style="padding:10px 12px;">Account Name or Domain</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_account_status</code></td>
           <td style="padding:10px 12px;">Get Account Health Status</td>
           <td style="padding:10px 12px;">Account ID</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_opportunity_status</code></td>
           <td style="padding:10px 12px;">Get Opportunity Status</td>
           <td style="padding:10px 12px;">Opportunity ID</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_engaged_people</code></td>
           <td style="padding:10px 12px;">Get Engaged Contacts</td>
           <td style="padding:10px 12px;">Account ID</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>ask_sales_ai_about_account</code></td>
           <td style="padding:10px 12px;">Ask Sales AI About Account</td>
           <td style="padding:10px 12px;">Account ID, Question</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>ask_sales_ai_about_opportunity</code></td>
           <td style="padding:10px 12px;">Ask Sales AI About Deal</td>
           <td style="padding:10px 12px;">Opportunity ID, Question</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>get_scorecard</code></td>
           <td style="padding:10px 12px;">Get Performance Scorecard</td>
           <td style="padding:10px 12px;">Account ID</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;"><code>top_records</code></td>
           <td style="padding:10px 12px;">Get Top Records</td>
           <td style="padding:10px 12px;">Record Type, Sort Criteria</td>
@@ -2296,7 +2323,7 @@ export OPENAI_API_KEY="sk-..."          # for OpenAI-based integrations</pre>
 
     <div style="padding:12px 16px;background:#1e1e2e;border-radius:var(--radius);margin:8px 0 20px 0;">
       <span style="color:#89b4fa;font-weight:600;">Apex Example:</span>
-      <pre style="color:#cdd6f4;margin:8px 0 0 0;font-size:13px;overflow-x:auto;">@InvocableMethod(label='Get Account Status from People.ai'
+      <pre style="color:#cdd6f4;margin:8px 0 0 0;font-size:13px;overflow-x:auto;">@InvocableMethod(label='Get Account Status from Backstory'
     description='Retrieves account health and engagement data')
 public static List&lt;AccountStatusResult&gt; getAccountStatus(
     List&lt;AccountStatusRequest&gt; requests
@@ -2313,7 +2340,7 @@ public static List&lt;AccountStatusResult&gt; getAccountStatus(
     </div>
 
     <!-- ============ STEP 3 ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">3. Create an Agentforce Agent</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">3. Create an Agentforce Agent</h3>
     <ol style="margin:12px 0 20px 20px;line-height:2;">
       <li>In Setup, go to <strong>Agentforce Agents</strong> (or search "Agent Builder")</li>
       <li>Click <strong>New Agent</strong></li>
@@ -2321,24 +2348,24 @@ public static List&lt;AccountStatusResult&gt; getAccountStatus(
       <li>Add a <strong>Topic</strong> for each skill category:
         <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;">
           <thead>
-            <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+            <tr style="background:#f0f7ff;border-bottom:2px solid var(--bs-border-subtle);">
               <th style="padding:8px 12px;text-align:left;">Topic</th>
               <th style="padding:8px 12px;text-align:left;">Description</th>
               <th style="padding:8px 12px;text-align:left;">Actions to Assign</th>
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;">Account Intelligence</td>
               <td style="padding:8px 12px;">Analyze account health, engagement, and relationships</td>
               <td style="padding:8px 12px;">Find Account, Get Account Health, Get Engaged Contacts, Ask Sales AI</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;">Deal Management</td>
               <td style="padding:8px 12px;">Opportunity analysis, win probability, and deal coaching</td>
               <td style="padding:8px 12px;">Get Opportunity Status, Ask Sales AI About Deal, Get Scorecard</td>
             </tr>
-            <tr style="border-bottom:1px solid var(--pai-light-gray);">
+            <tr style="border-bottom:1px solid var(--bs-border-subtle);">
               <td style="padding:8px 12px;">Pipeline Review</td>
               <td style="padding:8px 12px;">Pipeline health, forecasting, and territory analysis</td>
               <td style="padding:8px 12px;">Get Top Records, Get Opportunity Status, Ask Sales AI</td>
@@ -2347,12 +2374,12 @@ public static List&lt;AccountStatusResult&gt; getAccountStatus(
         </table>
       </li>
       <li>Paste the skill instructions from this library into each Topic's <strong>Instructions</strong> field</li>
-      <li>Assign the People.ai Actions you created in Step 2 to each Topic</li>
+      <li>Assign the Backstory Actions you created in Step 2 to each Topic</li>
       <li>Click <strong>Activate</strong> to deploy the agent</li>
     </ol>
 
     <!-- ============ STEP 4 ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">4. Configure Triggers (Optional)</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">4. Configure Triggers (Optional)</h3>
     <p style="margin:8px 0;">Agentforce agents can run automatically based on Salesforce events:</p>
     <ul style="margin:8px 0 20px 20px;line-height:2;">
       <li><strong>Stage Change</strong> — Run opportunity analysis when a deal moves to a new stage</li>
@@ -2360,50 +2387,50 @@ public static List&lt;AccountStatusResult&gt; getAccountStatus(
       <li><strong>Activity Gap</strong> — Alert when no meetings or emails logged for 14+ days</li>
       <li><strong>New Account Assignment</strong> — Auto-generate account plan when an AE is assigned a new account</li>
     </ul>
-    <p style="margin:8px 0;font-size:13px;color:var(--pai-dark-gray);">Configure triggers in <strong>Setup &rarr; Process Builder</strong> or <strong>Flow Builder</strong>, invoking your Agentforce agent as the action.</p>
+    <p style="margin:8px 0;font-size:13px;color:var(--bs-text-secondary);">Configure triggers in <strong>Setup &rarr; Process Builder</strong> or <strong>Flow Builder</strong>, invoking your Agentforce agent as the action.</p>
 
     <!-- ============ STEP 5 ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">5. Test Your Agent</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">5. Test Your Agent</h3>
     <p style="margin:8px 0;">Try these queries in the Agentforce test console:</p>
     <ul style="margin:8px 0 16px 20px;line-height:2;">
       <li><code>"Analyze the Acme Corp account — what's the engagement health?"</code></li>
       <li><code>"What's the win probability for the Globex Enterprise deal?"</code></li>
       <li><code>"Who are the key stakeholders at Initech and when did we last meet?"</code></li>
     </ul>
-    <p style="margin:8px 0;">If the agent responds with People.ai data, you're connected. Check the agent's execution log for tool call details.</p>
+    <p style="margin:8px 0;">If the agent responds with Backstory data, you're connected. Check the agent's execution log for tool call details.</p>
 
     <!-- ============ TROUBLESHOOTING ============ -->
-    <h3 style="margin-top:28px;color:var(--pai-primary-blue);">6. Troubleshooting</h3>
+    <h3 style="margin-top:28px;color:var(--bs-horizon);">6. Troubleshooting</h3>
     <table style="width:100%;border-collapse:collapse;margin:12px 0 20px 0;font-size:14px;">
       <thead>
-        <tr style="background:#f0f7ff;border-bottom:2px solid var(--pai-light-gray);">
+        <tr style="background:#f0f7ff;border-bottom:2px solid var(--bs-border-subtle);">
           <th style="padding:10px 12px;text-align:left;">Issue</th>
           <th style="padding:10px 12px;text-align:left;">Cause</th>
           <th style="padding:10px 12px;text-align:left;">Fix</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">Callout exception</td>
           <td style="padding:10px 12px;">Named Credential misconfigured</td>
           <td style="padding:10px 12px;">Verify URL is exactly <code>https://mcp.people.ai/mcp</code>. Check Remote Site Settings include <code>mcp.people.ai</code>.</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">401 Unauthorized</td>
           <td style="padding:10px 12px;">Wrong credentials or header names</td>
           <td style="padding:10px 12px;">Headers are case-sensitive: <code>PAI-Client-Id</code>, <code>PAI-Client-Secret</code>. Verify MCP credentials, not REST API keys.</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
-          <td style="padding:10px 12px;">Agent not selecting People.ai actions</td>
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
+          <td style="padding:10px 12px;">Agent not selecting Backstory actions</td>
           <td style="padding:10px 12px;">Actions not assigned to Topic</td>
-          <td style="padding:10px 12px;">Ensure each People.ai Action is explicitly assigned to the relevant Topic in Agent Builder.</td>
+          <td style="padding:10px 12px;">Ensure each Backstory Action is explicitly assigned to the relevant Topic in Agent Builder.</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">Timeout on ask_sales_ai calls</td>
           <td style="padding:10px 12px;">AI analysis takes 10-30 seconds</td>
           <td style="padding:10px 12px;">Increase callout timeout in Named Credential. Consider async pattern with Platform Events for long-running analysis.</td>
         </tr>
-        <tr style="border-bottom:1px solid var(--pai-light-gray);">
+        <tr style="border-bottom:1px solid var(--bs-border-subtle);">
           <td style="padding:10px 12px;">Permission errors</td>
           <td style="padding:10px 12px;">User profile lacks Agentforce access</td>
           <td style="padding:10px 12px;">Assign the <code>Agentforce User</code> permission set to target users. Verify agent sharing settings.</td>
@@ -2411,15 +2438,15 @@ public static List&lt;AccountStatusResult&gt; getAccountStatus(
       </tbody>
     </table>
 
-    <div style="margin-top:24px;padding:16px;background:#f0f7ff;border-left:4px solid var(--pai-primary-blue);border-radius:0 var(--radius) var(--radius) 0;">
-      <strong>Security:</strong> Agentforce inherits Salesforce's Trust Layer — all People.ai data queries are governed by your org's
+    <div style="margin-top:24px;padding:16px;background:#f0f7ff;border-left:4px solid var(--bs-horizon);border-radius:0 var(--radius) var(--radius) 0;">
+      <strong>Security:</strong> Agentforce inherits Salesforce's Trust Layer — all Backstory data queries are governed by your org's
       sharing rules, field-level security, and audit logging. Credentials are stored securely in Named Credentials, never in code.
     </div>
 
     <div style="margin-top:16px;padding:16px;background:#f0faf0;border-left:4px solid #2da44e;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:32px;">
-      <strong>Need help?</strong> For People.ai MCP issues, contact your CSM or email <strong>support@people.ai</strong>.
-      For Agentforce questions, see <a href="https://help.salesforce.com/s/articleView?id=sf.agentforce_overview.htm" target="_blank" style="color:var(--pai-primary-blue);">Salesforce Agentforce Documentation</a>
-      or the <a href="https://trailhead.salesforce.com" target="_blank" style="color:var(--pai-primary-blue);">Trailhead Agentforce modules</a>.
+      <strong>Need help?</strong> For Backstory MCP issues, contact your CSM or email <strong>support@backstory.ai</strong>.
+      For Agentforce questions, see <a href="https://help.salesforce.com/s/articleView?id=sf.agentforce_overview.htm" target="_blank" style="color:var(--bs-horizon);">Salesforce Agentforce Documentation</a>
+      or the <a href="https://trailhead.salesforce.com" target="_blank" style="color:var(--bs-horizon);">Trailhead Agentforce modules</a>.
     </div>
   </div>
 </div>
@@ -2431,15 +2458,15 @@ public static List&lt;AccountStatusResult&gt; getAccountStatus(
     <div class="wizard-step-indicator" id="wizard-dots"></div>
 
     <div class="wizard-step" id="wizard-step-0">
-      <div class="wizard-title">Connect People.ai MCP</div>
+      <div class="wizard-title">Connect Backstory MCP</div>
       <div class="wizard-text">
-        Before using any skill, you need to connect the People.ai MCP integration to your LLM platform.
+        Before using any skill, you need to connect the Backstory MCP integration to your LLM platform.
         This gives the AI access to your account data, communication intelligence, and scorecards.
       </div>
       <div style="background:#F8F9FB;border-radius:8px;padding:16px;margin-bottom:16px;font-size:13px;">
-        <strong>For Claude.ai:</strong> Settings &rarr; Integrations &rarr; Enable "People.ai MCP"<br><br>
-        <strong>For ChatGPT:</strong> Configure Actions in your Custom GPT pointing to People.ai API endpoints<br><br>
-        <a href="#/guide/mcp-setup" id="wizard-mcp-link" style="color:var(--pai-primary-blue);">Full setup guide &rarr;</a>
+        <strong>For Claude.ai:</strong> Settings &rarr; Integrations &rarr; Enable "Backstory MCP"<br><br>
+        <strong>For ChatGPT:</strong> Configure Actions in your Custom GPT pointing to Backstory API endpoints<br><br>
+        <a href="#/guide/mcp-setup" id="wizard-mcp-link" style="color:var(--bs-horizon);">Full setup guide &rarr;</a>
       </div>
       <div class="wizard-actions">
         <div></div>
@@ -2700,7 +2727,7 @@ function renderDetail(skillId) {
         <span class="badge badge-status-${skill.status}" style="font-size:12px;">
           ${skill.status === 'ready' ? 'Ready to Deploy' : 'Draft'}
         </span>
-        <span style="font-size:12px;color:var(--pai-med-gray);">Skill ${skill.number}</span>
+        <span style="font-size:12px;color:var(--bs-text-tertiary);">Skill ${skill.number}</span>
       </div>
       <div class="detail-title">${skill.name}</div>
       <div class="detail-desc">${skill.description}</div>
@@ -2710,10 +2737,10 @@ function renderDetail(skillId) {
         <div><strong>Category:</strong> ${cat ? cat.name : ''}</div>
         <div><strong>MCP:</strong> ${skill.mcpConnectors.join(', ')}</div>
       </div>
-      ${skill.mcpTools.length ? `<div style="margin-top:8px;font-size:12px;color:var(--pai-dark-gray);">
+      ${skill.mcpTools.length ? `<div style="margin-top:8px;font-size:12px;color:var(--bs-text-secondary);">
         <strong>Tools:</strong> ${skill.mcpTools.join(', ')}
       </div>` : ''}
-      ${skill.projectKnowledgeFiles.length ? `<div style="margin-top:8px;font-size:12px;color:var(--pai-dark-gray);">
+      ${skill.projectKnowledgeFiles.length ? `<div style="margin-top:8px;font-size:12px;color:var(--bs-text-secondary);">
         <strong>Knowledge Files:</strong> ${skill.projectKnowledgeFiles.join(', ')}
       </div>` : ''}
     </div>
@@ -2763,10 +2790,10 @@ function renderDetail(skillId) {
         const knowledgeFiles = skill.projectKnowledgeFiles || [];
         const repoBase = repoRawBase;
         const filesHtml = knowledgeFiles.length ? `
-          <div style="margin-top:16px;padding:16px;background:#f0f7ff;border-radius:8px;border:1px solid var(--pai-light-blue);">
-            <div style="font-weight:600;font-size:14px;margin-bottom:8px;color:var(--pai-dark-blue);">Knowledge Files</div>
+          <div style="margin-top:16px;padding:16px;background:#f0f7ff;border-radius:8px;border:1px solid var(--bs-horizon-subtle);">
+            <div style="font-weight:600;font-size:14px;margin-bottom:8px;color:var(--bs-graphite);">Knowledge Files</div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;">
-              ${repoBase ? knowledgeFiles.map(f => `<a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" class="btn btn-download" style="font-size:13px;padding:6px 14px;text-decoration:none;">&#x2913; ${f}</a>`).join('') : '<div style="font-size:13px;color:var(--pai-dark-gray);">Knowledge-file downloads are not configured for this build.</div>'}
+              ${repoBase ? knowledgeFiles.map(f => `<a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" class="btn btn-download" style="font-size:13px;padding:6px 14px;text-decoration:none;">&#x2913; ${f}</a>`).join('') : '<div style="font-size:13px;color:var(--bs-text-secondary);">Knowledge-file downloads are not configured for this build.</div>'}
             </div>
           </div>` : '';
         return `<div class="tab-content" data-panel="${p.id}" style="display:none">
@@ -2812,7 +2839,7 @@ function renderDetail(skillId) {
       leftHtml += `
         <div class="detail-section">
           <h3>Knowledge Files</h3>
-          ${repoBase ? `<ul>${skill.projectKnowledgeFiles.map(f => `<li><a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" style="color:var(--pai-primary-blue);text-decoration:none;">${f} <span style="font-size:11px;">&#x2913;</span></a></li>`).join('')}</ul>` : '<div style="font-size:13px;color:var(--pai-dark-gray);">Knowledge-file downloads are not configured for this build.</div>'}
+          ${repoBase ? `<ul>${skill.projectKnowledgeFiles.map(f => `<li><a href="${repoBase}/${skill.id}/assets/${encodeURIComponent(f)}" download="${f}" style="color:var(--bs-horizon);text-decoration:none;">${f} <span style="font-size:11px;">&#x2913;</span></a></li>`).join('')}</ul>` : '<div style="font-size:13px;color:var(--bs-text-secondary);">Knowledge-file downloads are not configured for this build.</div>'}
         </div>`;
     }
 
@@ -2972,9 +2999,9 @@ function renderWizardPlatforms() {
   if (!catalogData) return;
   const platforms = catalogData.catalog.platforms.filter(p => p.status === 'supported');
   document.getElementById('wizard-platform-grid').innerHTML = platforms.map(p => `
-    <div style="border:2px solid ${wizardState.platform === p.id ? 'var(--pai-primary-blue)' : 'var(--pai-light-gray)'};
+    <div style="border:2px solid ${wizardState.platform === p.id ? 'var(--bs-horizon)' : 'var(--bs-border-subtle)'};
                 border-radius:8px;padding:14px;cursor:pointer;transition:all 0.2s;
-                background:${wizardState.platform === p.id ? 'var(--pai-light-blue)' : 'white'}"
+                background:${wizardState.platform === p.id ? 'var(--bs-horizon-subtle)' : 'white'}"
          onclick="wizardState.platform='${p.id}';renderWizardPlatforms();">
       <div style="font-weight:600;font-size:14px;">${p.name}</div>
     </div>
@@ -2988,12 +3015,12 @@ function renderWizardSkills() {
   const skills = readySkills.length ? readySkills : allSkills.slice(0, 4);
 
   document.getElementById('wizard-skill-grid').innerHTML = skills.map(s => `
-    <div style="border:2px solid ${wizardState.skill?.id === s.id ? 'var(--pai-primary-blue)' : 'var(--pai-light-gray)'};
+    <div style="border:2px solid ${wizardState.skill?.id === s.id ? 'var(--bs-horizon)' : 'var(--bs-border-subtle)'};
                 border-radius:8px;padding:14px;cursor:pointer;transition:all 0.2s;
-                background:${wizardState.skill?.id === s.id ? 'var(--pai-light-blue)' : 'white'}"
+                background:${wizardState.skill?.id === s.id ? 'var(--bs-horizon-subtle)' : 'white'}"
          onclick="wizardState.skill=catalogData.skills.find(x=>x.id==='${s.id}');renderWizardSkills();">
       <div style="font-weight:600;font-size:14px;">${s.name}</div>
-      <div style="font-size:12px;color:var(--pai-dark-gray);margin-top:4px;">${s.description.substring(0, 80)}...</div>
+      <div style="font-size:12px;color:var(--bs-text-secondary);margin-top:4px;">${s.description.substring(0, 80)}...</div>
     </div>
   `).join('');
 }
@@ -3307,9 +3334,9 @@ class SkillWalkthrough {
     const tools = this.wt.steps.filter(s => s.type === 'tool').map(s => s.name);
     const uniqueTools = [...new Set(tools)];
     return `
-      <div style="font-family:'Proxima Nova',-apple-system,sans-serif;font-size:13px;">
-        <div style="font-weight:700;margin-bottom:8px;color:white;">Step 0: Connect People.ai MCP</div>
-        <div style="color:var(--pai-med-gray);margin-bottom:8px;">Settings &rarr; Integrations &rarr; People.ai MCP</div>
+      <div style="font-family:'Roboto',-apple-system,sans-serif;font-size:13px;">
+        <div style="font-weight:700;margin-bottom:8px;color:white;">Step 0: Connect Backstory MCP</div>
+        <div style="color:var(--bs-text-tertiary);margin-bottom:8px;">Settings &rarr; Integrations &rarr; Backstory MCP</div>
         <div class="wt-mcp-connected" style="display:none;" data-connected>
           &#10003; Connected — tools available:
         </div>
@@ -3320,7 +3347,7 @@ class SkillWalkthrough {
   }
 
   renderMcpCollapsed() {
-    return `<div class="wt-mcp-connected">&#10003; People.ai MCP Connected <span style="color:var(--pai-med-gray);font-weight:400;margin-left:8px;">(click to replay)</span></div>`;
+    return `<div class="wt-mcp-connected">&#10003; Backstory MCP Connected <span style="color:var(--bs-text-tertiary);font-weight:400;margin-left:8px;">(click to replay)</span></div>`;
   }
 
   async animateMcp() {
@@ -3473,7 +3500,7 @@ class SetupWalkthrough {
 
   render() {
     this.container.innerHTML = `
-      <h3 style="margin-bottom:16px;color:var(--pai-dark-blue);">Setup Walkthrough</h3>
+      <h3 style="margin-bottom:16px;color:var(--bs-graphite);">Setup Walkthrough</h3>
       <div class="setup-wt">
         <div class="setup-wt-tabs">
           <div class="setup-wt-tab" data-platform="mcp-setup">MCP Setup</div>
@@ -3559,7 +3586,7 @@ class SetupWalkthrough {
               <div style="font-size:12px;color:#8B7E6E;margin-bottom:16px;">Connect external tools and data sources via MCP</div>
               <div data-section="mcp-list"></div>
               <div data-section="mcp-detail" style="display:none;">
-                <div style="font-weight:600;font-size:13px;margin-bottom:8px;">People.ai MCP Server</div>
+                <div style="font-weight:600;font-size:13px;margin-bottom:8px;">Backstory MCP Server</div>
                 <div style="font-size:11px;color:#8B7E6E;margin-bottom:12px;">Access CRM intelligence, engagement data, and sales insights</div>
                 <div class="mock-field-label">Server URL</div>
                 <div class="mock-text-field" data-field="url" style="font-size:11px;"></div>
@@ -3618,11 +3645,11 @@ class SetupWalkthrough {
         }
       },
       {
-        title: 'Find People.ai MCP',
+        title: 'Find Backstory MCP',
         detail: 'Browse available MCP integrations',
         animate: async () => {
           const items = [
-            { name: 'People.ai', desc: 'CRM intelligence & sales insights', highlight: true },
+            { name: 'Backstory', desc: 'CRM intelligence & sales insights', highlight: true },
             { name: 'GitHub', desc: 'Repository access & code search', highlight: false },
             { name: 'Slack', desc: 'Channel messages & search', highlight: false }
           ];
@@ -3639,7 +3666,7 @@ class SetupWalkthrough {
       },
       {
         title: 'Enter MCP Server URL',
-        detail: 'Point to the People.ai MCP endpoint',
+        detail: 'Point to the Backstory MCP endpoint',
         animate: async () => {
           mcpList.style.display = 'none';
           mcpDetail.style.display = 'block';
@@ -3673,7 +3700,7 @@ class SetupWalkthrough {
       },
       {
         title: 'Enable Integration',
-        detail: 'Toggle on People.ai MCP for your projects',
+        detail: 'Toggle on Backstory MCP for your projects',
         animate: async () => {
           sfOauth.style.display = 'none';
           mcpDetail.style.display = 'block';
@@ -3738,7 +3765,7 @@ class SetupWalkthrough {
               <div data-section="mcp" style="display:none;">
                 <div class="mock-field-label">Integrations</div>
                 <div class="mock-toggle-row">
-                  <span style="font-size:12px;">People.ai MCP</span>
+                  <span style="font-size:12px;">Backstory MCP</span>
                   <div class="mock-toggle" data-toggle="mcp"></div>
                 </div>
               </div>
@@ -3818,7 +3845,7 @@ class SetupWalkthrough {
         }
       },
       {
-        title: 'Connect People.ai MCP',
+        title: 'Connect Backstory MCP',
         detail: 'Enable the MCP integration in project settings',
         animate: async () => {
           mcpSection.style.display = 'block';
@@ -3908,12 +3935,12 @@ class SetupWalkthrough {
       },
       {
         title: 'Verify MCP Connection',
-        detail: 'Confirm People.ai MCP is available',
+        detail: 'Confirm Backstory MCP is available',
         animate: async () => {
           const l1 = addLine('<span class="mock-terminal-prompt">$</span> <span class="mock-terminal-cmd">claude mcp list</span>');
           l1.classList.add('visible');
           await this.wait(500);
-          const l2 = addLine('<span class="mock-terminal-success">People.ai MCP ✓ Connected</span>');
+          const l2 = addLine('<span class="mock-terminal-success">Backstory MCP ✓ Connected</span>');
           l2.classList.add('visible');
           await this.wait(200);
           if (tools.length) {
@@ -4027,7 +4054,7 @@ class SetupWalkthrough {
       },
       {
         title: 'Configure Actions',
-        detail: 'Add People.ai API endpoints as actions',
+        detail: 'Add Backstory API endpoints as actions',
         animate: async () => {
           actionsSection.style.display = 'block';
           const actionTools = tools.length > 0 ? tools.slice(0, 6) : ['find_account', 'get_scorecard', 'get_engaged_people'];

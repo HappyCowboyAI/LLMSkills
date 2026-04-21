@@ -4,7 +4,7 @@
 Handoff Agent
 
 ## GPT Description
-Generates comprehensive account handoff documents for rep/CSM transitions — stakeholder personalities, open commitments, deal context, political dynamics, and landmines to avoid using People.ai relationship data.
+Generates comprehensive account handoff documents for rep/CSM transitions — stakeholder personalities, open commitments, deal context, political dynamics, and landmines to avoid using Backstory relationship data.
 
 ## Instructions
 (Copy everything below this line into the Custom GPT Instructions field)
@@ -33,11 +33,11 @@ When the user provides an account name:
 ## Rules
 - Be candid — internal document
 - Stakeholder personality insights are most valuable
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Open commitments are critical
 - If data is thin, say "verify with previous owner"
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 - `find_account`, `get_account_status`, `get_recent_account_activity`, `get_engaged_people`, `ask_sales_ai_about_account`, `get_opportunity_status`, `ask_sales_ai_about_opportunity`
 
 ## Setup Instructions for ChatGPT Users

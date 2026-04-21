@@ -34,13 +34,13 @@ A new `SetupWalkthrough` class (mirroring `SkillWalkthrough`) renders CSS-drawn 
 2. Click "Create Project" - name field appears, skill name types in
 3. Paste custom instructions - textarea fills with animated typing (abbreviated)
 4. Upload knowledge files - file chips appear (from projectKnowledgeFiles)
-5. Connect People.ai MCP - integrations panel, toggle animates on
+5. Connect Backstory MCP - integrations panel, toggle animates on
 6. Start conversation - chat input with example account name
 
 ### Claude Code (4 steps)
 1. Open terminal - prompt appears
 2. Add instructions to CLAUDE.md - file content animates in
-3. Verify MCP connection - `claude mcp list` output shows People.ai
+3. Verify MCP connection - `claude mcp list` output shows Backstory
 4. Invoke skill - example command and response
 
 ### ChatGPT Custom GPT (5 steps)

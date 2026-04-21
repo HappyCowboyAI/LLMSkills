@@ -34,12 +34,12 @@ When the user provides an account name:
 
 ## Rules
 - Data first — numbers, not analysis
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Always show directional trends
 - "Going Dark" and "Newly Active" are most valuable
 - No recommendations — just the data
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 - `find_account`, `get_engaged_people`, `get_recent_account_activity`, `get_account_status`, `ask_sales_ai_about_account`
 
 Configure these plugins in your Copilot agent
@@ -47,5 +47,5 @@ Configure these plugins in your Copilot agent
 ## Setup Instructions for Microsoft Copilot Users
 1. Go to **Microsoft Copilot Studio** > **Create** > **New Agent**
 2. Set Agent Name and Agent Description from above
-3. Paste Instructions into the Instructions field, configure plugins for each People.ai tool
+3. Paste Instructions into the Instructions field, configure plugins for each Backstory tool
 4. Test by typing an account name

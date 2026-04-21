@@ -21,7 +21,7 @@ Traditional account planning suffers from:
 ### Solution
 An AI-enhanced account planning agent that:
 - **Prioritizes Account Plan Completion** as the primary success metric
-- **Automatically detects completion gaps** via People.ai MCP integration
+- **Automatically detects completion gaps** via Backstory MCP integration
 - **Provides real-time insights** using SalesAI communication intelligence
 - **Creates interactive dashboards** for executive-ready presentations
 - **Identifies undocumented achievements** through AI analysis
@@ -34,7 +34,7 @@ An AI-enhanced account planning agent that:
 
 ```mermaid
 graph TB
-    A[Salesforce Account Plans] --> B[People.ai MCP Integration]
+    A[Salesforce Account Plans] --> B[Backstory MCP Integration]
     B --> C[SalesAI Analysis Engine]
     C --> D[Account Plan Agent v1.1]
     D --> E[Plan Completion Dashboard]
@@ -108,7 +108,7 @@ const gapAnalysis = {
 - **Export functionality** for executive reporting
 
 ### Technology Stack
-- **Backend Integration:** People.ai MCP API
+- **Backend Integration:** Backstory MCP API
 - **Frontend Framework:** Vanilla HTML/CSS/JavaScript (portable)
 - **AI Engine:** SalesAI natural language processing
 - **Data Visualization:** Custom SVG animations and CSS gradients
@@ -218,7 +218,7 @@ const gapAnalysis = {
 ## 🚀 Implementation Guide v1.1
 
 ### Phase 1: Foundation Setup ✅ COMPLETE
-1. **People.ai MCP Integration**
+1. **Backstory MCP Integration**
    - ✅ API connections established
    - ✅ Data retrieval from AVEVA account validated
    - ✅ Section-level score access confirmed
@@ -370,7 +370,7 @@ ROI = (Completion improvement × plan quality × renewal success rate) +
 ## 📞 Getting Started v1.1
 
 ### Prerequisites
-- Active People.ai MCP access with communication intelligence
+- Active Backstory MCP access with communication intelligence
 - Salesforce account plan implementation (any completion level)
 - Web hosting capability for dashboard deployment
 - Basic HTML/CSS/JavaScript knowledge for customization

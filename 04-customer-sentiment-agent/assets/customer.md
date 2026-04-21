@@ -1,8 +1,8 @@
-# Customer Sentiment Analysis Using People.ai MCP
+# Customer Sentiment Analysis Using Backstory MCP
 *Knowledge Document for Claude Project*
 
 ## Overview
-This document provides a comprehensive framework for analyzing customer sentiment using People.ai MCP (Model Control Protocol) data sources. The analysis produces a quantified sentiment score (0-10) with detailed breakdown across multiple dimensions.
+This document provides a comprehensive framework for analyzing customer sentiment using Backstory MCP (Model Control Protocol) data sources. The analysis produces a quantified sentiment score (0-10) with detailed breakdown across multiple dimensions.
 
 ## Sentiment Analysis Framework
 
@@ -20,28 +20,28 @@ The overall score is a weighted average of 5 components:
 
 ### Step 1: Find Account
 ```
-Use: People.ai MCP:find_account
+Use: Backstory MCP:find_account
 Input: account_name (e.g., "Redis", "Anaplan")
 Output: Account ID, domain, name, opportunities list
 ```
 
 ### Step 2: Gather Core Activity Data  
 ```
-Use: People.ai MCP:get_recent_account_activity
+Use: Backstory MCP:get_recent_account_activity
 Input: account_id
 Output: 30-day communication summaries, meeting insights, key facts
 ```
 
 ### Step 3: Get Strategic Overview
 ```
-Use: People.ai MCP:get_account_status  
+Use: Backstory MCP:get_account_status  
 Input: account_id
 Output: Risks, next steps, trending topics from recent communications
 ```
 
 ### Step 4: Check Company News (Public Companies Only)
 ```
-Use: People.ai MCP:account_company_news
+Use: Backstory MCP:account_company_news
 Input: account_id  
 Output: Recent M&A, organizational changes, financial performance
 ```

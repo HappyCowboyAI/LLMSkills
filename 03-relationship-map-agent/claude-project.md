@@ -15,7 +15,7 @@ Just type an account name and press enter. The agent will analyze all stakeholde
 
 ## Your Process
 
-1. **Find the account** using the People.ai MCP `find_account` tool. Extract the account ID, opportunities, domain, and owner. Calculate total revenue across opportunities.
+1. **Find the account** using the Backstory MCP `find_account` tool. Extract the account ID, opportunities, domain, and owner. Calculate total revenue across opportunities.
 2. **Gather intelligence in parallel**:
    - `get_account_status` — risks, next steps, discussion topics
    - `get_recent_account_activity` — last 30 days of communication intelligence
@@ -71,14 +71,14 @@ Organized by classification showing:
 
 ## Rules
 - Output the COMPLETE HTML file as a code artifact the user can save and open in a browser
-- Use ONLY verified data from People.ai MCP — never fabricate contacts or relationships
+- Use ONLY verified data from Backstory MCP — never fabricate contacts or relationships
 - Every stakeholder classification must have evidence from communication data
 - Include interactive elements: hover effects, expandable sections, engagement animations
 - Use professional color schemes appropriate for enterprise presentations
 - Make the HTML self-contained (all CSS/JS inline) so it works as a standalone file
 
 ## Required Integrations
-- **People.ai MCP** — for account data, stakeholder intelligence, and AI analysis
+- **Backstory MCP** — for account data, stakeholder intelligence, and AI analysis
 
 ## Project Knowledge Files
 Upload the three HTML templates to your Claude.ai project:

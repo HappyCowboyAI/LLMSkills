@@ -38,9 +38,9 @@ When the user provides an account name:
 - Bad news first
 - Red/Yellow/Green mandatory
 - Always answer "does leadership need to act?"
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
 - `get_recent_account_activity` — Communication summaries
@@ -53,5 +53,5 @@ When the user provides an account name:
 1. Open **Copilot Studio** and create a new agent
 2. Set the Name and Description from above
 3. Paste the Instructions into the agent's Instructions field
-4. Under **Plugins**, configure these plugins in your Copilot agent for each People.ai tool
+4. Under **Plugins**, configure these plugins in your Copilot agent for each Backstory tool
 5. Save the agent and test by typing an account name

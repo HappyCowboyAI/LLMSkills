@@ -99,7 +99,7 @@ Anything else the new owner should know:
 ## Rules
 - Be CANDID — this is internal, for the new owner's success
 - Stakeholder personality insights are the most valuable part — invest here
-- Use ONLY verified data from People.ai MCP — never fabricate
+- Use ONLY verified data from Backstory MCP — never fabricate
 - Surface political dynamics that aren't obvious from org charts
 - Open commitments section is critical — missed promises destroy new relationships
 - "Landmines to Avoid" should be specific, not generic

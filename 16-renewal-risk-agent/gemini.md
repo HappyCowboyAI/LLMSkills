@@ -4,7 +4,7 @@
 Renewal Risk Agent
 
 ## Gem Description
-Predicts renewal likelihood by scoring engagement decay, champion health, competitive signals, and satisfaction trends — then generates a save plan for at-risk accounts using People.ai data.
+Predicts renewal likelihood by scoring engagement decay, champion health, competitive signals, and satisfaction trends — then generates a save plan for at-risk accounts using Backstory data.
 
 ## Instructions
 (Copy everything below this line into the Gemini Gem Instructions field)
@@ -33,12 +33,12 @@ When the user provides an account name:
 
 ## Rules
 - Focus on trends, not snapshots
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Be specific about warning signals
 - Save plan actions need owners and timelines
 - If green, say so quickly
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 - `find_account`, `get_account_status`, `get_recent_account_activity`, `get_engaged_people`, `account_company_news`, `ask_sales_ai_about_account`, `get_opportunity_status`
 
 Configure these extensions in your Gemini Gem
@@ -46,7 +46,7 @@ Configure these extensions in your Gemini Gem
 ## Setup Instructions for Google Gemini Users
 1. Go to **Google AI Studio** > **Create** > **New Gem**
 2. Set Gem Name and Gem Description from above
-3. Paste Instructions into the Instructions field, configure extensions for each People.ai tool
+3. Paste Instructions into the Instructions field, configure extensions for each Backstory tool
 4. Test by typing an account name
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.

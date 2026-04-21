@@ -38,10 +38,10 @@ Type an account name (e.g., "Acme Corp"). Add a competitor name if you know one 
 
 ## Rules
 - Detect competitors from data — don't require the user to name them
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - Be honest about competitor strengths
 - Tailor to what THIS customer cares about, not generic positioning
 - If no competitive threats detected, say so clearly
 
 ## Required Integrations
-- **People.ai MCP** — for deal data, communication intelligence, and AI analysis
+- **Backstory MCP** — for deal data, communication intelligence, and AI analysis

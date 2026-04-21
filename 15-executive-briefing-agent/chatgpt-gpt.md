@@ -38,9 +38,9 @@ When the user provides an account name:
 - Bad news first
 - Red/Yellow/Green mandatory
 - Always answer "does leadership need to act?"
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
 - `get_recent_account_activity` — Communication summaries
@@ -52,5 +52,5 @@ When the user provides an account name:
 1. Go to ChatGPT > **Explore GPTs** > **Create**
 2. Set Name and Description from above
 3. Paste Instructions into the GPT's Instructions field
-4. Configure **Actions** for each People.ai tool
+4. Configure **Actions** for each Backstory tool
 5. Test by typing an account name

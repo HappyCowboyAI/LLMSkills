@@ -1,6 +1,6 @@
-# People.ai LLM Skills
+# Backstory LLM Skills
 
-Shareable Claude skills powered by the People.ai MCP. These skills help customers jump-start their use of the People.ai MCP integration with Claude.
+Shareable Claude skills powered by the Backstory MCP. These skills help customers jump-start their use of the Backstory MCP integration with Claude.
 
 ## Start here (customer setup)
 
@@ -10,7 +10,7 @@ Shareable Claude skills powered by the People.ai MCP. These skills help customer
 - Open `claude-project.md`
 - Copy the **Custom Instructions** block into a new Claude.ai Project
 - Upload any files in that skill’s `assets/` folder (if present)
-- Connect **People.ai MCP** in Claude (Settings → Integrations)
+- Connect **Backstory MCP** in Claude (Settings → Integrations)
 - Start a chat in the project and provide the skill input (usually an **account name**)
 
 **Optional: Browse the catalog UI**
@@ -90,4 +90,4 @@ python3 docs/validate-skills.py
 ## Prerequisites
 
 - Claude Pro/Team account
-- People.ai MCP integration connected ([MCP setup articles](https://help.people.ai/en/?q=mcp))
+- Backstory MCP integration connected ([MCP setup articles](https://help.people.ai/en/?q=mcp))

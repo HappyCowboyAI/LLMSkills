@@ -40,9 +40,9 @@ Type an account name. You'll get a complete handoff brief for a new account owne
 ## Rules
 - Be candid — internal document for new owner's success
 - Stakeholder personality insights are the most valuable part
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - Open commitments are critical — missed promises destroy trust
 - If data is thin, say so — "verify with previous owner"
 
 ## Required Integrations
-- **People.ai MCP** — for relationship history, engagement data, and AI analysis
+- **Backstory MCP** — for relationship history, engagement data, and AI analysis

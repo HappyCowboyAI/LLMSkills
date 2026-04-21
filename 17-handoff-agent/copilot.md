@@ -4,7 +4,7 @@
 Handoff Agent
 
 ## Agent Description
-Generates comprehensive account handoff documents for rep/CSM transitions — stakeholder personalities, open commitments, deal context, political dynamics, and landmines to avoid using People.ai relationship data.
+Generates comprehensive account handoff documents for rep/CSM transitions — stakeholder personalities, open commitments, deal context, political dynamics, and landmines to avoid using Backstory relationship data.
 
 ## Instructions
 (Copy everything below this line into the Copilot Studio Instructions field)
@@ -33,11 +33,11 @@ When the user provides an account name:
 ## Rules
 - Be candid — internal document
 - Stakeholder personality insights are most valuable
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Open commitments are critical
 - If data is thin, say "verify with previous owner"
 
-## Required Plugins (People.ai MCP)
+## Required Plugins (Backstory MCP)
 - `find_account`, `get_account_status`, `get_recent_account_activity`, `get_engaged_people`, `ask_sales_ai_about_account`, `get_opportunity_status`, `ask_sales_ai_about_opportunity`
 
 Configure these plugins in your Copilot agent
@@ -45,5 +45,5 @@ Configure these plugins in your Copilot agent
 ## Setup Instructions for Microsoft Copilot Users
 1. Go to **Microsoft Copilot Studio** > **Create** > **New Agent**
 2. Set Agent Name and Agent Description from above
-3. Paste Instructions into the Instructions field, configure plugins for each People.ai tool
+3. Paste Instructions into the Instructions field, configure plugins for each Backstory tool
 4. Test by typing an account name

@@ -38,8 +38,8 @@ For each action:
 - Every action names a specific person
 - Every action includes what to say or do
 - Be direct and opinionated
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - If nothing is urgent, say so
 
 ## Required Integrations
-- **People.ai MCP** — for account data, communication intelligence, and AI analysis
+- **Backstory MCP** — for account data, communication intelligence, and AI analysis

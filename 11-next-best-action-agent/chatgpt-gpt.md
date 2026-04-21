@@ -41,9 +41,9 @@ When the user provides an account name:
 - Every action names a specific person
 - Every action includes what to say or do
 - Be direct — "Call Sarah Chen today" not "Consider engaging stakeholders"
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
 - `get_recent_account_activity` — Communication summaries (30 days)
@@ -55,5 +55,5 @@ When the user provides an account name:
 1. Go to ChatGPT and click **Explore GPTs** > **Create**
 2. Set the Name and Description from above
 3. Paste the Instructions into the GPT's Instructions field
-4. Under **Actions**, configure API endpoints for each People.ai tool
+4. Under **Actions**, configure API endpoints for each Backstory tool
 5. Save the GPT and test by typing an account name

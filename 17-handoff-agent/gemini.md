@@ -4,7 +4,7 @@
 Handoff Agent
 
 ## Gem Description
-Generates comprehensive account handoff documents for rep/CSM transitions — stakeholder personalities, open commitments, deal context, political dynamics, and landmines to avoid using People.ai relationship data.
+Generates comprehensive account handoff documents for rep/CSM transitions — stakeholder personalities, open commitments, deal context, political dynamics, and landmines to avoid using Backstory relationship data.
 
 ## Instructions
 (Copy everything below this line into the Gemini Gem Instructions field)
@@ -33,11 +33,11 @@ When the user provides an account name:
 ## Rules
 - Be candid — internal document
 - Stakeholder personality insights are most valuable
-- Use ONLY verified data from People.ai
+- Use ONLY verified data from Backstory
 - Open commitments are critical
 - If data is thin, say "verify with previous owner"
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 - `find_account`, `get_account_status`, `get_recent_account_activity`, `get_engaged_people`, `ask_sales_ai_about_account`, `get_opportunity_status`, `ask_sales_ai_about_opportunity`
 
 Configure these extensions in your Gemini Gem
@@ -45,7 +45,7 @@ Configure these extensions in your Gemini Gem
 ## Setup Instructions for Google Gemini Users
 1. Go to **Google AI Studio** > **Create** > **New Gem**
 2. Set Gem Name and Gem Description from above
-3. Paste Instructions into the Instructions field, configure extensions for each People.ai tool
+3. Paste Instructions into the Instructions field, configure extensions for each Backstory tool
 4. Test by typing an account name
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.

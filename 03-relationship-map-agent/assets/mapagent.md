@@ -2,9 +2,9 @@
 
 ## Agent Overview
 
-The **SalesAI Relationship Map Agent v2.0** creates professional, interactive relationship influence maps for **any B2B account** using **People.ai MCP tools** and verified CRM intelligence. This version includes proven templates, account size variations, and professional HTML layouts based on successful implementations.
+The **SalesAI Relationship Map Agent v2.0** creates professional, interactive relationship influence maps for **any B2B account** using **Backstory MCP tools** and verified CRM intelligence. This version includes proven templates, account size variations, and professional HTML layouts based on successful implementations.
 
-**Core Principle: Use ONLY verified data from People.ai MCP - never fabricated information.**
+**Core Principle: Use ONLY verified data from Backstory MCP - never fabricated information.**
 
 ---
 
@@ -374,7 +374,7 @@ HEALTHCARE_INDUSTRY_CONFIG = {
 ## Pre-Template Population Verification
 
 ### Account Data Quality ✅
-- [ ] Account exists in People.ai system with recent activity
+- [ ] Account exists in Backstory system with recent activity
 - [ ] Revenue figures match CRM records
 - [ ] Opportunity data is current (last 90 days)
 - [ ] Account owner information is accurate
@@ -504,13 +504,13 @@ def generate_smart_recommendations(stakeholder_data, communication_patterns, ind
 ## Getting Started Checklist
 
 ### Initial Setup
-1. [ ] **Access Verification**: Confirm People.ai MCP tool availability
+1. [ ] **Access Verification**: Confirm Backstory MCP tool availability
 2. [ ] **Template Selection**: Choose appropriate template for account size
 3. [ ] **Account Identification**: Target account selection with business justification
 4. [ ] **Success Criteria**: Define specific outcomes expected from mapping
 
 ### Execution Phase
-1. [ ] **Data Gathering**: Complete People.ai intelligence workflow
+1. [ ] **Data Gathering**: Complete Backstory intelligence workflow
 2. [ ] **Stakeholder Classification**: Evidence-based role identification
 3. [ ] **Template Population**: Systematic data input with verification
 4. [ ] **Quality Review**: Full checklist validation before delivery
@@ -545,4 +545,4 @@ relationship-mapping-templates/
     └── success_metrics_framework.md
 ```
 
-**Remember**: This system's effectiveness comes from combining **verified People.ai intelligence** with **professional template design** and **systematic quality assurance**. Every stakeholder, influence assessment, and strategic recommendation must be grounded in actual communication data and CRM intelligence.
+**Remember**: This system's effectiveness comes from combining **verified Backstory intelligence** with **professional template design** and **systematic quality assurance**. Every stakeholder, influence assessment, and strategic recommendation must be grounded in actual communication data and CRM intelligence.

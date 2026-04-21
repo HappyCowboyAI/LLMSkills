@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-Create an intelligent agent that leverages People.ai MCP tools to automatically gather, analyze, and synthesize external market intelligence for target accounts. This agent combines public company data, financial reports, and strategic insights to provide sales teams with comprehensive market intelligence.
+Create an intelligent agent that leverages Backstory MCP tools to automatically gather, analyze, and synthesize external market intelligence for target accounts. This agent combines public company data, financial reports, and strategic insights to provide sales teams with comprehensive market intelligence.
 
 ## Required Tools & Dependencies
 
-### People.ai MCP Tools
+### Backstory MCP Tools
 - `find_account` - Account discovery and basic information
 - `account_company_news` - External news, public filings, and market events
 - `ask_sales_ai_about_account` - AI-powered strategic analysis
@@ -258,7 +258,7 @@ async def gather_internal_context(account_id: int):
 
 ---
 
-## ðŸ“Š People.ai Relationship Context
+## ðŸ“Š Backstory Relationship Context
 
 ### Current Engagement Status
 {Internal relationship health, recent activity}

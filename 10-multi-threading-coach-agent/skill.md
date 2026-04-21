@@ -108,7 +108,7 @@ For each multi-threading target, provide:
 
 ## Rules
 - `get_engaged_people` is the foundation — analyze it thoroughly
-- Use ONLY verified data from People.ai MCP — never fabricate contacts
+- Use ONLY verified data from Backstory MCP — never fabricate contacts
 - Every threading recommendation must reference a real person from the engagement data
 - Quantify concentration risk with specific percentages
 - Be direct about single-threaded danger — "one departure kills this deal" is appropriate language

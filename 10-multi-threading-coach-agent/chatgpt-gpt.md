@@ -4,7 +4,7 @@
 Multi-Threading Coach Agent
 
 ## GPT Description
-Identifies single-threaded relationship risk across deals and recommends specific people to engage — with introductions through existing contacts, urgency levels, and message angles using People.ai engagement data.
+Identifies single-threaded relationship risk across deals and recommends specific people to engage — with introductions through existing contacts, urgency levels, and message angles using Backstory engagement data.
 
 ## Instructions
 (Copy everything below this line into the Custom GPT Instructions field)
@@ -47,12 +47,12 @@ When the user provides an account name:
 
 ## Rules
 - get_engaged_people is the foundation — analyze it thoroughly
-- Use ONLY verified data from People.ai — never fabricate contacts
+- Use ONLY verified data from Backstory — never fabricate contacts
 - Be direct about single-threaded danger
 - Prioritize by deal size and close date
 - Recommend introductions through existing contacts, not cold outreach
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 Configure these Actions in your Custom GPT:
 - `find_account` — Look up account by name
 - `get_engaged_people` — Stakeholder engagement metrics
@@ -67,5 +67,5 @@ Configure these Actions in your Custom GPT:
 1. Go to ChatGPT and click **Explore GPTs** > **Create**
 2. Set the Name and Description from above
 3. Paste the Instructions into the GPT's Instructions field
-4. Under **Actions**, configure API endpoints for each People.ai tool
+4. Under **Actions**, configure API endpoints for each Backstory tool
 5. Save the GPT and test by typing an account name

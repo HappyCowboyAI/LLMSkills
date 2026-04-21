@@ -2,10 +2,10 @@
 
 ## Overview
 
-The **SalesAI MEDDPICC Agent** is an AI-powered qualification system that leverages People.ai communication intelligence to automatically assess and improve MEDDPICC qualification for any B2B opportunity. This agent transforms raw communication data into actionable qualification insights with personalized coaching and prioritized action plans.
+The **SalesAI MEDDPICC Agent** is an AI-powered qualification system that leverages Backstory communication intelligence to automatically assess and improve MEDDPICC qualification for any B2B opportunity. This agent transforms raw communication data into actionable qualification insights with personalized coaching and prioritized action plans.
 
 ### Core Principle
-Transform People.ai data into intelligent MEDDPICC qualification with specific ownership, evidence-based insights, and AI-powered coaching recommendations for any account or opportunity.
+Transform Backstory data into intelligent MEDDPICC qualification with specific ownership, evidence-based insights, and AI-powered coaching recommendations for any account or opportunity.
 
 ---
 
@@ -127,70 +127,79 @@ def generate_coaching_insights(meddpicc_assessment, opportunity_intelligence):
 
 ---
 
-## People.ai Brand Integration
+## Backstory Brand Integration
 
 ### Color Palette Implementation
 
 ```css
 :root {
-    /* Primary Colors */
-    --primary-blue: #006885;
-    --off-black: #641225;
-    --dark-blue: #00204E;
-    --blue: #0A41AA;
-    --med-blue: #8CB8ED;
-    --light-blue: #CDE6FF;
-    
-    /* Secondary Colors */
-    --teal: #00D9D3;
-    --light-teal: #7FECE9;
-    --dark-gray: #54667D;
-    --med-gray: #A9B2BE;
-    --light-gray: #D4D9DE;
+    /* Neutrals (dominant) */
+    --black: #000000;
     --white: #FFFFFF;
-    
-    /* Support Colors */
-    --yellow: #E8C031;
-    --orange: #EB8D35;
-    --red: #F8544D;
-    --magenta: #FC458A;
-    --violet: #743FCF;
-    --turquoise: #019E9B;
+    --graphite: #171721;
+    --surface-gray: #BBBCBC;
+
+    /* Primary palette (supporting) */
+    --horizon: #6296AD;
+    --horizon-hover: #447C93;
+    --horizon-subtle: #DBEBF2;
+
+    /* Secondary palette (accent only) */
+    --plum: #B08FA2;
+    --mint: #8FCDA8;
+    --cinder: #C05527;
+    --indigo: #275198;
+    --cobalt: #21B5FF;
+
+    /* Text tokens */
+    --text-default: #171721;
+    --text-secondary: #55555E;
+    --text-tertiary: #7F7F85;
 }
 ```
 
 ### Typography Standards
 
 ```css
-/* Primary Typeface - Headers */
+/* Headlines — LL Kleisch with Cardo fallback */
 .agent-title, .meddpicc-name, .coaching-category {
-    font-family: 'Proxima Nova Bold', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Cardo', Georgia, serif;
     font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
-/* Secondary Typeface - Body Copy */
+/* Body — KMR Waldenburg with Roboto fallback */
 .agent-subtitle, .meddpicc-status, .coaching-recommendation {
-    font-family: 'Proxima Nova Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-weight: 400;
+}
+
+/* Data labels, figures — Chivo Mono */
+.data-label, .stat-value {
+    font-family: 'Chivo Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 ```
 
 ### Brand-Compliant Gradients
 
+Backstory uses gradients sparingly and never on text or logos. Approved pairs from the brand system:
+
 ```css
-/* Primary Gradient: Teal + Primary Blue + Magenta */
+/* Horizon → Black (headers) */
 .agent-header {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--primary-blue) 50%, var(--magenta) 100%);
+    background: linear-gradient(135deg, var(--horizon) 0%, var(--black) 100%);
 }
 
-/* BG 01: Primary Blue + Medium Blue */
+/* Surface Gray → Horizon (soft panels) */
 .meddpicc-assessment .assessment-header {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--med-blue) 100%);
+    background: linear-gradient(135deg, var(--surface-gray) 0%, var(--horizon) 100%);
 }
 
-/* Blue-Teal Gradient */
+/* Indigo → Mint (feature accents) */
 .coaching-panel .coaching-header {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--teal) 100%);
+    background: linear-gradient(135deg, var(--indigo) 0%, var(--mint) 100%);
 }
 ```
 
@@ -498,7 +507,7 @@ def get_status_indicator(engagement, days_to_close, amount):
 
 ## Integration Points
 
-### People.ai MCP Tools Required
+### Backstory MCP Tools Required
 
 1. **find_account** - Universal account discovery and opportunity selection
 2. **get_opportunity_status** - Strategic overview with risks and next steps
@@ -571,7 +580,7 @@ def process_any_opportunity_for_meddpicc(account_name, opportunity_selection):
 ## Implementation Checklist
 
 ### Phase 1: Foundation (Week 1)
-- [ ] Set up People.ai MCP tool access
+- [ ] Set up Backstory MCP tool access
 - [ ] Implement universal account discovery
 - [ ] Create opportunity selection interface
 - [ ] Build MEDDPICC scoring engine
@@ -585,7 +594,7 @@ def process_any_opportunity_for_meddpicc(account_name, opportunity_selection):
 - [ ] Test coaching accuracy across different deal types
 
 ### Phase 3: Optimization (Week 3)
-- [ ] Integrate People.ai brand guidelines
+- [ ] Integrate Backstory brand guidelines
 - [ ] Add responsive design and mobile support
 - [ ] Implement progress tracking and analytics
 - [ ] Create team collaboration features

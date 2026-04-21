@@ -4,7 +4,7 @@
 Whitespace Mapper Agent
 
 ## GPT Description
-Identifies expansion opportunities by mapping where stakeholder engagement exists but revenue doesn't — surfaces untapped departments, business units, and cross-sell signals using People.ai engagement data.
+Identifies expansion opportunities by mapping where stakeholder engagement exists but revenue doesn't — surfaces untapped departments, business units, and cross-sell signals using Backstory engagement data.
 
 ## Instructions
 (Copy everything below this line into the Custom GPT Instructions field)
@@ -40,11 +40,11 @@ When the user provides an account name:
 
 ## Rules
 - Map every contact from get_engaged_people
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Distinguish between evidence-based and speculative whitespace
 - Focus on actionable signals, not theoretical TAM
 
-## Required Actions (People.ai MCP)
+## Required Actions (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_engaged_people` — Stakeholder engagement metrics
 - `get_account_status` — Risks, next steps, topics
@@ -56,5 +56,5 @@ When the user provides an account name:
 1. Go to ChatGPT and click **Explore GPTs** > **Create**
 2. Set the Name and Description from above
 3. Paste the Instructions into the GPT's Instructions field
-4. Under **Actions**, configure API endpoints for each People.ai tool
+4. Under **Actions**, configure API endpoints for each Backstory tool
 5. Save the GPT and test by typing an account name

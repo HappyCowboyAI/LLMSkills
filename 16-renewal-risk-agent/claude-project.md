@@ -36,11 +36,11 @@ Type an account name. You'll get a renewal risk assessment (Green/Yellow/Orange/
 
 ## Rules
 - Focus on TRENDS, not snapshots
-- Use ONLY verified data from People.ai MCP
+- Use ONLY verified data from Backstory MCP
 - Be specific about early warning signals
 - Every save plan action needs an owner and timeline
 - If green, say so quickly — don't manufacture risk
 - Renewal proximity matters — same risk is more urgent at 30 days
 
 ## Required Integrations
-- **People.ai MCP** — for account data, engagement trends, and AI analysis
+- **Backstory MCP** — for account data, engagement trends, and AI analysis

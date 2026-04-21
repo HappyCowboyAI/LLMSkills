@@ -4,7 +4,7 @@
 Pipeline Review Agent
 
 ## Gem Description
-Portfolio-level pipeline review for sales managers — aggregates deal health, identifies stalled opportunities, surfaces coaching priorities, and flags forecast risks across multiple accounts using People.ai intelligence.
+Portfolio-level pipeline review for sales managers — aggregates deal health, identifies stalled opportunities, surfaces coaching priorities, and flags forecast risks across multiple accounts using Backstory intelligence.
 
 ## Instructions
 (Copy everything below this line into the Gemini Gem Instructions field)
@@ -42,13 +42,13 @@ When the user provides one or more account names:
 
 ## Rules
 - Process multiple accounts — portfolio view
-- Use ONLY verified data from People.ai — never fabricate
+- Use ONLY verified data from Backstory — never fabricate
 - Be honest about pipeline health
 - Rank coaching by revenue impact
 - Keep per-deal summaries brief
 - Flag forecast risks explicitly
 
-## Required Extensions (People.ai MCP)
+## Required Extensions (Backstory MCP)
 - `find_account` — Look up account by name
 - `get_account_status` — Risks, next steps, topics
 - `get_opportunity_status` — Deal-specific insights
@@ -60,7 +60,7 @@ When the user provides one or more account names:
 1. Open **Google AI Studio** and create a new Gem
 2. Set the Name and Description from above
 3. Paste the Instructions into the Gem's Instructions field
-4. Under **Extensions**, configure these extensions in your Gemini Gem for each People.ai tool
+4. Under **Extensions**, configure these extensions in your Gemini Gem for each Backstory tool
 5. Save the Gem and test by typing multiple account names
 
 > Note: Google Gemini MCP extension support is coming soon. These instructions are prepared for when the integration becomes available.
