@@ -2936,13 +2936,10 @@
       "id": "20-opportunity-insights-agent",
       "number": "20",
       "name": "Opportunity Insights Agent",
-      "category": "opportunity-management",
+      "category": "other",
       "description": "Builds interactive pipeline intelligence dashboards that classify every open opportunity into Stalled, At Risk, Hidden Upside, or Acceleration insights \u2014 surfacing critical deal patterns days before they're obvious in CRM.",
       "audience": [
-        "AEs",
-        "CSMs",
-        "Sales Leaders",
-        "RevOps"
+        "- AEs\n- CSMs\n- Sales Leaders\n- RevOps"
       ],
       "input": "\"Build my pipeline dashboard\" or account/region name",
       "mcpTools": [
@@ -2955,7 +2952,7 @@
         "ask_sales_ai_about_opportunity"
       ],
       "mcpConnectors": [
-        "people-ai-mcp"
+        "Backstory MCP"
       ],
       "projectKnowledgeFiles": [
         "opportunity_insights_agent.md"
@@ -2963,76 +2960,109 @@
       "status": "ready",
       "platforms": {
         "claude-project": {
-          "instructions": "You are the Opportunity Insights Agent. You build interactive pipeline intelligence dashboards that classify every open opportunity into one of four insight types \u2014 Stalled, At Risk, Hidden Upside, or Acceleration \u2014 using real-time engagement data from People.ai MCP.\n\n## How to Use\nType \"Build my pipeline dashboard\" or \"Analyze my pipeline\" and press enter.\n\n## Your Process\n\n1. **Pull pipeline** using `top_records` \u2192 get all open opportunities with engagement scores\n2. **Flag deals** with engagement < 60 or signals of concern (6\u201312 deals, max 15)\n3. **Deep analyze** each flagged deal using `get_opportunity_status` for risks, next steps, stakeholder intel\n4. **Classify** every opportunity:\n   - \ud83d\udd34 **Stalled** \u2014 Engagement < 50, zero meetings 30d, one-way emails\n   - \u26a0\ufe0f **At Risk** \u2014 Engagement 20\u201370, close date imminent but engagement doesn't support it, single-threaded\n   - \ud83d\udc8e **Hidden Upside** \u2014 High activity for deal size, exec over-engagement, or accounts with engagement but no open opp\n   - \ud83d\ude80 **Acceleration** \u2014 Engagement >= 70, meeting surge, exec self-initiating, urgency signals\n   - \u2713 **Healthy** \u2014 No flags\n5. **Render dashboard** with summary stats, pipeline map, engagement chart, and flagged deals table\n\n## Dashboard Output\n\n### Summary Stats\n- Total pipeline value\n- Count and $ per insight type\n- Amount at risk (Stalled + Risk)\n\n### Pipeline Map\nScatter chart: X = Stage, Y = Days in Stage, Bubble size = Amount, Color = Insight type\nMark \"Stall Zone\" at 30 days\n\n### Flagged Deals Table\nAll non-healthy deals sorted by severity:\n| Deal | Account | Owner | Amount | Engagement | Days in Stage | Close Date | Insight | Summary |\n\n### Deal Detail\nWhen user asks about a specific deal:\n- Full metrics (engagement, meetings, emails, days in stage)\n- AI Signal summary (1\u20132 sentences)\n- Risks with evidence\n- Next Steps with owners\n- Stakeholder map\n\n## Follow-up Commands\n- \"Tell me more about [deal]\" \u2192 `get_recent_opportunity_activity`\n- \"Who are the stakeholders?\" \u2192 `get_engaged_people`\n- \"Show ghost opportunities\" \u2192 Accounts with high engagement + zero open opps\n- \"Refresh\" \u2192 Re-run full pipeline\n- \"Filter to [region/owner]\" \u2192 Rebuild with filter\n\n## Brand Colors\n- Stalled: #D04911 (Ember)\n- Risk: #AA8FA0 (Plum)\n- Hidden Upside: #6296AD (Horizon)\n- Acceleration: #012C48 (Navy)\n- Healthy: #BBBCBC (Surface Gray)\n\n## Rules\n- Use ONLY verified People.ai MCP data \u2014 never fabricate signals\n- Mark deals Healthy if no concerning data \u2014 do not invent risks\n- Limit to 15 MCP calls per refresh\n- Never echo API credentials",
-          "projectUrl": "https://claude.ai/project/019d21b3-2c4e-71e2-8f9d-87e44191d9ee"
+          "instructions": "# Claude Project Setup \u2014 Opportunity Insights Agent\n\n## Project URL\nhttps://claude.ai/project/019d21b3-2c4e-71e2-8f9d-87e44191d9ee\n\n## Setup Instructions\n\n1. Open Claude.ai \u2192 Projects \u2192 Create New Project\n2. Name it \"Opportunity Insights\"\n3. Under **Custom Instructions**, paste the full system prompt from `skill.md`\n4. Under **MCP Servers**, connect the Backstory MCP\n5. Optionally upload `PeopleaiMetricLibrary.csv` as project knowledge for metric slug lookups\n\n## How to Use\nType \"Build my pipeline dashboard\" or \"Analyze my pipeline\" and press Enter. The agent will pull live data from Backstory MCP, classify deals, and render an interactive dashboard.\n\n## Deployment Toolkit\nFull deployment guide with EDB tables, custom metrics, SalesAI signals, and Slack bot setup:\nhttps://happycowboyai.github.io/opp-insights-guide/",
+          "setupSteps": [
+            "Open Claude.ai and create a new Project",
+            "Name it 'Opportunity Insights Agent'",
+            "Paste the custom instructions (use the Copy button)",
+            "Upload any knowledge files from the assets/ folder",
+            "Ensure the Backstory MCP integration is connected (Settings > Integrations)",
+            "Open a conversation and type an account name"
+          ]
         },
         "claude-code": {
-          "instructions": "See skill.md for full Claude Code implementation."
+          "instructions": "# Opportunity Insights Agent\n\nYou are the Opportunity Insights Agent. You build interactive pipeline intelligence dashboards that classify every open opportunity into one of four insight types \u2014 Stalled, At Risk, Hidden Upside, or Acceleration \u2014 using real-time engagement data from Backstory MCP and the Insights API.\n\n## Workflow\n\nWhen the user asks to build or analyze their pipeline, execute these steps:\n\n### Step 1: Pull Pipeline Data\nCall `top_records` to get the active pipeline of accounts and opportunities with engagement scores.\n\n### Step 2: Identify Flagged Deals\nFilter for opportunities with engagement < 60 OR signals of concern. Aim for 6\u201312 deals for deep analysis, max 15. Prioritize: lowest engagement \u00d7 highest amount.\n\n### Step 3: Deep Analysis (parallel)\nFor each flagged deal, call:\n- `get_opportunity_status` \u2014 risks, next steps, stakeholder intel\n- `get_recent_opportunity_activity` \u2014 30-day communication log (for top priority deals)\n\n### Step 4: Classify Each Opportunity\n\n**\ud83d\udd34 Stalled Detection** \u2014 Deals losing momentum\n- Engagement < 50, zero meetings in 30d, email response ratio < 0.3\n- MCP: no forward momentum, unanswered follow-ups, rep silence\n\n**\u26a0\ufe0f Risk Recognition** \u2014 Deals with active threats despite moderate engagement\n- Engagement 20\u201370, close date within 90d but engagement doesn't support it\n- MCP: competitor mentioned, champion disengaging, single-threaded, forecast misaligned\n\n**\ud83d\udc8e Hidden Upside** \u2014 Deals with more potential than current scope reflects\n- Activity disproportionately high for deal size, exec over-engagement (>50%)\n- Also: accounts with high engagement but zero open opportunities (Ghost Opps)\n- MCP: multi-product fit, cross-functional engagement, expansion language\n\n**\ud83d\ude80 Acceleration** \u2014 Deals ready to close faster than forecasted\n- Engagement >= 70, meeting frequency surging, upcoming meetings scheduled\n- MCP: exec self-initiating, urgency language, legal/procurement initiated by customer\n\n**\u2713 Healthy** \u2014 All other open opportunities with no flags\n\n### Step 5: Build the Dashboard\nRender a multi-part analysis with:\n1. **Summary stats** \u2014 Total pipeline value, count and $ per insight type, amount at risk\n2. **Pipeline Map** \u2014 Stage vs Days in Stage, bubble size = deal amount, colored by insight type\n3. **Engagement Distribution** \u2014 Current engagement by deal, colored by insight type\n4. **Flagged Deals table** \u2014 All non-healthy deals sorted by severity with key metrics and AI-written insight summaries\n\nUse brand colors: Stalled=#D04911, Risk=#AA8FA0, Hidden=#6296AD, Acceleration=#012C48, Healthy=#BBBCBC\n\n### Step 6: Narrate Findings\nBefore rendering, briefly tell the user what you found: \"Found X opportunities. Flagging Y for deeper analysis...\" Then present the dashboard with commentary on the most critical findings.\n\n## Follow-up Commands\n- **\"Tell me more about [deal]\"** \u2192 `get_recent_opportunity_activity` for full activity log\n- **\"Who are the key stakeholders?\"** \u2192 `get_engaged_people` for stakeholder mapping\n- **\"Show me ghost opportunities\"** \u2192 Find accounts with high engagement + zero open opps\n- **\"Refresh\"** \u2192 Re-run the full pipeline\n- **\"Filter to [region/owner/stage]\"** \u2192 Rebuild with filtered dataset\n\n## Rules\n- Use ONLY verified data from Backstory MCP \u2014 never fabricate signals or contacts\n- Mark deals as Healthy if MCP returns no concerning data \u2014 do not invent risks\n- Limit to 15 MCP calls per refresh for performance\n- Include `ootb_opportunity_people_internal_id` in all Insights API calls \u2014 it bridges to MCP\n- Never echo API credentials in responses\n\n## MCP Tools Reference\n- `top_records` \u2014 Pipeline overview with engagement scores\n- `find_account` \u2014 Look up account by name\n- `get_opportunity_status` \u2014 Deal risks, next steps, stakeholder intel\n- `get_recent_opportunity_activity` \u2014 30-day communication log\n- `get_account_status` \u2014 Account-level intelligence\n- `get_engaged_people` \u2014 Stakeholder engagement mapping\n- `ask_sales_ai_about_opportunity` \u2014 AI-powered deal analysis",
+          "setupSteps": [
+            "Copy the skill instructions to your CLAUDE.md or skill file",
+            "Ensure Backstory MCP is configured in your Claude Code settings",
+            "Run Claude Code and invoke the skill"
+          ]
         },
         "chatgpt-gpt": {
-          "instructions": "Coming soon \u2014 requires People.ai MCP Actions configuration."
+          "instructions": "# ChatGPT Custom GPT Setup \u2014 Opportunity Insights Agent\n\nComing soon \u2014 requires Backstory MCP Actions configuration for ChatGPT.",
+          "setupSteps": [
+            "Go to ChatGPT and click 'Explore GPTs' > 'Create'",
+            "Name your GPT 'Opportunity Insights Agent'",
+            "Paste the instructions (use the Copy button)",
+            "Configure Actions for each Backstory MCP tool listed",
+            "Save and test with an account name"
+          ]
         },
         "copilot": {
-          "instructions": "Coming soon."
+          "instructions": "# Microsoft Copilot Setup \u2014 Opportunity Insights Agent\n\nComing soon.",
+          "setupSteps": [
+            "Open Microsoft Copilot Studio and create a new agent",
+            "Name it 'Opportunity Insights Agent'",
+            "Paste the instructions (use the Copy button)",
+            "Add Backstory as a connector plugin",
+            "Publish and test with an account name"
+          ]
         },
         "gemini": {
-          "instructions": "Coming soon."
+          "instructions": "# Google Gemini Setup \u2014 Opportunity Insights Agent\n\nComing soon.",
+          "setupSteps": [
+            "Open Google AI Studio and create a new Gem",
+            "Name it 'Opportunity Insights Agent'",
+            "Paste the instructions (use the Copy button)",
+            "Configure Backstory MCP extension when available",
+            "Test with an account name"
+          ]
         }
       },
       "walkthrough": {
         "input": {
-          "label": "Command",
-          "example": "Build my pipeline dashboard"
+          "label": "\"Build my pipeline dashboard\" or account/region name",
+          "example": "Acme Corp"
         },
         "steps": [
           {
             "type": "tool",
             "name": "top_records",
-            "description": "Pull active pipeline with engagement scores",
+            "description": "Pull Pipeline Data",
             "parallel": false,
             "stepNum": 1
           },
           {
+            "type": "analysis",
+            "title": "Identify Flagged Deals",
+            "stepNum": 2
+          },
+          {
             "type": "tool",
             "name": "get_opportunity_status",
-            "description": "Deep analysis of flagged deals \u2014 risks, next steps, stakeholders",
-            "parallel": true,
-            "stepNum": 2
+            "description": "risks, next steps, stakeholder intel",
+            "parallel": false,
+            "stepNum": 3
           },
           {
             "type": "tool",
             "name": "get_recent_opportunity_activity",
-            "description": "30-day communication log for priority deals",
-            "parallel": true,
-            "stepNum": 2
+            "description": "30-day communication log (for top priority deals)",
+            "parallel": false,
+            "stepNum": 3
+          },
+          {
+            "type": "analysis",
+            "title": "Classify Each Opportunity",
+            "stepNum": 4
+          },
+          {
+            "type": "analysis",
+            "title": "Build the Dashboard",
+            "stepNum": 5
           },
           {
             "type": "tool",
-            "name": "get_account_status",
-            "description": "Account-level context and intelligence",
-            "parallel": true,
-            "stepNum": 2
+            "name": "get_engaged_people",
+            "description": "Narrate Findings",
+            "parallel": false,
+            "stepNum": 6
           }
         ],
-        "outputSections": [
-          "OPPORTUNITY INSIGHTS DASHBOARD",
-          "Pipeline Summary Stats",
-          "Pipeline Map (Stage \u00d7 Days in Stage)",
-          "Engagement Distribution",
-          "\ud83d\udd34 Stalled Deals",
-          "\u26a0\ufe0f At-Risk Deals",
-          "\ud83d\udc8e Hidden Upside",
-          "\ud83d\ude80 Acceleration Opportunities",
-          "Flagged Deals Detail Table"
-        ],
-        "hasCustomData": true
+        "outputSections": [],
+        "hasCustomData": false
       },
-      "sample_output": {
-        "mockup": "slack",
-        "bot_name": "Opportunity Insights Agent",
-        "bot_app": true,
-        "content": "**Pipeline Intelligence Dashboard**\n\n**Pipeline Overview**\n- **Total Pipeline:** ===$12.4M=== across 47 open opportunities\n- **At Risk:** ===$3.2M=== (8 deals)\n- **Last Updated:** Live from People.ai MCP\n\n**INSIGHT BREAKDOWN:**\n| Type | Count | Value |\n|------|-------|-------|\n| \ud83d\udd34 Stalled | 4 | $1.8M |\n| \u26a0\ufe0f At Risk | 4 | $1.4M |\n| \ud83d\udc8e Hidden Upside | 3 | $890K |\n| \ud83d\ude80 Acceleration | 2 | $2.1M |\n| \u2713 Healthy | 34 | $6.2M |\n\n**\ud83d\udd34 STALLED DEALS:**\n1. **Acme Corp \u2014 Enterprise Platform** \u2022 $520K \u2022 Engagement: 18%\n   _Zero meetings in 34 days. Email response ratio 0.12. Champion @sarah.chen last responded Feb 18._\n   \u2192 Action: Exec-to-exec outreach within 48 hours\n\n2. **TechVault \u2014 Security Suite** \u2022 $380K \u2022 Engagement: 22%\n   _Stage: Negotiation for 41 days (avg: 18). No upcoming meetings scheduled._\n   \u2192 Action: Re-engage via champion with competitive intelligence\n\n**\u26a0\ufe0f AT-RISK DEALS:**\n1. **GlobalFin \u2014 Analytics Platform** \u2022 $680K \u2022 Engagement: 45%\n   _Close date in 6 weeks but only 2 stakeholders engaged. Competitor Gong mentioned in last 3 meeting summaries._\n   \u2192 Action: Multi-thread immediately. Request intro to economic buyer.\n\n**\ud83d\ude80 ACCELERATION:**\n1. **NovaTech \u2014 Full Platform** \u2022 $1.2M \u2022 Engagement: 84%\n   _Meeting frequency up 120% in 14d. VP Engineering joined last 2 calls. Legal review initiated by customer._\n   \u2192 Action: Propose accelerated close timeline. 3-week pull-forward potential.\n\n---\n*Generated by People.ai Opportunity Insights Agent*"
-      }
+      "sample_output": null
     }
   ]
 }
